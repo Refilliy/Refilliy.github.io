@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>기밀 — 이능력 범죄 분류 기록 / 관리국 · 세이프티 가드 합동</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#e8e0cf;--paper-dark:#d8cdb4;--paper-edge:#c4b896;
+    --ink:#2b2620;--ink-soft:#4f463a;--ink-faint:#7a6f5d;
+    --stamp-red:#9e2b25;--stamp-red-soft:rgba(158,43,37,.85);--classified:#7a1410;
+    --line:#b3a684;--accent:#5a4632;
+    --serif:"Nanum Myeongjo","Times New Roman",serif;
+    --sans:"Noto Sans KR","Apple SD Gothic Neo",sans-serif;
+    --mono:"Courier New",monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{font-family:var(--sans);color:var(--ink);
+    background-color:var(--paper);
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(120,100,60,.025) 3px, transparent 4px),
+      radial-gradient(ellipse at 15% 12%, rgba(150,120,70,.16), transparent 42%),
+      radial-gradient(ellipse at 85% 80%, rgba(120,95,50,.14), transparent 46%),
+      radial-gradient(circle at 50% 45%, rgba(200,185,150,.35), transparent 72%);
+    line-height:1.7;min-height:100vh;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+
+  .paper-bg{background-color:var(--paper);
+    background-image:repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(120,100,60,.025) 3px, transparent 4px),
+      radial-gradient(ellipse at 15% 20%, rgba(150,120,70,.18), transparent 45%),
+      radial-gradient(ellipse at 85% 75%, rgba(120,95,50,.15), transparent 50%),
+      radial-gradient(circle at 50% 50%, rgba(200,185,150,.4), transparent 70%);position:relative;}
+  .paper-bg::after{content:"";position:absolute;inset:0;pointer-events:none;
+    box-shadow:inset 0 0 90px rgba(80,60,30,.35), inset 0 0 25px rgba(60,45,20,.25);mix-blend-mode:multiply;}
+
+  .stain{position:absolute;border-radius:50%;pointer-events:none;mix-blend-mode:multiply;opacity:.5;z-index:1;}
+  .stain.s1{width:120px;height:90px;top:8%;right:6%;background:radial-gradient(circle,rgba(120,85,40,.4),transparent 70%);}
+  .stain.s2{width:80px;height:80px;bottom:14%;left:4%;background:radial-gradient(circle,rgba(100,70,35,.35),transparent 70%);}
+
+  .wrap{max-width:1080px;margin:0 auto;padding:0 48px;}
+
+  .topbar{background:repeating-linear-gradient(45deg,var(--classified),var(--classified) 18px,#5e0f0c 18px,#5e0f0c 36px);
+    color:#f3e9d4;text-align:center;padding:7px 12px;font-family:var(--mono);font-size:12px;letter-spacing:.32em;font-weight:bold;
+    position:sticky;top:0;z-index:80;border-bottom:2px solid #3d0a08;box-shadow:0 2px 8px rgba(0,0,0,.4);}
+
+  .tabnav{position:sticky;top:34px;z-index:70;background:#2f2920;border-bottom:3px double #5e5340;
+    display:flex;justify-content:center;padding:0 8px;box-shadow:0 3px 10px rgba(0,0,0,.45);}
+  .tabnav .tabs{display:flex;gap:5px;max-width:1080px;width:100%;}
+  .tab-btn{flex:1;background:#403828;border:none;border-bottom:3px solid transparent;color:#b6a98a;
+    font-family:var(--serif);font-size:15px;font-weight:700;padding:13px 8px 11px;cursor:pointer;position:relative;
+    transition:all .2s ease;letter-spacing:.03em;border-radius:7px 7px 0 0;margin-top:6px;}
+  .tab-btn .num{font-family:var(--mono);font-size:10px;display:block;color:#8a7d60;letter-spacing:.15em;margin-bottom:2px;}
+  .tab-btn:hover{background:#4a4230;color:#d8cdb4;}
+  .tab-btn.active{background:var(--paper);color:var(--classified);border-bottom-color:var(--stamp-red);
+    margin-top:2px;padding-top:17px;box-shadow:0 -2px 8px rgba(0,0,0,.2);}
+  .tab-btn.active .num{color:var(--stamp-red);}
+  @media(max-width:560px){.tab-btn{font-size:12px;padding:11px 4px 9px;}.tab-btn .num{font-size:8px;}}
+  @media(max-width:560px){.wrap{padding:0 18px;}}
+  @media(min-width:561px) and (max-width:900px){.wrap{padding:0 32px;}}
+
+  .stage{position:relative;min-height:60vh;}
+  .page{display:none;position:relative;z-index:2;background:none;}
+  .page.paper-bg::after{display:none;}
+  .page.active{display:block;animation:fadeIn .25s ease both;}
+  @keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+  @media(prefers-reduced-motion:reduce){.page.active{animation:none;}}
+
+  .watermark{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden;
+    background-image:repeating-linear-gradient(-38deg,transparent 0,transparent 120px,rgba(90,70,45,.06) 120px,rgba(90,70,45,.06) 121px,transparent 121px,transparent 240px);}
+  .watermark .wm-text{position:absolute;font-family:var(--serif);font-weight:800;font-size:46px;
+    color:rgba(90,70,45,.07);letter-spacing:.2em;white-space:nowrap;transform:rotate(-38deg);user-select:none;}
+
+  header.doc-head{padding:30px 0 22px;border-bottom:3px double var(--line);position:relative;z-index:2;}
+  .agency-row{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;flex-wrap:wrap;margin-bottom:20px;}
+  .agency{display:flex;align-items:center;gap:10px;font-family:var(--serif);}
+  .agency .seal{width:46px;height:46px;border:2.5px solid var(--ink-soft);border-radius:50%;display:flex;align-items:center;justify-content:center;
+    text-align:center;font-size:9px;font-weight:bold;line-height:1.15;letter-spacing:.04em;color:var(--ink-soft);flex-shrink:0;transform:rotate(-4deg);}
+  .agency .seal.gov{border-style:double;}
+  .agency .a-name{font-size:13px;font-weight:bold;letter-spacing:.05em;}
+  .agency .a-sub{font-size:10px;color:var(--ink-faint);font-family:var(--mono);letter-spacing:.08em;}
+
+  .doc-title-block{text-align:center;padding:8px 0;}
+  .doc-class{display:inline-block;border:2px solid var(--stamp-red);color:var(--stamp-red);font-family:var(--mono);
+    font-size:12px;font-weight:bold;letter-spacing:.3em;padding:3px 14px;margin-bottom:14px;transform:rotate(-1deg);}
+  h1.doc-title{font-family:var(--serif);font-size:28px;font-weight:800;letter-spacing:.06em;color:var(--ink);line-height:1.3;}
+  .doc-subtitle{font-family:var(--mono);font-size:12px;color:var(--ink-soft);margin-top:8px;letter-spacing:.12em;}
+  .case-no{font-family:var(--mono);font-size:11px;color:var(--ink-faint);margin-top:14px;letter-spacing:.08em;}
+
+  .header-stamp{position:absolute;top:24px;right:6px;width:118px;height:118px;border:4px solid var(--stamp-red-soft);border-radius:50%;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--stamp-red-soft);transform:rotate(-16deg);
+    opacity:.72;pointer-events:none;font-family:var(--mono);text-align:center;z-index:3;}
+  .header-stamp .big{font-size:20px;font-weight:bold;letter-spacing:.12em;}
+  .header-stamp .small{font-size:7px;letter-spacing:.14em;margin-top:3px;}
+  .header-stamp .mid{font-size:9px;letter-spacing:.1em;border-top:1.5px solid var(--stamp-red-soft);border-bottom:1.5px solid var(--stamp-red-soft);padding:2px 0;margin:3px 0;}
+  @media(max-width:640px){.header-stamp{width:78px;height:78px;top:14px;right:2px;}.header-stamp .big{font-size:13px;}.header-stamp .small{font-size:5px;}.header-stamp .mid{font-size:7px;}}
+
+  .page-body{padding:34px 0 50px;position:relative;z-index:2;min-height:50vh;}
+  .sec-tag{font-family:var(--mono);font-size:11px;color:var(--stamp-red);letter-spacing:.2em;font-weight:bold;margin-bottom:6px;}
+  h2.sec-title{font-family:var(--serif);font-size:23px;font-weight:800;letter-spacing:.04em;margin-bottom:6px;color:var(--ink);}
+  .sec-line{height:2px;background:var(--ink-soft);width:54px;margin:10px 0 22px;}
+  p.body{font-size:15px;color:var(--ink-soft);margin-bottom:14px;}
+  .lead{font-family:var(--serif);font-size:17px;color:var(--ink);font-style:italic;border-left:3px solid var(--stamp-red);padding-left:16px;margin-bottom:22px;}
+
+  .field-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin:18px 0;}
+  .field{background:var(--paper);padding:11px 14px;}
+  .field .k{font-family:var(--mono);font-size:10px;color:var(--ink-faint);letter-spacing:.1em;margin-bottom:3px;text-transform:uppercase;}
+  .field .v{font-size:14px;font-weight:bold;color:var(--ink);}
+
+  .info-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:18px;}
+  .info-card{background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--accent);padding:15px 16px;box-shadow:2px 2px 0 var(--paper-edge);}
+  .info-card h3{font-family:var(--serif);font-size:16px;margin-bottom:6px;color:var(--ink);}
+  .info-card p{font-size:13px;color:var(--ink-soft);}
+  .info-card .badge{display:inline-block;font-family:var(--mono);font-size:10px;background:var(--ink-soft);color:var(--paper);padding:2px 8px;letter-spacing:.08em;margin-bottom:8px;}
+
+  .roster-note{font-family:var(--mono);font-size:12px;color:var(--ink-faint);background:rgba(158,43,37,.07);border:1px dashed var(--stamp-red);padding:10px 14px;margin-bottom:24px;letter-spacing:.04em;}
+  .gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:18px;}
+  @media(max-width:480px){.gallery{grid-template-columns:repeat(2,1fr);gap:12px;}}
+
+  .subject{background:var(--paper);border:1px solid var(--line);padding:10px;cursor:pointer;position:relative;
+    box-shadow:2px 3px 0 var(--paper-edge);transition:transform .18s ease,box-shadow .18s ease;text-align:center;}
+  .subject:hover,.subject:focus-visible{transform:translateY(-4px) rotate(-.6deg);box-shadow:4px 7px 0 var(--paper-edge);outline:none;}
+  .subject:focus-visible{border-color:var(--stamp-red);}
+  .photo-frame{position:relative;width:100%;aspect-ratio:3/4;overflow:hidden;background:#cfc4a8;border:1px solid var(--ink-faint);margin-bottom:9px;}
+  .photo-frame img{width:100%;height:100%;object-fit:cover;display:block;}
+  .photo-frame.locked img{filter:grayscale(1) blur(7px) contrast(.9) brightness(.85);}
+  .photo-frame .noimg{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+    background:repeating-linear-gradient(45deg,#c2b596,#c2b596 9px,#bcae8d 9px,#bcae8d 18px);
+    font-family:var(--mono);font-size:10px;color:var(--ink-faint);letter-spacing:.1em;text-align:center;padding:8px;}
+  .lock-stamp{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;}
+  .lock-stamp span{border:3px solid var(--stamp-red-soft);color:var(--stamp-red-soft);font-family:var(--mono);font-weight:bold;
+    font-size:13px;letter-spacing:.14em;padding:5px 9px;transform:rotate(-15deg);background:rgba(232,224,207,.35);text-align:center;line-height:1.3;}
+  .scanline{position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,0,0,.06) 4px);}
+  .subject .case-tag{font-family:var(--mono);font-size:10px;color:var(--ink-faint);letter-spacing:.08em;}
+  .subject .sin{font-family:var(--serif);font-size:15px;font-weight:bold;color:var(--ink);margin-top:2px;}
+  .subject .sin-en{font-family:var(--mono);font-size:9px;color:var(--stamp-red);letter-spacing:.18em;text-transform:uppercase;}
+  .subject .name-locked{font-family:var(--mono);font-size:12px;color:var(--ink-faint);letter-spacing:.25em;margin-top:2px;}
+  .status-pill{position:absolute;top:7px;left:7px;font-family:var(--mono);font-size:8px;font-weight:bold;padding:2px 6px;letter-spacing:.1em;z-index:3;}
+  .status-pill.open{background:#2f5d3a;color:#e8e0cf;}
+  .status-pill.sealed{background:var(--classified);color:#e8e0cf;}
+
+  .page-nav{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:36px;padding-top:20px;border-top:1px dashed var(--line);}
+  .nav-btn{background:var(--paper);border:1.5px solid var(--ink-soft);color:var(--ink-soft);font-family:var(--mono);
+    font-size:12px;font-weight:bold;padding:9px 16px;cursor:pointer;letter-spacing:.06em;transition:all .18s;box-shadow:2px 2px 0 var(--paper-edge);}
+  .nav-btn:hover:not(:disabled){background:var(--ink-soft);color:var(--paper);}
+  .nav-btn:disabled{opacity:.3;cursor:default;}
+  .nav-page-ind{font-family:var(--mono);font-size:11px;color:var(--ink-faint);letter-spacing:.1em;}
+
+  footer{padding:24px 0 50px;text-align:center;position:relative;z-index:2;}
+  footer .stamp-row{display:flex;justify-content:center;gap:30px;flex-wrap:wrap;margin-bottom:20px;}
+  .approve-stamp{border:2px solid var(--ink-soft);color:var(--ink-soft);font-family:var(--mono);font-size:10px;padding:8px 12px;transform:rotate(-3deg);text-align:center;line-height:1.6;opacity:.7;}
+  .approve-stamp.r{transform:rotate(2deg);}
+  footer .fine{font-family:var(--mono);font-size:10px;color:var(--ink-faint);letter-spacing:.1em;line-height:1.9;}
+
+  .overlay{position:fixed;inset:0;background:rgba(25,18,8,.78);backdrop-filter:blur(2px);z-index:100;display:none;align-items:flex-start;justify-content:center;padding:24px 12px;overflow-y:auto;}
+  .overlay.show{display:flex;}
+  .dossier{max-width:760px;width:100%;position:relative;animation:slideUp .28s ease;}
+  @keyframes slideUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+  .dossier-inner{padding:30px 26px 40px;position:relative;z-index:2;}
+  .close-btn{position:absolute;top:10px;right:10px;z-index:10;background:var(--classified);color:#e8e0cf;border:none;width:38px;height:38px;font-size:20px;cursor:pointer;font-family:var(--mono);box-shadow:1px 1px 4px rgba(0,0,0,.4);}
+  .close-btn:hover{background:#7a1410;}
+  .dossier-head{display:flex;gap:20px;align-items:flex-start;border-bottom:2px solid var(--ink-soft);padding-bottom:18px;margin-bottom:20px;flex-wrap:wrap;}
+  .dossier-photo{width:130px;aspect-ratio:3/4;flex-shrink:0;border:2px solid var(--ink-soft);overflow:hidden;background:#cfc4a8;position:relative;}
+  .dossier-photo img{width:100%;height:100%;object-fit:cover;}
+  .dossier-id{flex:1;min-width:200px;}
+  .dossier-id .sin-en{font-family:var(--mono);font-size:11px;color:var(--stamp-red);letter-spacing:.2em;}
+  .dossier-id h2{font-family:var(--serif);font-size:28px;font-weight:800;margin:2px 0 8px;}
+  .dossier-id .meta-line{font-family:var(--mono);font-size:12px;color:var(--ink-soft);letter-spacing:.04em;}
+  .d-section{margin-bottom:22px;}
+  .d-section h4{font-family:var(--mono);font-size:12px;color:var(--stamp-red);letter-spacing:.16em;border-bottom:1px dashed var(--line);padding-bottom:5px;margin-bottom:11px;font-weight:bold;}
+  .d-section p{font-size:14px;color:var(--ink-soft);margin-bottom:9px;}
+  .crime-list{list-style:none;}
+  .crime-list li{font-size:13px;color:var(--ink-soft);padding:6px 0 6px 22px;position:relative;border-bottom:1px dotted var(--line);}
+  .crime-list li::before{content:"§";position:absolute;left:0;color:var(--stamp-red);font-weight:bold;}
+  .ability-box{background:rgba(90,70,50,.08);border:1px solid var(--line);padding:13px 15px;}
+  .grade-tag{display:inline-block;font-family:var(--mono);font-size:13px;font-weight:bold;background:var(--classified);color:#e8e0cf;padding:3px 12px;letter-spacing:.1em;}
+  .sealed-detail{text-align:center;padding:50px 20px;position:relative;}
+  .sealed-detail .big-stamp{display:inline-block;border:5px solid var(--stamp-red-soft);color:var(--stamp-red-soft);font-family:var(--mono);font-weight:bold;padding:18px 28px;transform:rotate(-8deg);margin-bottom:28px;}
+  .sealed-detail .big-stamp .l1{font-size:30px;letter-spacing:.16em;}
+  .sealed-detail .big-stamp .l2{font-size:12px;letter-spacing:.22em;margin-top:6px;border-top:2px solid var(--stamp-red-soft);padding-top:6px;}
+  .sealed-detail p{font-family:var(--mono);font-size:13px;color:var(--ink-soft);letter-spacing:.05em;line-height:2;}
+  .redact{display:inline-block;background:var(--ink);color:var(--ink);user-select:none;margin:0 2px;border-radius:1px;}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0;}
+
+  .global-wm{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
+  .global-wm .wm-text{position:absolute;font-family:var(--serif);font-weight:800;font-size:52px;
+    color:rgba(90,70,45,.05);letter-spacing:.25em;white-space:nowrap;transform:rotate(-38deg);user-select:none;}
+  ::selection{background:var(--stamp-red);color:var(--paper);}
+</style>
+</head>
+<body>
+
+<div class="global-wm" id="globalWm"></div>
+
+<div class="topbar">⬤ CLASSIFIED — 대외비 · 무단 열람 및 복제 금지 · 관리국 보안 1급 ⬤</div>
+
+<nav class="tabnav" aria-label="문서 페이지 탐색">
+  <div class="tabs">
+    <button class="tab-btn active" data-page="0"><span class="num">§ 01</span>사건 개요</button>
+    <button class="tab-btn" data-page="1"><span class="num">§ 02</span>이능력 체계</button>
+    <button class="tab-btn" data-page="2"><span class="num">§ 03</span>대상 인물</button>
+  </div>
+</nav>
+
+<div class="wrap">
+  <div class="stage" id="stage">
+
+    <article class="page paper-bg active" id="page-0">
+      <div class="stain s1"></div>
+      <header class="doc-head">
+        <div class="header-stamp"><div class="big">기밀</div><div class="mid">CLASSIFIED</div><div class="small">관리국 · 세이프티가드</div></div>
+        <div class="agency-row">
+          <div class="agency"><div class="seal gov">관리국<br>管理局</div><div><div class="a-name">이능력자 관리국</div><div class="a-sub">BUREAU OF ESPER CONTROL</div></div></div>
+          <div class="agency"><div class="seal">SAFE<br>GUARD</div><div><div class="a-name">세이프티 가드</div><div class="a-sub">SAFETY GUARD · GUARDIAN DIV.</div></div></div>
+        </div>
+        <div class="doc-title-block">
+          <span class="doc-class">SECURITY LEVEL · 1</span>
+          <h1 class="doc-title">이능력 중대범죄 분류 기록</h1>
+          <div class="doc-subtitle">통칭 「七大罪 / SEVEN DEADLY SINS」 합동 수사 자료</div>
+          <div class="case-no">CASE NO. SDS-2045-0007 &nbsp;|&nbsp; 작성: 합동수사본부 &nbsp;|&nbsp; 분류: σ세대 중대 위협</div>
+        </div>
+      </header>
+      <div class="page-body">
+        <div class="sec-tag">§ 01 — BACKGROUND</div>
+        <h2 class="sec-title">사건 개요</h2>
+        <div class="sec-line"></div>
+        <p class="lead">유전자 내 축적된 이능력 인자가 특정 세대에 이르러 발현되기 시작했다. 사회는 이들을 「관리 개체」로 분류하고, 등록·감시·통제를 시작했다.</p>
+        <p class="body">발현은 약 10세 전후, 심박수가 한계치(220 − 나이)에 도달하거나 근접할 때 최초로 일어난다. 능력은 1인 1개로 고정되며 변경이 불가능하다. 강한 자는 정부와 기업에 「히어로」로 포장되어 동원되고, 그렇지 못한 자는 감시 대상으로 남는다.</p>
+        <p class="body">「七大罪」는 이 체제에 짓밟히거나, 내면의 부적응이 차별과 만나 폭발한 일곱 명의 이능력 범죄자에게 사회와 정부가 붙인 분류명이다. 전원 σ세대 · 전원 동갑이며, 본디 개별 활동하던 이들을 「오만」이 집결시켜 하나의 위협으로 결집시켰다.</p>
+        <div class="field-grid">
+          <div class="field"><div class="k">분류 세대</div><div class="v">σ (시그마) 세대</div></div>
+          <div class="field"><div class="k">대상 인원</div><div class="v">7명 (전원 여성)</div></div>
+          <div class="field"><div class="k">위협 등급</div><div class="v">최상위 / 국가 비상</div></div>
+          <div class="field"><div class="k">최초 인지</div><div class="v">2037 — 존속살해</div></div>
+          <div class="field"><div class="k">완전 집결</div><div class="v">2045 — 본부 붕괴</div></div>
+          <div class="field"><div class="k">현 상태</div><div class="v">수배 / 추적 중</div></div>
+        </div>
+        <div class="page-nav">
+          <button class="nav-btn" disabled>◀ 이전</button>
+          <span class="nav-page-ind">PAGE 1 / 3</span>
+          <button class="nav-btn" data-go="1">다음 ▶</button>
+        </div>
+      </div>
+    </article>
+
+    <article class="page paper-bg" id="page-1">
+      <div class="stain s2"></div>
+      <header class="doc-head">
+        <div class="header-stamp"><div class="big">기밀</div><div class="mid">CLASSIFIED</div><div class="small">관리국 · 세이프티가드</div></div>
+        <div class="doc-title-block">
+          <span class="doc-class">SECURITY LEVEL · 1</span>
+          <h1 class="doc-title">이능력 체계 및 세대</h1>
+          <div class="doc-subtitle">ESPER SYSTEM &amp; GENERATIONAL CLASSIFICATION</div>
+          <div class="case-no">부속 자료 · APPENDIX A &nbsp;|&nbsp; SDS-2045-0007</div>
+        </div>
+      </header>
+      <div class="page-body">
+        <div class="sec-tag">§ 02 — ESPER SYSTEM</div>
+        <h2 class="sec-title">이능력 체계</h2>
+        <div class="sec-line"></div>
+        <p class="body">이능력은 감정 격화·심박수 급상승을 통해 최초 발현하며, 등급은 F부터 SSS까지 분류된다. 최상위 SSS는 단독으로 세계 멸망이 가능한 것으로 평가된다. 발현 후에는 훈련을 통해 심박수와 무관하게 의식적으로 능력을 제어할 수 있으나, 극한의 감정 상태에서 심박수가 한계를 넘으면 「폭주」 — 출력 증폭과 통제력 상실 — 가 발생한다.</p>
+        <div class="field-grid">
+          <div class="field"><div class="k">발현 시기</div><div class="v">약 10세 전후</div></div>
+          <div class="field"><div class="k">발현 조건</div><div class="v">심박 ≥ (220−나이)</div></div>
+          <div class="field"><div class="k">능력 구조</div><div class="v">1인 1능력 · 고정</div></div>
+          <div class="field"><div class="k">등급 범위</div><div class="v">F ~ SSS</div></div>
+          <div class="field"><div class="k">폭주 종료</div><div class="v">기절 / 외부 진압</div></div>
+          <div class="field"><div class="k">후유증</div><div class="v">일정기간 사용불가</div></div>
+        </div>
+        <h2 class="sec-title" style="margin-top:34px;">세대 구분</h2>
+        <div class="sec-line"></div>
+        <div class="info-cards">
+          <div class="info-card"><div class="badge">ε · 1세대</div><h3>엡실론 세대</h3><p>최초 발현자들. 이능력 개척기와 사회 혼란기를 정면으로 겪은 세대. 1980~2000년대 출생.</p></div>
+          <div class="info-card"><div class="badge">σ · 2세대</div><h3>시그마 세대</h3><p>「七大罪」가 속한 세대. 부모가 비능력자라도 발현하는 사례가 늘어난 세대. 2010~2030년 출생.</p></div>
+          <div class="info-card"><div class="badge">Ω · 3세대</div><h3>오메가 세대</h3><p>아직 그 끝을 알 수 없는 세대. 2030년 이후 출생. 발현 양상 미상.</p></div>
+        </div>
+        <div class="page-nav">
+          <button class="nav-btn" data-go="0">◀ 이전</button>
+          <span class="nav-page-ind">PAGE 2 / 3</span>
+          <button class="nav-btn" data-go="2">다음 ▶</button>
+        </div>
+      </div>
+    </article>
+
+    <article class="page paper-bg" id="page-2">
+      <div class="stain s1"></div>
+      <header class="doc-head">
+        <div class="header-stamp"><div class="big">기밀</div><div class="mid">CLASSIFIED</div><div class="small">관리국 · 세이프티가드</div></div>
+        <div class="doc-title-block">
+          <span class="doc-class">SECURITY LEVEL · 1</span>
+          <h1 class="doc-title">대상 인물 명부</h1>
+          <div class="doc-subtitle">SUBJECT ROSTER · SEVEN DEADLY SINS</div>
+          <div class="case-no">부속 자료 · APPENDIX B &nbsp;|&nbsp; SDS-2045-0007</div>
+        </div>
+      </header>
+      <div class="page-body">
+        <div class="sec-tag">§ 03 — SUBJECT ROSTER</div>
+        <h2 class="sec-title">대상 인물 명부</h2>
+        <div class="sec-line"></div>
+        <div class="roster-note">⚠ 본 명부의 대다수 항목은 보안 등급에 따라 봉인 처리되어 있습니다. 인가된 열람자에 한해 개별 항목이 순차 공개됩니다. 봉인된 사진을 선택할 경우 열람 불가 안내가 표시됩니다.</div>
+        <div class="gallery" id="gallery"></div>
+        <footer>
+          <div class="stamp-row">
+            <div class="approve-stamp">결재<br>관리국장<br>───<br>(印)</div>
+            <div class="approve-stamp r">승인<br>세이프티가드 청장<br>───<br>(印)</div>
+          </div>
+          <div class="fine">본 문서는 「이능력자 관리법」에 의거 작성된 1급 기밀 자료입니다.<br>무단 열람·복제·유출 시 동법 및 형법에 따라 처벌됩니다.<br>SDS-2045-0007 · 합동수사본부 · 대외비</div>
+        </footer>
+        <div class="page-nav">
+          <button class="nav-btn" data-go="1">◀ 이전</button>
+          <span class="nav-page-ind">PAGE 3 / 3</span>
+          <button class="nav-btn" disabled>다음 ▶</button>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</div>
+
+<div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-labelledby="dossierTitle">
+  <div class="dossier paper-bg">
+    <button class="close-btn" id="closeBtn" aria-label="닫기">✕</button>
+    <div class="dossier-inner" id="dossierContent"></div>
+  </div>
+</div>
+
+<script>
+const SUBJECTS = [
+  { id:"nouel", published:true, caseNo:"SDS-01", sin:"오만", sinEn:"Pride", name:"장노을",
+    img:"https://pride.s6f.uk/Noeulprofile.webp", gen:"σ세대", gender:"여", grade:"SSS", ability:"절대 회피",
+    abilityDesc:"본인이 사전 지정한 동작을 상대가 행하는 순간, 해당 동작을 절대적으로 회피한다. 천재적 두뇌로 미세 근육의 준비 동작까지 수백 가지를 동시 지정하여, 사실상 의도를 품은 모든 행위의 가장 초기 단계에서 포착·회피한다.",
+    profile:"부유한 가정의 외동딸이자 초고속 사고를 지닌 천재. 부모는 천재인 딸을 「관리 대상」으로 보았고, 노을은 그 의도를 전부 읽어버렸다. 인생 2회차 같은 달관한 태도로, 화내기보다 한심해한다. 「七大罪」를 결집시킨 장본인.",
+    crimes:["존속살해죄 (형법 제250조 제2항) — 부모 살해","범죄단체 조직죄 (형법 제114조) — 七大罪 직접 조직"],
+    firstKnown:"2037년 — 성인 직후 존속살해로 매스컴 최초 데뷔" },
+  { id:"sori", published:false, caseNo:"SDS-02", sin:"질투", sinEn:"Envy", name:"이소리",
+    img:"img/sori.png", gen:"σ세대", gender:"여", grade:"SS", ability:"완전 복제", abilityDesc:"봉인됨", profile:"봉인됨", crimes:[], firstKnown:"봉인됨" },
+  { id:"yujeong", published:false, caseNo:"SDS-03", sin:"분노", sinEn:"Wrath", name:"진유정",
+    img:"img/yujeong.png", gen:"σ세대", gender:"여", grade:"S", ability:"발화", abilityDesc:"봉인됨", profile:"봉인됨", crimes:[], firstKnown:"봉인됨" },
+  { id:"seungji", published:false, caseNo:"SDS-04", sin:"나태", sinEn:"Sloth", name:"배승지",
+    img:"img/seungji.png", gen:"σ세대", gender:"여", grade:"SSS", ability:"상상 실현", abilityDesc:"봉인됨", profile:"봉인됨", crimes:[], firstKnown:"봉인됨" },
+  { id:"jiyoung", published:false, caseNo:"SDS-05", sin:"탐욕", sinEn:"Greed", name:"유지영",
+    img:"img/jiyoung.png", gen:"σ세대", gender:"여", grade:"S", ability:"염동력", abilityDesc:"봉인됨", profile:"봉인됨", crimes:[], firstKnown:"봉인됨" },
+  { id:"nara", published:false, caseNo:"SDS-06", sin:"폭식", sinEn:"Gluttony", name:"문나래",
+    img:"img/nara.png", gen:"σ세대", gender:"여", grade:"SS", ability:"융해산성", abilityDesc:"봉인됨", profile:"봉인됨", crimes:[], firstKnown:"봉인됨" },
+  { id:"areum", published:false, caseNo:"SDS-07", sin:"색욕", sinEn:"Lust", name:"설아름",
+    img:"img/areum.png", gen:"σ세대", gender:"여", grade:"SSS", ability:"다중 정신지배", abilityDesc:"봉인됨", profile:"봉인됨", crimes:[], firstKnown:"봉인됨" }
+];
+
+function fillWatermarks(){
+  document.querySelectorAll('.watermark').forEach(wm=>{
+    const txt = wm.dataset.wm;
+    const unit = (txt+' \u00a0\u00a0 ').repeat(8);
+    let html='';
+    for(let row=0;row<16;row++){ html += `<div class="wm-text" style="top:${row*110 - 220}px; left:-15%; width:140%;">${unit}</div>`; }
+    wm.innerHTML = html;
+  });
+}
+function fillGlobalWm(){
+  const wm=document.getElementById('globalWm'); if(!wm) return;
+  const unit=('CLASSIFIED \u00a0\u00a0\u00a0 ').repeat(8);
+  let h='';
+  for(let row=0;row<22;row++){ h += `<div class="wm-text" style="top:${row*120 - 240}px; left:-25%; width:160%;">${unit}</div>`; }
+  wm.innerHTML=h;
+}
+
+const gallery = document.getElementById('gallery');
+function photoInner(s){
+  const imgTag = `<img src="${s.img}" alt="${s.published ? s.name+' 프로필 사진' : '봉인된 사진'}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">`;
+  const noImg = `<div class="noimg" style="display:none;">사진 자료<br>NO IMAGE</div>`;
+  if(s.published) return `<div class="photo-frame">${imgTag}${noImg}<div class="scanline"></div></div>`;
+  return `<div class="photo-frame locked">${imgTag}${noImg}<div class="scanline"></div><div class="lock-stamp"><span>기밀<br>SEALED</span></div></div>`;
+}
+function renderGallery(){
+  gallery.innerHTML = SUBJECTS.map((s,i)=>{
+    const status = s.published ? `<div class="status-pill open">OPEN</div>` : `<div class="status-pill sealed">SEALED</div>`;
+    const nameBlock = s.published ? `<div class="sin">${s.sin} · ${s.name}</div>` : `<div class="sin">${s.sin}</div><div class="name-locked">█ █ █</div>`;
+    return `<div class="subject" role="button" tabindex="0" data-idx="${i}" aria-label="${s.published ? s.name+' 상세 보기' : '봉인된 인물 '+s.caseNo}">
+      ${status}${photoInner(s)}<div class="case-tag">${s.caseNo}</div><div class="sin-en">${s.sinEn}</div>${nameBlock}</div>`;
+  }).join('');
+  document.querySelectorAll('.subject').forEach(el=>{
+    el.addEventListener('click',()=>openDossier(+el.dataset.idx));
+    el.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){e.preventDefault();openDossier(+el.dataset.idx);} });
+  });
+}
+
+const overlay = document.getElementById('overlay');
+const dossierContent = document.getElementById('dossierContent');
+let lastFocused = null;
+function redact(n){ return `<span class="redact" aria-label="삭제됨">${'█'.repeat(n)}</span>`; }
+
+function openDossier(idx){
+  const s = SUBJECTS[idx];
+  lastFocused = document.activeElement;
+  if(s.published){
+    dossierContent.innerHTML = `
+      <div class="dossier-head">
+        <div class="dossier-photo"><img src="${s.img}" alt="${s.name} 프로필" onerror="this.parentElement.innerHTML='<div class=&quot;noimg&quot; style=&quot;display:flex;height:100%&quot;>NO IMAGE</div>';"></div>
+        <div class="dossier-id"><div class="sin-en">${s.caseNo} · ${s.sinEn}</div><h2 id="dossierTitle">${s.sin} — ${s.name}</h2>
+          <div class="meta-line">분류 ${s.gen} &nbsp;·&nbsp; 성별 ${s.gender} &nbsp;·&nbsp; 위협등급 <span class="grade-tag">${s.grade}</span></div></div>
+      </div>
+      <div class="d-section"><h4>인물 개요 / PROFILE</h4><p>${s.profile}</p></div>
+      <div class="d-section"><h4>이능력 / ABILITY</h4><div class="ability-box">
+        <p style="margin-bottom:6px;"><strong style="font-family:var(--serif);font-size:16px;">${s.ability}</strong></p>
+        <p style="margin:0;">${s.abilityDesc}</p></div></div>
+      <div class="d-section"><h4>죄목 / CHARGES</h4><ul class="crime-list">${s.crimes.map(c=>`<li>${c}</li>`).join('')}</ul></div>
+      <div class="d-section"><h4>최초 인지 / FIRST KNOWN</h4><p>${s.firstKnown}</p></div>`;
+  } else {
+    dossierContent.innerHTML = `
+      <div class="dossier-head">
+        <div class="dossier-photo"><img src="${s.img}" alt="봉인된 사진" style="filter:grayscale(1) blur(8px) brightness(.8);" onerror="this.parentElement.querySelector('.noimg').style.display='flex';">
+          <div class="noimg" style="display:none;height:100%;">SEALED</div><div class="lock-stamp"><span>기밀</span></div></div>
+        <div class="dossier-id"><div class="sin-en">${s.caseNo} · ${s.sinEn}</div><h2 id="dossierTitle">${s.sin} — ${redact(6)}</h2>
+          <div class="meta-line">분류 ${s.gen} &nbsp;·&nbsp; 성별 ${redact(2)} &nbsp;·&nbsp; 위협등급 ${redact(3)}</div></div>
+      </div>
+      <div class="sealed-detail">
+        <div class="big-stamp"><div class="l1">열람 불가</div><div class="l2">ACCESS DENIED · SEALED</div></div>
+        <p>본 항목은 보안 1급으로 분류되어 봉인되었습니다.<br>인물 정보 ${redact(8)} · 이능력 ${redact(6)} · 죄목 ${redact(10)}<br>열람을 위해서는 ${redact(4)} 이상의 인가가 필요합니다.<br>── 합동수사본부 보안과 ──</p>
+      </div>`;
+  }
+  fillWatermarks();
+  overlay.classList.add('show');
+  document.body.style.overflow='hidden';
+  document.getElementById('closeBtn').focus();
+}
+function closeDossier(){ overlay.classList.remove('show'); document.body.style.overflow=''; if(lastFocused) lastFocused.focus(); }
+document.getElementById('closeBtn').addEventListener('click',closeDossier);
+overlay.addEventListener('click',e=>{ if(e.target===overlay) closeDossier(); });
+
+let current = 0;
+const pages = [...document.querySelectorAll('.page')];
+const tabBtns = [...document.querySelectorAll('.tab-btn')];
+
+function goPage(target){
+  target = Math.max(0, Math.min(2, target));
+  if(target===current) return;
+  pages[current].classList.remove('active');
+  pages[target].classList.add('active');
+  tabBtns.forEach((b,i)=>b.classList.toggle('active', i===target));
+  current = target;
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+tabBtns.forEach(b=> b.addEventListener('click', ()=> goPage(+b.dataset.page)));
+document.querySelectorAll('.nav-btn[data-go]').forEach(b=> b.addEventListener('click', ()=> goPage(+b.dataset.go)));
+document.addEventListener('keydown',e=>{
+  if(overlay.classList.contains('show')){ if(e.key==='Escape') closeDossier(); return; }
+  if(e.key==='ArrowRight') goPage(current+1);
+  if(e.key==='ArrowLeft') goPage(current-1);
+});
+
+fillWatermarks();
+fillGlobalWm();
+renderGallery();
+</script>
+</body>
+</html>
