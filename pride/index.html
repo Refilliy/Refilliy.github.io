@@ -372,10 +372,13 @@ function fillGlobalWm(){
 
 const gallery = document.getElementById('gallery');
 function photoInner(s){
-  const imgTag = `<img src="${s.img}" alt="${s.published ? s.name+' 프로필 사진' : '봉인된 사진'}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">`;
-  const noImg = `<div class="noimg" style="display:none;"></div>`;
-  if(s.published) return `<div class="photo-frame">${imgTag}${noImg}<div class="scanline"></div></div>`;
-  return `<div class="photo-frame locked">${imgTag}${noImg}<div class="scanline"></div><div class="lock-stamp"><span>기밀<br>SEALED</span></div></div>`;
+  if(s.published){
+    const imgTag = `<img src="${s.img}" alt="${s.name} 프로필 사진" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">`;
+    const noImg = `<div class="noimg" style="display:none;"></div>`;
+    return `<div class="photo-frame">${imgTag}${noImg}<div class="scanline"></div></div>`;
+  }
+  // 봉인 인물: 이미지 요청 없이 바로 검은 모자이크
+  return `<div class="photo-frame locked"><div class="noimg" style="display:flex;"></div><div class="scanline"></div><div class="lock-stamp"><span>기밀<br>SEALED</span></div></div>`;
 }
 function renderGallery(){
   gallery.innerHTML = SUBJECTS.map((s,i)=>{
@@ -414,8 +417,7 @@ function openDossier(idx){
   } else {
     dossierContent.innerHTML = `
       <div class="dossier-head">
-        <div class="dossier-photo"><img src="${s.img}" alt="봉인된 사진" style="filter:grayscale(1) blur(8px) brightness(.8);" onerror="this.parentElement.querySelector('.noimg').style.display='flex';">
-          <div class="noimg" style="display:none;height:100%;"></div><div class="lock-stamp"><span>기밀</span></div></div>
+        <div class="dossier-photo"><div class="noimg" style="display:flex;height:100%;"></div><div class="lock-stamp"><span>기밀</span></div></div>
         <div class="dossier-id"><div class="sin-en">${s.caseNo} · ${s.sinEn}</div><h2 id="dossierTitle">${s.sin} — ${redact(6)}</h2>
           <div class="meta-line">분류 ${s.gen} &nbsp;·&nbsp; 성별 ${redact(2)} &nbsp;·&nbsp; 위협등급 ${redact(3)}</div></div>
       </div>
