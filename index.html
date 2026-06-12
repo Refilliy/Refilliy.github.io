@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>사회복무요원 이세계 아카데미 전생기</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700;900&family=Pretendard:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        /* === Design System & Variables === */
+        :root {
+            --bg-color: #0a0a0c;
+            --text-main: #f0f0f0;
+            --text-muted: #888;
+            --accent-purple: #8a2be2;
+            --accent-gold: #ffd700;
+            --accent-red: #ff003c;
+            --glass-bg: rgba(25, 25, 30, 0.6);
+            --glass-border: rgba(138, 43, 226, 0.3);
+            --font-serif: 'Noto Serif KR', serif;
+            --font-sans: 'Pretendard', sans-serif;
+            --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        /* === Base Styles === */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+        h1, h2, h3 { font-family: var(--font-serif); }
+        a { text-decoration: none; color: inherit; }
+
+        /* === Utilities & Animations === */
+        .reveal { opacity: 0; transform: translateY(30px); transition: var(--transition); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        @keyframes glow {
+            0% { box-shadow: 0 0 10px var(--accent-purple); }
+            50% { box-shadow: 0 0 30px var(--accent-purple), 0 0 10px var(--accent-gold); }
+            100% { box-shadow: 0 0 10px var(--accent-purple); }
+        }
+
+        /* === Header === */
+        header {
+            position: fixed;
+            top: 0; width: 100%;
+            padding: 20px 50px;
+            background: rgba(10, 10, 12, 0.8);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .logo { font-family: var(--font-serif); font-size: 1.5rem; font-weight: 900; letter-spacing: 2px; color: var(--accent-gold); }
+        .nav-links { display: flex; gap: 30px; font-weight: 600; }
+        .nav-links a:hover { color: var(--accent-purple); }
+
+        /* === Hero Section === */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            padding: 20px;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at center, rgba(138,43,226,0.15) 0%, rgba(10,10,12,1) 70%);
+            z-index: -1;
+        }
+        .hero h1 {
+            font-size: 4rem;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            text-shadow: 0 0 20px rgba(138, 43, 226, 0.5);
+            animation: float 6s ease-in-out infinite;
+        }
+        .hero p { font-size: 1.2rem; color: var(--text-muted); max-width: 600px; margin-bottom: 40px; }
+        .hero .subtitle { color: var(--accent-gold); font-size: 1.5rem; display: block; margin-bottom: 10px; }
+        
+        .btn {
+            padding: 15px 40px;
+            background: transparent;
+            border: 2px solid var(--accent-purple);
+            color: var(--text-main);
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 30px;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        .btn:hover { background: var(--accent-purple); animation: glow 2s infinite; }
+
+        /* === Story Section === */
+        .section { padding: 100px 20px; max-width: 1200px; margin: 0 auto; }
+        .section-title { font-size: 2.5rem; text-align: center; margin-bottom: 50px; color: var(--accent-gold); }
+        
+        .story-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+        .placeholder-img {
+            width: 100%;
+            height: 400px;
+            background: repeating-linear-gradient(45deg, #1a1a1f, #1a1a1f 10px, #222 10px, #222 20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--text-muted);
+            font-family: var(--font-sans);
+            font-size: 1.2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .story-text h3 { font-size: 1.8rem; margin-bottom: 20px; color: var(--accent-purple); }
+        .story-text p { margin-bottom: 15px; font-size: 1.1rem; color: #ccc; }
+
+        /* === Characters AI Interface Section === */
+        .char-showcase {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            backdrop-filter: blur(20px);
+        }
+        .char-tabs {
+            display: flex;
+            gap: 15px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 15px;
+            overflow-x: auto;
+        }
+        .tab-btn {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            font-family: var(--font-serif);
+            cursor: pointer;
+            padding: 10px 20px;
+            transition: var(--transition);
+            white-space: nowrap;
+        }
+        .tab-btn.active { color: var(--accent-gold); border-bottom: 2px solid var(--accent-gold); }
+        
+        .char-content { display: none; grid-template-columns: 1fr 2fr; gap: 40px; animation: fadeIn 0.5s; }
+        .char-content.active { display: grid; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateX(-10px); } to { opacity: 1; transform: translateX(0); } }
+        
+        .char-portrait { height: 500px; }
+        .char-info { display: flex; flex-direction: column; justify-content: center; }
+        .char-info h3 { font-size: 2.5rem; margin-bottom: 10px; display: flex; align-items: center; gap: 15px;}
+        .char-class { font-size: 1rem; padding: 5px 12px; background: rgba(138,43,226,0.2); border: 1px solid var(--accent-purple); border-radius: 20px; font-family: var(--font-sans); }
+        
+        .char-tags { display: flex; flex-wrap: wrap; gap: 10px; margin: 20px 0; }
+        .tag { background: rgba(255,255,255,0.05); padding: 5px 15px; border-radius: 5px; font-size: 0.9rem; color: #aaa; }
+        
+        .quote {
+            font-style: italic;
+            border-left: 4px solid var(--accent-purple);
+            padding-left: 15px;
+            margin: 20px 0;
+            color: #ddd;
+            background: rgba(0,0,0,0.3);
+            padding: 15px;
+            border-radius: 0 10px 10px 0;
+        }
+        
+        .chat-btn { align-self: flex-start; margin-top: 20px; background: var(--text-main); color: var(--bg-color); }
+
+        /* === Footer === */
+        footer { text-align: center; padding: 40px 20px; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 50px; color: var(--text-muted); }
+
+        /* === Mobile Responsiveness === */
+        @media (max-width: 768px) {
+            header { padding: 15px 20px; flex-direction: column; gap: 15px; }
+            .hero h1 { font-size: 2.5rem; }
+            .story-container, .char-content { grid-template-columns: 1fr; }
+            .char-portrait { height: 300px; }
+            .section { padding: 80px 20px 40px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">ACADEMY.log</div>
+        <nav class="nav-links">
+            <a href="#hero">HOME</a>
+            <a href="#story">LORE</a>
+            <a href="#characters">CHARACTERS</a>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero" class="hero">
+            <h1 class="reveal"><span class="subtitle">오직 검술만이 존재하는 세계,</span>전설의 귀인들이<br>강림하시었다.</h1>
+            <p class="reveal" style="transition-delay: 0.2s;">이세계인들은 이들의 수치스러운 '중2병 영창'을<br>고대의 비전 마법으로 오해하기 시작했다.</p>
+            <button class="btn reveal" style="transition-delay: 0.4s;">에피소드 시작하기</button>
+        </section>
+
+        <section id="story" class="section">
+            <h2 class="section-title reveal">창립 설화 : 파프니르의 토벌</h2>
+            <div class="story-container">
+                <div class="placeholder-img reveal">[ 거대한 동상이 세워진 아카데미 중앙 광장 BG ]</div>
+                <div class="story-text reveal" style="transition-delay: 0.2s;">
+                    <h3>"용이 다시 눈을 뜨는 날, 하늘은 네 명의 기사를 보내리라."</h3>
+                    <p>수백 년 전, 세상을 멸망시키려던 고대 드래곤 '파프니르'를 토벌하고 아카데미를 세운 전설의 4인방.</p>
+                    <p>심연의 기사 디에고, 대검의 심장 막시모, 유성우의 무희 마르셀라... 그리고 이름조차 알려지지 않은 심검의 현자.</p>
+                    <p>아카데미 입학식 당일, 하늘이 열리며 단상 위로 냅다 추락한 대한민국 주민센터 소속 3인방은 완벽하게 이 전설의 재림으로 오해받게 되는데...</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="characters" class="section">
+            <h2 class="section-title reveal">전승 3인방 프로필 데이터</h2>
+            <div class="char-showcase reveal" style="transition-delay: 0.2s;">
+                <div class="char-tabs">
+                    <button class="tab-btn active" onclick="switchChar('char1')">황동윤</button>
+                    <button class="tab-btn" onclick="switchChar('char2')">심형욱</button>
+                    <button class="tab-btn" onclick="switchChar('char3')">홍수희</button>
+                </div>
+
+                <div id="char1" class="char-content active">
+                    <div class="placeholder-img char-portrait">[ 황동윤 일러스트 (중2병 포즈) ]</div>
+                    <div class="char-info">
+                        <h3>황동윤 <span class="char-class">제1의 영웅?</span></h3>
+                        <div class="char-tags">
+                            <span class="tag">#INTP</span> <span class="tag">#어둠의_다크니스</span> <span class="tag">#사회복무요원</span> <span class="tag">#A반</span>
+                        </div>
+                        <p>무직 백수 시절의 영양 과다로 입대한 사회복무요원. 특기생 대우를 받자 기고만장해져 이세계 라이프를 만끽 중이다.</p>
+                        <div class="quote">
+                            "크큭... 제 왼팔에 봉인된 흑염룡이 오늘따라 날뛰는군요."
+                        </div>
+                        <button class="btn chat-btn">캐릭터와 대화하기</button>
+                    </div>
+                </div>
+
+                <div id="char2" class="char-content">
+                    <div class="placeholder-img char-portrait">[ 심형욱 일러스트 (대검 장착) ]</div>
+                    <div class="char-info">
+                        <h3>심형욱 <span class="char-class">제2의 영웅?</span></h3>
+                        <div class="char-tags">
+                            <span class="tag">#INTJ</span> <span class="tag">#열혈_메카물</span> <span class="tag">#공학도</span> <span class="tag">#A반</span>
+                        </div>
+                        <p>체중 미달로 입대한 공학도. 평소엔 차갑고 염세적이지만 로봇과 기계 앞에서는 텐션이 폭발한다. 그의 대검은 무려 조립/거대화가 가능하다.</p>
+                        <div class="quote">
+                            "이 종이 더미를 섬멸하기 위해... 시스템 리미터를 해제한다!"
+                        </div>
+                        <button class="btn chat-btn">캐릭터와 대화하기</button>
+                    </div>
+                </div>
+
+                <div id="char3" class="char-content">
+                    <div class="placeholder-img char-portrait">[ 홍수희 일러스트 (프릴 예복) ]</div>
+                    <div class="char-info">
+                        <h3>홍수희 <span class="char-class">제3의 영웅?</span></h3>
+                        <div class="char-tags">
+                            <span class="tag">#ESFJ</span> <span class="tag">#마법소녀</span> <span class="tag">#9급_주무관</span> <span class="tag">#귀환희망</span>
+                        </div>
+                        <p>민원인과 공익들에게 시달리던 9급 공무원. 어떻게든 이 수치스러운 마법소녀 생활을 청산하고 지구로 칼퇴근하기 위해 드래곤 토벌을 노린다.</p>
+                        <div class="quote">
+                            "아 진짜! 제발 좀 정상적으로 싸우면 안 돼요?!"
+                        </div>
+                        <button class="btn chat-btn">캐릭터와 대화하기</button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 이세계 아카데미 전생기 프로젝트. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Scroll Reveal Animation
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const revealOnScroll = () => {
+            const windowHeight = window.innerHeight;
+            revealElements.forEach(el => {
+                const elementTop = el.getBoundingClientRect().top;
+                if (elementTop < windowHeight - 50) {
+                    el.classList.add('active');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', revealOnScroll);
+        window.addEventListener('load', revealOnScroll);
+
+        // Character Tab Switching
+        function switchChar(charId) {
+            // Update tabs
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            // Update content
+            document.querySelectorAll('.char-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            document.getElementById(charId).classList.add('active');
+        }
+    </script>
+</body>
+</html>
