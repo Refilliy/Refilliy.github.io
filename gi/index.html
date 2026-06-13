@@ -1,332 +1,2774 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>사회복무요원 이세계 아카데미 전생기</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700;900&family=Pretendard:wght@400;600;800&display=swap" rel="stylesheet">
-    <style>
-        /* === Design System & Variables === */
-        :root {
-            --bg-color: #0a0a0c;
-            --text-main: #f0f0f0;
-            --text-muted: #888;
-            --accent-purple: #8a2be2;
-            --accent-gold: #ffd700;
-            --accent-red: #ff003c;
-            --glass-bg: rgba(25, 25, 30, 0.6);
-            --glass-border: rgba(138, 43, 226, 0.3);
-            --font-serif: 'Noto Serif KR', serif;
-            --font-sans: 'Pretendard', sans-serif;
-            --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>소르빌 기사 아카데미 — 검술이 전부인 세계에 소환됐는데, 마법 발동 조건이 너무 오글거립니다</title>
+<meta name="description" content="이세계 전생 × 아카데미 × 착각계 코미디. 위력은 절륜, 대사는 절망. 수치심을 연료로 세계 최강이 되는 공무원들의 이야기.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="소르빌 기사 아카데미 — 공식(비공식) 안내 페이지">
+<meta property="og:description" content="위력은 절륜. 대사는 절망. 이세계에 소환된 공무원들의 착각계 아카데미 코미디.">
+<meta name="theme-color" content="#070912">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='90'%3E%E2%9A%94%EF%B8%8F%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Nanum+Myeongjo:wght@400;700;800&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   SORVIL KNIGHT ACADEMY — design tokens
+   midnight navy × antique gold / LN-serif × engraved latin
+   ============================================================ */
+:root{
+  --bg:#070912;
+  --bg2:#0c1020;
+  --card:#10142a;
+  --surface:rgba(18,22,42,.62);
+  --line:rgba(212,178,95,.16);
+  --line2:rgba(212,178,95,.36);
+  --gold:#d4b25f;
+  --gold-bright:#f0d48a;
+  --gold-dim:#8a7440;
+  --ink:#ece6d6;
+  --muted:#a09cae;
+  --faint:#6d6a7c;
+  --crimson:#d05050;
+  --acc:#d4b25f; /* per-component accent, overridden inline */
+  --serif:'Nanum Myeongjo','Noto Sans KR',serif;
+  --sans:'Noto Sans KR',-apple-system,sans-serif;
+  --latin:'Cinzel','Nanum Myeongjo',serif;
+  --radius:14px;
+  --nav-h:64px;
+}
 
-        /* === Base Styles === */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            font-family: var(--font-sans);
-            overflow-x: hidden;
-            line-height: 1.6;
-        }
-        h1, h2, h3 { font-family: var(--font-serif); }
-        a { text-decoration: none; color: inherit; }
+/* ---------- reset / base ---------- */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--sans);
+  font-weight:400;
+  line-height:1.75;
+  letter-spacing:.01em;
+  word-break:keep-all;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+body::before{ /* vignette + top glow */
+  content:"";position:fixed;inset:0;z-index:1;pointer-events:none;
+  background:
+    radial-gradient(1200px 600px at 50% -8%, rgba(212,178,95,.07), transparent 60%),
+    radial-gradient(140% 100% at 50% 50%, transparent 55%, rgba(0,0,0,.5) 100%);
+}
+img,svg{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+ul{list-style:none}
+::selection{background:rgba(212,178,95,.35);color:#fff8e6}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:4px}
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-thumb{background:#2a2f4a;border-radius:99px;border:2px solid var(--bg)}
+::-webkit-scrollbar-track{background:var(--bg)}
 
-        /* === Utilities & Animations === */
-        .reveal { opacity: 0; transform: translateY(30px); transition: var(--transition); }
-        .reveal.active { opacity: 1; transform: translateY(0); }
-        
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
-            100% { transform: translateY(0px); }
-        }
-        @keyframes glow {
-            0% { box-shadow: 0 0 10px var(--accent-purple); }
-            50% { box-shadow: 0 0 30px var(--accent-purple), 0 0 10px var(--accent-gold); }
-            100% { box-shadow: 0 0 10px var(--accent-purple); }
-        }
+#stars{position:fixed;inset:0;z-index:0;pointer-events:none}
+.page{position:relative;z-index:2}
 
-        /* === Header === */
-        header {
-            position: fixed;
-            top: 0; width: 100%;
-            padding: 20px 50px;
-            background: rgba(10, 10, 12, 0.8);
-            backdrop-filter: blur(10px);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 100;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        .logo { font-family: var(--font-serif); font-size: 1.5rem; font-weight: 900; letter-spacing: 2px; color: var(--accent-gold); }
-        .nav-links { display: flex; gap: 30px; font-weight: 600; }
-        .nav-links a:hover { color: var(--accent-purple); }
+/* ---------- utilities ---------- */
+[hidden]{display:none!important}
+.container{max-width:1140px;margin:0 auto;padding:0 22px}
+.section{position:relative;padding:clamp(76px,10vw,128px) 0;overflow:hidden}
+section[id],header[id]{scroll-margin-top:calc(var(--nav-h) + 14px)}
+.sec-inner{position:relative;z-index:1}
+.bg-han{
+  position:absolute;z-index:0;pointer-events:none;user-select:none;line-height:1;
+  font-family:var(--serif);font-weight:800;color:rgba(212,178,95,.045);
+  font-size:clamp(180px,28vw,400px);right:-3%;top:4%;
+}
+.eyebrow{
+  font-family:var(--latin);font-weight:700;font-size:12px;
+  letter-spacing:.42em;text-transform:uppercase;color:var(--gold);
+  display:flex;align-items:center;gap:14px;
+}
+.eyebrow::before{content:"";width:34px;height:1px;background:linear-gradient(90deg,transparent,var(--gold))}
+.sec-title{
+  font-family:var(--serif);font-weight:800;
+  font-size:clamp(26px,4.4vw,42px);line-height:1.3;margin:14px 0 16px;
+}
+.gtx{
+  background:linear-gradient(180deg,#f6e3ab 0%,#d4b25f 55%,#9a7f42 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.sec-desc{color:var(--muted);max-width:64ch;font-size:15px}
+.sec-head{margin-bottom:clamp(34px,5vw,54px)}
 
-        /* === Hero Section === */
-        .hero {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            position: relative;
-            padding: 20px;
-            overflow: hidden;
-        }
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at center, rgba(138,43,226,0.15) 0%, rgba(10,10,12,1) 70%);
-            z-index: -1;
-        }
-        .hero h1 {
-            font-size: 4rem;
-            line-height: 1.2;
-            margin-bottom: 20px;
-            text-shadow: 0 0 20px rgba(138, 43, 226, 0.5);
-            animation: float 6s ease-in-out infinite;
-        }
-        .hero p { font-size: 1.2rem; color: var(--text-muted); max-width: 600px; margin-bottom: 40px; }
-        .hero .subtitle { color: var(--accent-gold); font-size: 1.5rem; display: block; margin-bottom: 10px; }
-        
-        .btn {
-            padding: 15px 40px;
-            background: transparent;
-            border: 2px solid var(--accent-purple);
-            color: var(--text-main);
-            font-size: 1.1rem;
-            font-weight: bold;
-            cursor: pointer;
-            border-radius: 30px;
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-        }
-        .btn:hover { background: var(--accent-purple); animation: glow 2s infinite; }
+.js .reveal{opacity:0;transform:translateY(26px);
+  transition:opacity .75s ease,transform .75s cubic-bezier(.2,.7,.2,1)}
+.js .reveal.in{opacity:1;transform:none}
 
-        /* === Story Section === */
-        .section { padding: 100px 20px; max-width: 1200px; margin: 0 auto; }
-        .section-title { font-size: 2.5rem; text-align: center; margin-bottom: 50px; color: var(--accent-gold); }
-        
-        .story-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-            align-items: center;
-        }
-        .placeholder-img {
-            width: 100%;
-            height: 400px;
-            background: repeating-linear-gradient(45deg, #1a1a1f, #1a1a1f 10px, #222 10px, #222 20px);
-            border: 1px solid var(--glass-border);
-            border-radius: 15px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: var(--text-muted);
-            font-family: var(--font-sans);
-            font-size: 1.2rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-        .story-text h3 { font-size: 1.8rem; margin-bottom: 20px; color: var(--accent-purple); }
-        .story-text p { margin-bottom: 15px; font-size: 1.1rem; color: #ccc; }
+/* ---------- buttons / chips ---------- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  padding:13px 28px;border-radius:999px;font-weight:700;font-size:15px;
+  letter-spacing:.02em;transition:transform .25s,box-shadow .25s,background .25s,border-color .25s;
+  white-space:nowrap;
+}
+.btn-gold{
+  background:linear-gradient(135deg,#efd58e,#c9a456 70%);color:#221a06;
+  box-shadow:0 8px 26px rgba(212,178,95,.22), inset 0 1px 0 rgba(255,255,255,.35);
+}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(212,178,95,.34)}
+.btn-ghost{border:1px solid var(--line2);color:var(--gold-bright)}
+.btn-ghost:hover{background:rgba(212,178,95,.08);transform:translateY(-2px)}
+.chip{
+  display:inline-flex;align-items:center;gap:6px;
+  border:1px solid var(--line);border-radius:999px;padding:6px 14px;
+  font-size:12.5px;font-weight:500;color:var(--gold-bright);
+  background:rgba(212,178,95,.055);letter-spacing:.03em;
+}
 
-        /* === Characters AI Interface Section === */
-        .char-showcase {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            padding: 30px;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            backdrop-filter: blur(20px);
-        }
-        .char-tabs {
-            display: flex;
-            gap: 15px;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            padding-bottom: 15px;
-            overflow-x: auto;
-        }
-        .tab-btn {
-            background: none;
-            border: none;
-            color: var(--text-muted);
-            font-size: 1.2rem;
-            font-family: var(--font-serif);
-            cursor: pointer;
-            padding: 10px 20px;
-            transition: var(--transition);
-            white-space: nowrap;
-        }
-        .tab-btn.active { color: var(--accent-gold); border-bottom: 2px solid var(--accent-gold); }
-        
-        .char-content { display: none; grid-template-columns: 1fr 2fr; gap: 40px; animation: fadeIn 0.5s; }
-        .char-content.active { display: grid; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateX(-10px); } to { opacity: 1; transform: translateX(0); } }
-        
-        .char-portrait { height: 500px; }
-        .char-info { display: flex; flex-direction: column; justify-content: center; }
-        .char-info h3 { font-size: 2.5rem; margin-bottom: 10px; display: flex; align-items: center; gap: 15px;}
-        .char-class { font-size: 1rem; padding: 5px 12px; background: rgba(138,43,226,0.2); border: 1px solid var(--accent-purple); border-radius: 20px; font-family: var(--font-sans); }
-        
-        .char-tags { display: flex; flex-wrap: wrap; gap: 10px; margin: 20px 0; }
-        .tag { background: rgba(255,255,255,0.05); padding: 5px 15px; border-radius: 5px; font-size: 0.9rem; color: #aaa; }
-        
-        .quote {
-            font-style: italic;
-            border-left: 4px solid var(--accent-purple);
-            padding-left: 15px;
-            margin: 20px 0;
-            color: #ddd;
-            background: rgba(0,0,0,0.3);
-            padding: 15px;
-            border-radius: 0 10px 10px 0;
-        }
-        
-        .chat-btn { align-self: flex-start; margin-top: 20px; background: var(--text-main); color: var(--bg-color); }
+/* ---------- generic card ---------- */
+.card{
+  position:relative;border:1px solid var(--line);border-radius:var(--radius);
+  background:linear-gradient(180deg,rgba(24,28,52,.78),rgba(12,15,31,.92));
+  box-shadow:0 18px 44px rgba(0,0,0,.34);
+}
+.card::before{ /* top hairline */
+  content:"";position:absolute;inset:0 14% auto 14%;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(240,212,138,.5),transparent);
+}
 
-        /* === Footer === */
-        footer { text-align: center; padding: 40px 20px; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 50px; color: var(--text-muted); }
+/* ---------- placeholder (image slots) ---------- */
+.ph{
+  position:relative;display:grid;place-items:center;gap:8px;text-align:center;
+  border:1px dashed rgba(212,178,95,.4);
+  border-color:color-mix(in srgb, var(--acc) 45%, transparent);
+  border-radius:12px;overflow:hidden;
+  background:
+    radial-gradient(120% 90% at 50% 0%, rgba(212,178,95,.10), transparent 62%),
+    repeating-linear-gradient(135deg, rgba(255,255,255,.028) 0 10px, transparent 10px 22px),
+    linear-gradient(180deg,#141833,#0a0d1c);
+}
+.ph::after{
+  content:"";position:absolute;inset:7px;border:1px solid rgba(236,230,214,.06);
+  border-radius:8px;pointer-events:none;
+}
+.ph-stack{display:grid;place-items:center;gap:7px;padding:18px}
+.ph-ico{font-size:clamp(30px,5vw,42px);line-height:1;
+  filter:drop-shadow(0 0 14px color-mix(in srgb, var(--acc) 55%, transparent))}
+.ph-tag{font-family:var(--latin);font-size:10px;letter-spacing:.34em;color:var(--muted)}
+.ph-sub{font-size:11px;color:var(--faint);letter-spacing:.08em}
 
-        /* === Mobile Responsiveness === */
-        @media (max-width: 768px) {
-            header { padding: 15px 20px; flex-direction: column; gap: 15px; }
-            .hero h1 { font-size: 2.5rem; }
-            .story-container, .char-content { grid-template-columns: 1fr; }
-            .char-portrait { height: 300px; }
-            .section { padding: 80px 20px 40px; }
-        }
-    </style>
+/* ---------- nav ---------- */
+.nav{
+  position:fixed;inset:0 0 auto 0;z-index:60;height:var(--nav-h);
+  display:flex;align-items:center;
+  background:rgba(7,9,18,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+  transition:box-shadow .3s;
+}
+.nav.scrolled{box-shadow:0 12px 34px rgba(0,0,0,.45)}
+.nav-inner{width:100%;display:flex;align-items:center;justify-content:space-between;gap:18px}
+.logo{display:flex;align-items:center;gap:11px}
+.logo .crest{width:30px;height:30px;flex:none}
+.logo-tx{display:flex;flex-direction:column;line-height:1.15}
+.logo-tx b{font-family:var(--latin);font-weight:700;font-size:14px;letter-spacing:.3em;color:var(--gold-bright)}
+.logo-tx span{font-size:10px;color:var(--faint);letter-spacing:.14em}
+.nav-links{display:flex;gap:4px}
+.nav-links a{
+  padding:9px 13px;border-radius:9px;font-size:13.5px;color:var(--muted);
+  transition:color .25s,background .25s;position:relative;
+}
+.nav-links a:hover{color:var(--gold-bright)}
+.nav-links a.active{color:var(--gold-bright)}
+.nav-links a.active::after{
+  content:"";position:absolute;left:13px;right:13px;bottom:4px;height:1px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+}
+.burger{display:none;width:42px;height:42px;flex-direction:column;align-items:center;justify-content:center;gap:5px;border-radius:10px}
+.burger span{width:20px;height:1.6px;background:var(--gold-bright);transition:transform .3s,opacity .3s}
+.burger.open span:nth-child(1){transform:translateY(6.6px) rotate(45deg)}
+.burger.open span:nth-child(2){opacity:0}
+.burger.open span:nth-child(3){transform:translateY(-6.6px) rotate(-45deg)}
+.mmenu{
+  position:fixed;inset:var(--nav-h) 0 auto 0;z-index:59;
+  background:rgba(7,9,18,.96);backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--line);
+  transform:translateY(-110%);transition:transform .38s cubic-bezier(.2,.8,.2,1);
+}
+.mmenu.open{transform:none}
+.mmenu nav{display:flex;flex-direction:column;padding:14px 24px 24px}
+.mmenu a{
+  font-family:var(--serif);font-weight:700;font-size:19px;padding:13px 4px;
+  border-bottom:1px solid rgba(212,178,95,.08);color:var(--ink);
+  display:flex;justify-content:space-between;align-items:center;
+}
+.mmenu a::after{content:"❯";font-size:12px;color:var(--gold-dim)}
+.mmenu a:hover{color:var(--gold-bright)}
+
+/* ---------- ticker ---------- */
+.ticker{
+  position:relative;border-block:1px solid var(--line);
+  background:rgba(212,178,95,.045);overflow:hidden;
+}
+.ticker::before,.ticker::after{
+  content:"";position:absolute;top:0;bottom:0;width:70px;z-index:2;pointer-events:none;
+}
+.ticker::before{left:0;background:linear-gradient(90deg,var(--bg),transparent)}
+.ticker::after{right:0;background:linear-gradient(-90deg,var(--bg),transparent)}
+.ticker-track{
+  display:flex;gap:54px;width:max-content;padding:10px 0;
+  animation:marquee 46s linear infinite;
+}
+.ticker:hover .ticker-track{animation-play-state:paused}
+.ticker-track span{font-size:12.5px;color:var(--muted);white-space:nowrap}
+.ticker-track b{color:var(--gold);font-weight:700;margin-right:7px;font-family:var(--serif)}
+@keyframes marquee{to{transform:translateX(-50%)}}
+
+/* ---------- hero ---------- */
+.hero{
+  position:relative;min-height:100svh;display:grid;place-items:center;
+  padding:calc(var(--nav-h) + 56px) 0 88px;text-align:center;overflow:hidden;
+}
+.hero-circle{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:clamp(440px,72vw,780px);opacity:.15;pointer-events:none;
+}
+.hero-inner{position:relative;z-index:1;display:grid;justify-items:center;gap:0}
+.hero .crest{width:clamp(72px,9vw,96px);height:auto;margin-bottom:26px;
+  filter:drop-shadow(0 0 26px rgba(212,178,95,.3))}
+.hero-eyebrow{
+  font-family:var(--latin);font-weight:700;font-size:clamp(10px,1.4vw,12.5px);
+  letter-spacing:.5em;color:var(--gold);text-transform:uppercase;
+}
+.hero-eyebrow-kr{font-size:12px;color:var(--faint);letter-spacing:.34em;margin-top:9px}
+.hero-title{
+  font-family:var(--serif);font-weight:800;line-height:1.42;
+  font-size:clamp(27px,5.6vw,56px);margin:26px 0 8px;text-wrap:balance;
+}
+.hero-title .bq{color:var(--gold-dim);font-weight:400}
+.hero-title .hl{
+  color:var(--gold-bright);
+  background:linear-gradient(transparent 68%, rgba(208,80,80,.34) 68%);
+  text-shadow:0 0 30px rgba(240,212,138,.22);
+}
+.hero-motto{
+  font-family:var(--serif);font-weight:700;font-size:clamp(15px,2.4vw,20px);
+  color:var(--gold-bright);letter-spacing:.16em;margin-top:18px;
+}
+.hero-motto i{font-style:normal;color:var(--crimson)}
+.hero-desc{color:var(--muted);font-size:clamp(13.5px,1.8vw,15.5px);max-width:62ch;margin:16px auto 0}
+.hero-chips{display:flex;flex-wrap:wrap;gap:9px;justify-content:center;margin-top:26px}
+.hero-cta{display:flex;flex-wrap:wrap;gap:13px;justify-content:center;margin-top:32px}
+.hstats{
+  display:flex;flex-wrap:wrap;justify-content:center;align-items:stretch;
+  gap:0;margin-top:46px;border:1px solid var(--line);border-radius:14px;
+  background:rgba(12,15,31,.5);backdrop-filter:blur(6px);overflow:hidden;
+}
+.hstat{padding:14px clamp(18px,3.4vw,34px);text-align:center}
+.hstat + .hstat{border-left:1px solid var(--line)}
+.hstat b{display:block;font-family:var(--serif);font-weight:800;font-size:clamp(17px,2.6vw,22px);color:var(--gold-bright)}
+.hstat span{font-size:10.5px;letter-spacing:.22em;color:var(--faint)}
+.scue{
+  position:absolute;bottom:24px;left:50%;transform:translateX(-50%);
+  display:grid;justify-items:center;gap:5px;color:var(--gold-dim);
+  font-family:var(--latin);font-size:9.5px;letter-spacing:.4em;z-index:1;
+}
+.scue i{font-style:normal;animation:cue 1.8s ease-in-out infinite;font-size:15px}
+@keyframes cue{0%,100%{transform:translateY(0);opacity:.5}50%{transform:translateY(7px);opacity:1}}
+@media (max-height:720px){.scue{display:none}}
+
+/* ---------- magic circle svg ---------- */
+.mcircle{animation:spin 90s linear infinite;transform-origin:50% 50%;will-change:transform}
+@keyframes spin{to{transform:rotate(360deg)}}
+.mc-ring{fill:none;stroke:var(--gold);stroke-width:.7;opacity:.8}
+.mc-dash{stroke-dasharray:3.5 7;opacity:.6}
+.mc-runes{font-family:var(--latin);font-size:8.6px;letter-spacing:3.4px;fill:var(--gold)}
+.mc-deco{fill:none;stroke:var(--gold);stroke-width:.6;opacity:.55}
+.mc-dot{fill:var(--gold)}
+
+/* ---------- story ---------- */
+.story-grid{display:grid;grid-template-columns:1.12fr .88fr;gap:clamp(26px,4vw,46px);align-items:start}
+.story-copy p{color:var(--muted);font-size:15px;margin-bottom:15px}
+.story-copy p strong{color:var(--ink);font-weight:700}
+.story-copy .punch{
+  font-family:var(--serif);font-weight:700;font-size:clamp(16px,2.4vw,19px);
+  color:var(--gold-bright);border-left:2px solid var(--gold);
+  padding:4px 0 4px 16px;margin:22px 0;line-height:1.7;
+}
+.kw-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:13px;margin-top:30px}
+.kw{padding:17px 18px;border-radius:12px}
+.kw .kico{font-size:21px;margin-bottom:7px;display:block}
+.kw h3{font-family:var(--serif);font-size:15.5px;font-weight:800;color:var(--gold-bright);margin-bottom:5px}
+.kw p{font-size:12.5px;color:var(--muted);line-height:1.65}
+.keyvisual{aspect-ratio:3/4;position:sticky;top:calc(var(--nav-h) + 26px)}
+
+/* ---------- magic system ---------- */
+.magic-grid{display:grid;grid-template-columns:.92fr 1.08fr;gap:clamp(26px,4vw,44px);align-items:start}
+.rules{display:grid;gap:13px}
+.rule{display:flex;gap:16px;padding:18px 20px;border-radius:12px}
+.rule-no{
+  font-family:var(--serif);font-weight:800;font-size:17px;color:var(--gold);
+  min-width:58px;line-height:1.5;
+}
+.rule h3{font-size:14.5px;font-weight:700;margin-bottom:4px}
+.rule p{font-size:13px;color:var(--muted);line-height:1.7}
+.rules-note{font-size:12px;color:var(--faint);margin-top:4px;padding-left:6px}
+
+.sim{padding:clamp(18px,2.6vw,26px);border-radius:18px}
+.sim-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}
+.sim-head h3{font-family:var(--serif);font-weight:800;font-size:17px}
+.sim-head .live{
+  display:inline-flex;align-items:center;gap:7px;font-family:var(--latin);
+  font-size:9.5px;letter-spacing:.3em;color:var(--crimson);
+}
+.sim-head .live::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--crimson);
+  box-shadow:0 0 10px var(--crimson);animation:blink 1.4s infinite}
+@keyframes blink{50%{opacity:.25}}
+.pills{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:16px}
+.pill{
+  display:inline-flex;align-items:center;gap:8px;padding:9px 16px;border-radius:999px;
+  border:1px solid var(--line);color:var(--muted);font-size:13.5px;font-weight:500;
+  transition:all .25s;
+}
+.pill:hover{border-color:var(--line2);color:var(--ink)}
+.pill[aria-pressed="true"]{
+  color:#0d0a02;font-weight:800;border-color:transparent;
+  background:linear-gradient(135deg, color-mix(in srgb, var(--acc) 88%, white), var(--acc));
+  box-shadow:0 6px 20px color-mix(in srgb, var(--acc) 38%, transparent);
+}
+.pill:disabled{opacity:.45;cursor:not-allowed}
+
+.stage{
+  position:relative;border:1px solid var(--line);border-radius:14px;
+  background:radial-gradient(110% 130% at 50% 110%, rgba(212,178,95,.08), transparent 55%), #0a0d1d;
+  aspect-ratio:16/9.5;display:grid;place-items:center;overflow:hidden;
+  transition:border-color .3s;
+}
+.stage .mcircle{position:absolute;width:74%;opacity:.4;transition:opacity .4s,filter .4s;animation-duration:64s}
+.stage.casting{border-color:var(--line2)}
+.stage.casting .mcircle{
+  animation-duration:2.4s;opacity:.85;
+  filter:drop-shadow(0 0 20px rgba(240,212,138,.5));
+}
+.sil{
+  position:relative;z-index:1;font-size:clamp(54px,8vw,76px);line-height:1;
+  filter:grayscale(1) brightness(.32) drop-shadow(0 10px 22px rgba(0,0,0,.7));
+  transition:filter .45s,transform .45s;
+}
+.stage.casting .sil{
+  filter:grayscale(.1) brightness(1.05) drop-shadow(0 0 26px color-mix(in srgb, var(--acc) 70%, transparent));
+  transform:scale(1.08);
+}
+.stage .flash{
+  position:absolute;inset:0;z-index:2;pointer-events:none;opacity:0;
+  background:radial-gradient(circle at 50% 52%, rgba(255,243,205,.95), rgba(255,243,205,0) 62%);
+}
+.stage.burst .flash{animation:burst .65s ease-out}
+@keyframes burst{0%{opacity:0}18%{opacity:1}100%{opacity:0}}
+.stage.burst{animation:shake .45s}
+@keyframes shake{
+  0%,100%{transform:translate(0,0)}
+  20%{transform:translate(-5px,2px)}40%{transform:translate(5px,-3px)}
+  60%{transform:translate(-4px,-2px)}80%{transform:translate(3px,2px)}
+}
+.stamp{
+  position:absolute;z-index:3;right:8%;top:12%;transform:rotate(-11deg) scale(1.6);
+  border:2.5px solid var(--gold-bright);border-radius:8px;padding:5px 13px;
+  font-family:var(--latin);font-weight:700;font-size:13px;letter-spacing:.22em;
+  color:var(--gold-bright);opacity:0;pointer-events:none;
+  text-shadow:0 0 14px rgba(240,212,138,.6);
+  box-shadow:0 0 22px rgba(240,212,138,.25), inset 0 0 14px rgba(240,212,138,.12);
+}
+.stage.burst .stamp{animation:stampIn .8s .12s forwards}
+@keyframes stampIn{
+  0%{opacity:0;transform:rotate(-11deg) scale(1.7)}
+  55%{opacity:1;transform:rotate(-11deg) scale(.96)}
+  100%{opacity:1;transform:rotate(-11deg) scale(1)}
+}
+.stage-cap{
+  position:absolute;left:12px;bottom:9px;z-index:3;
+  font-family:var(--latin);font-size:8.5px;letter-spacing:.26em;color:var(--faint);
+}
+
+.chant{
+  min-height:118px;margin-top:15px;padding:15px 17px;border-radius:12px;
+  border:1px solid var(--line);background:rgba(10,12,24,.7);
+  font-family:var(--serif);font-size:clamp(14.5px,2vw,17px);line-height:1.85;
+}
+.chant .hint{color:var(--faint);font-size:13px;font-family:var(--sans)}
+.chant .ln{display:block}
+.chant .ln-dir{font-size:12.5px;color:var(--faint);font-family:var(--sans);margin-bottom:7px}
+.chant .ln-final{
+  color:var(--gold-bright);font-weight:800;font-size:1.18em;letter-spacing:.03em;
+  text-shadow:0 0 20px rgba(240,212,138,.4);
+}
+.caret{display:inline-block;width:8px;margin-left:2px;animation:blink 1s steps(1) infinite;color:var(--gold)}
+
+.gauge-row{display:flex;align-items:center;gap:12px;margin-top:14px}
+.gauge-row .glabel{font-size:11.5px;color:var(--faint);letter-spacing:.12em;white-space:nowrap}
+.gauge{flex:1;height:10px;border-radius:99px;background:#161a32;border:1px solid var(--line);overflow:hidden}
+.gauge i{
+  display:block;height:100%;width:0%;border-radius:99px;
+  background:linear-gradient(90deg,#f0d48a,#e8a04c 55%,#e25555);
+  box-shadow:0 0 12px rgba(226,85,85,.4);transition:width .3s ease;
+}
+.gstate{font-size:11.5px;font-weight:700;color:var(--gold-bright);min-width:74px;text-align:right;white-space:nowrap}
+
+.castbtn{width:100%;margin-top:15px;font-size:16px;padding:15px}
+.castbtn:disabled{opacity:.55;cursor:wait;transform:none!important}
+
+.sim-result{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:15px}
+.bub{
+  position:relative;padding:14px 16px;border-radius:13px;border:1px solid var(--line);
+  background:rgba(13,16,32,.75);opacity:0;transform:translateY(10px);
+  transition:opacity .5s,transform .5s;
+}
+.bub.show{opacity:1;transform:none}
+.bub .blabel{
+  display:inline-block;font-family:var(--latin);font-size:9px;letter-spacing:.3em;
+  margin-bottom:8px;padding-bottom:4px;border-bottom:1px solid var(--line);
+}
+.bub-inner .blabel{color:var(--crimson)}
+.bub-inner p{font-size:13.5px;color:var(--muted);font-style:italic}
+.bub-out .blabel{color:var(--gold)}
+.bub-out p{font-size:13.5px;color:var(--ink)}
+.bub-out p + p{margin-top:8px;padding-top:8px;border-top:1px dashed rgba(212,178,95,.14)}
+.bub-out p b{color:var(--gold-bright);font-weight:700}
+
+/* ---------- legend ---------- */
+.statue-ph{aspect-ratio:21/8;margin-bottom:clamp(26px,4vw,40px)}
+.prophecy{
+  position:relative;text-align:center;max-width:760px;margin:0 auto clamp(34px,5vw,52px);
+  padding:30px 20px;
+}
+.prophecy::before,.prophecy::after{
+  font-family:var(--serif);font-size:56px;color:var(--gold-dim);position:absolute;line-height:1;
+}
+.prophecy::before{content:"❝";left:0;top:0}
+.prophecy::after{content:"❞";right:0;bottom:-8px}
+.prophecy p{
+  font-family:var(--serif);font-weight:700;font-size:clamp(17px,3vw,24px);
+  line-height:1.85;color:var(--ink);
+}
+.prophecy small{display:block;margin-top:14px;font-size:11.5px;color:var(--faint);letter-spacing:.2em}
+.tablets{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.tablet{
+  padding:clamp(22px,3vw,30px);border-radius:14px;
+  outline:1px solid rgba(212,178,95,.1);outline-offset:-7px;
+}
+.tablet .tno{
+  font-family:var(--serif);font-weight:800;font-size:14px;color:var(--gold);
+  letter-spacing:.3em;display:flex;align-items:center;gap:12px;
+}
+.tablet .tno::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--line2),transparent)}
+.tablet .tepi{font-size:12.5px;color:var(--gold);margin-top:16px;letter-spacing:.14em}
+.tablet h3{font-family:var(--serif);font-weight:800;font-size:clamp(20px,2.6vw,25px);margin:4px 0 14px}
+.tablet .tverse{
+  font-family:var(--serif);font-size:14px;line-height:2;color:var(--muted);
+  border-left:2px solid rgba(212,178,95,.25);padding-left:14px;
+}
+.tablet.mys{border-style:dashed;background:linear-gradient(180deg,rgba(20,23,42,.5),rgba(10,12,24,.8))}
+.tablet.mys h3{color:var(--muted);animation:mysPulse 3s ease-in-out infinite}
+@keyframes mysPulse{0%,100%{opacity:.55}50%{opacity:1}}
+.legend-note{
+  margin-top:26px;text-align:center;font-size:12.5px;color:var(--faint);
+  font-style:italic;line-height:1.9;
+}
+
+/* ---------- characters ---------- */
+.tabs{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:30px}
+.tab{
+  padding:10px 19px;border-radius:999px;border:1px solid var(--line);
+  color:var(--muted);font-size:13.5px;font-weight:500;white-space:nowrap;transition:all .25s;
+  display:inline-flex;align-items:center;gap:8px;
+}
+.tab:hover{color:var(--ink);border-color:var(--line2)}
+.tab[aria-selected="true"]{
+  background:linear-gradient(135deg,#efd58e,#c9a456);color:#221a06;
+  font-weight:800;border-color:transparent;
+}
+.tbadge{
+  font-style:normal;font-size:10.5px;font-weight:800;padding:2px 8px;border-radius:99px;
+  background:rgba(0,0,0,.22);letter-spacing:.06em;
+}
+.tab:not([aria-selected="true"]) .tbadge{background:rgba(212,178,95,.12);color:var(--gold)}
+.cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(236px,1fr));gap:17px}
+.ccard{
+  text-align:left;display:flex;flex-direction:column;cursor:pointer;
+  transition:transform .3s,border-color .3s,box-shadow .3s;
+}
+.ccard:hover{
+  transform:translateY(-5px);
+  border-color:color-mix(in srgb, var(--acc) 55%, transparent);
+  box-shadow:0 22px 48px rgba(0,0,0,.45), 0 0 0 1px color-mix(in srgb, var(--acc) 26%, transparent);
+}
+.cport{aspect-ratio:4/4.4;border-radius:13px 13px 0 0;border-style:dashed;border-width:0 0 1px 0}
+.cbody{padding:17px 18px 19px;display:flex;flex-direction:column;gap:9px;flex:1}
+.crow{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+.crow h3{font-family:var(--serif);font-weight:800;font-size:19px}
+.alias{
+  font-size:10.5px;font-weight:700;letter-spacing:.08em;padding:3px 9px;border-radius:99px;
+  color:#10112a;background:linear-gradient(135deg, color-mix(in srgb, var(--acc) 92%, white), var(--acc));
+}
+.crole{font-size:11.5px;color:var(--gold);letter-spacing:.1em}
+.cmeta{display:grid;gap:5px;font-size:12px;color:var(--muted)}
+.cmeta b{
+  display:inline-block;min-width:42px;margin-right:8px;font-weight:700;font-size:10.5px;
+  color:var(--faint);letter-spacing:.16em;
+}
+.cdesc{
+  font-size:12.5px;color:var(--muted);line-height:1.7;
+  display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;
+}
+.cmore{
+  margin-top:auto;padding-top:11px;font-size:11.5px;font-weight:700;letter-spacing:.1em;
+  color:color-mix(in srgb, var(--acc) 80%, white);
+}
+.ccard.locked{cursor:pointer}
+.ccard.locked .cport{filter:grayscale(.6)}
+.cnote{margin-top:24px;font-size:12px;color:var(--faint)}
+
+/* ---------- modal ---------- */
+.modal{position:fixed;inset:0;z-index:90;display:none;place-items:center;padding:18px}
+.modal.open{display:grid}
+.modal-bk{position:absolute;inset:0;background:rgba(4,6,12,.8);backdrop-filter:blur(7px)}
+.modal-card{
+  position:relative;width:min(660px,100%);max-height:min(86vh,840px);overflow:auto;
+  border:1px solid var(--line2);border-radius:18px;background:#0d1022;
+  box-shadow:0 40px 90px rgba(0,0,0,.6);
+  animation:mIn .35s cubic-bezier(.2,.8,.2,1);
+}
+@keyframes mIn{from{opacity:0;transform:translateY(26px) scale(.98)}to{opacity:1;transform:none}}
+.mclose{
+  position:sticky;top:12px;margin-left:calc(100% - 50px);z-index:5;
+  width:38px;height:38px;border-radius:50%;display:grid;place-items:center;
+  border:1px solid var(--line2);background:rgba(10,12,24,.85);color:var(--gold-bright);
+  font-size:14px;transition:background .25s,transform .25s;
+}
+.mclose:hover{background:rgba(212,178,95,.16);transform:rotate(90deg)}
+.mtop{
+  display:flex;gap:20px;padding:6px 26px 24px;margin-top:-30px;
+  border-bottom:1px solid var(--line);
+  background:linear-gradient(150deg, color-mix(in srgb, var(--acc) 13%, transparent), transparent 58%);
+}
+.mport{width:112px;min-width:112px;aspect-ratio:5/6}
+.mid{display:flex;flex-direction:column;justify-content:center;gap:7px;min-width:0}
+.mid .mrole{font-size:11px;color:var(--gold);letter-spacing:.16em}
+.mid h2{font-family:var(--serif);font-weight:800;font-size:clamp(22px,4vw,28px);display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.mid .mtags{display:flex;flex-wrap:wrap;gap:7px}
+.mid .mtags .chip{font-size:11px;padding:4px 11px}
+.mbody{padding:22px 26px 30px;display:grid;gap:20px}
+.msec h4{
+  font-family:var(--latin);font-size:10px;letter-spacing:.34em;color:var(--gold);
+  margin-bottom:11px;display:flex;align-items:center;gap:12px;
+}
+.msec h4::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--line),transparent)}
+.mprofile{display:grid;gap:9px}
+.mprofile .prow{display:grid;grid-template-columns:84px 1fr;gap:12px;font-size:13.5px}
+.mprofile .prow b{color:var(--faint);font-weight:700;font-size:11px;letter-spacing:.18em;padding-top:2px}
+.mprofile .prow span{color:var(--ink)}
+.mability{
+  border:1px solid var(--line);border-left:3px solid var(--acc);border-radius:11px;
+  padding:15px 17px;background:color-mix(in srgb, var(--acc) 6%, transparent);
+}
+.mability b{display:block;font-family:var(--serif);font-weight:800;font-size:15.5px;margin-bottom:6px;
+  color:color-mix(in srgb, var(--acc) 78%, white)}
+.mability p{font-size:13px;color:var(--muted);line-height:1.75}
+.mquote{
+  font-family:var(--serif);font-weight:700;font-size:15.5px;line-height:1.9;color:var(--ink);
+  padding:4px 0 4px 18px;border-left:2px solid var(--gold);
+}
+.mnotes{display:grid;gap:7px}
+.mnotes li{font-size:12.5px;color:var(--muted);display:flex;gap:9px}
+.mnotes li::before{content:"✦";color:var(--gold);font-size:10px;line-height:1.9}
+
+/* ---------- academy ---------- */
+.timeline{position:relative;padding-left:36px;max-width:720px}
+.timeline::before{
+  content:"";position:absolute;left:9px;top:8px;bottom:8px;width:1px;
+  background:linear-gradient(180deg,transparent,var(--gold) 12%,var(--gold) 88%,transparent);
+  opacity:.5;
+}
+.tl-item{position:relative;padding-bottom:26px}
+.tl-item:last-child{padding-bottom:0}
+.tl-item::before{
+  content:"";position:absolute;left:-31.5px;top:9px;width:9px;height:9px;border-radius:50%;
+  background:var(--bg);border:1.6px solid var(--gold);box-shadow:0 0 10px rgba(212,178,95,.4);
+}
+.tl-item.hot::before{background:var(--gold);box-shadow:0 0 16px rgba(240,212,138,.8)}
+.tl-month{font-family:var(--serif);font-weight:800;color:var(--gold-bright);font-size:15px;letter-spacing:.08em}
+.tl-item h3{font-size:15px;font-weight:700;display:inline;margin-left:10px}
+.tl-item .hotchip{
+  display:inline-block;margin-left:9px;font-size:10px;font-weight:800;letter-spacing:.1em;
+  color:#221a06;background:linear-gradient(135deg,#efd58e,#c9a456);
+  border-radius:99px;padding:2px 9px;vertical-align:2px;
+}
+.tl-item p{font-size:12.5px;color:var(--muted);margin-top:4px}
+.acad-grid{display:grid;grid-template-columns:1fr .9fr;gap:clamp(26px,4vw,46px);align-items:start}
+
+.sports{margin-top:clamp(48px,7vw,72px)}
+.sports-head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:22px}
+.sports-head h3{font-family:var(--serif);font-weight:800;font-size:clamp(19px,3vw,25px)}
+.sports-head small{font-size:12px;color:var(--faint);letter-spacing:.1em}
+.sgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(225px,1fr));gap:14px}
+.sport{padding:18px 19px;border-radius:12px;transition:transform .3s,border-color .3s}
+.sport:hover{transform:translateY(-4px);border-color:var(--line2)}
+.sport .sno{font-family:var(--latin);font-size:10px;letter-spacing:.3em;color:var(--gold-dim)}
+.sport h4{font-family:var(--serif);font-weight:800;font-size:15.5px;margin:7px 0 7px;color:var(--gold-bright)}
+.sport p{font-size:12.5px;color:var(--muted);line-height:1.7}
+
+.fac-wrap{margin-top:clamp(48px,7vw,72px);display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(22px,3.4vw,38px);align-items:start}
+.fac-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(146px,1fr));gap:12px}
+.fac{padding:15px 15px;border-radius:11px;display:grid;gap:4px}
+.fac .fico{font-size:20px}
+.fac b{font-size:13.5px;font-weight:700}
+.fac span{font-size:11px;color:var(--faint);line-height:1.55}
+.uniform{padding:21px 22px;border-radius:13px}
+.uniform h4{font-family:var(--serif);font-weight:800;font-size:16px;margin-bottom:13px;color:var(--gold-bright)}
+.swatches{display:flex;gap:9px;margin-bottom:13px}
+.sw{width:25px;height:25px;border-radius:7px;border:1px solid rgba(255,255,255,.16);display:grid;place-items:center;font-size:9px;color:#999}
+.uniform p{font-size:12.5px;color:var(--muted);line-height:1.8}
+.uniform p i{color:var(--faint);font-size:11.5px}
+
+/* ---------- goal ---------- */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin-bottom:clamp(44px,6vw,64px)}
+.step{position:relative;padding:22px 18px;border-radius:13px;text-align:center}
+.step::after{
+  content:"❯";position:absolute;right:-13.5px;top:50%;transform:translateY(-50%);
+  color:var(--gold);font-size:13px;z-index:1;text-shadow:0 0 10px rgba(212,178,95,.6);
+}
+.step:last-child::after{content:none}
+.step .stno{font-family:var(--latin);font-size:10px;letter-spacing:.32em;color:var(--gold-dim)}
+.step h3{font-family:var(--serif);font-weight:800;font-size:17.5px;margin:9px 0 7px;color:var(--gold-bright)}
+.step p{font-size:12px;color:var(--muted);line-height:1.7}
+.step.final h3{color:var(--crimson)}
+
+.wills{padding:clamp(22px,3.4vw,32px);border-radius:16px}
+.wills-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:8px}
+.wills-head h3{font-family:var(--serif);font-weight:800;font-size:clamp(18px,2.8vw,23px)}
+.wills-head small{font-size:11.5px;color:var(--faint);letter-spacing:.12em}
+.will{padding:18px 0;border-bottom:1px dashed rgba(212,178,95,.13)}
+.will:last-of-type{border-bottom:0}
+.will-top{display:flex;align-items:center;gap:13px}
+.wdot{width:11px;height:11px;border-radius:50%;background:var(--acc);box-shadow:0 0 12px var(--acc);flex:none}
+.will-top b{font-family:var(--serif);font-weight:800;font-size:16px;min-width:74px}
+.wbar{flex:1;height:11px;border-radius:99px;background:#151933;border:1px solid var(--line);overflow:hidden}
+.wbar i{
+  display:block;height:100%;width:0;border-radius:99px;
+  background:linear-gradient(90deg, color-mix(in srgb, var(--acc) 60%, white), var(--acc));
+  transition:width 1.4s cubic-bezier(.2,.8,.2,1);
+}
+.will.in .wbar i{width:var(--w)}
+.will.over .wbar i{
+  background:repeating-linear-gradient(115deg, var(--acc) 0 12px, color-mix(in srgb, var(--acc) 55%, white) 12px 24px);
+  background-size:34px 100%;animation:overdrive 1s linear infinite;
+}
+@keyframes overdrive{to{background-position:34px 0}}
+.wpct{font-family:var(--serif);font-weight:800;font-size:16px;color:var(--gold-bright);min-width:62px;text-align:right}
+.will q{display:block;margin:9px 0 0 24px;font-size:12.5px;color:var(--muted);quotes:"“" "”"}
+.goal-close{
+  margin-top:clamp(36px,5vw,52px);text-align:center;font-family:var(--serif);font-weight:700;
+  font-size:clamp(15px,2.6vw,19px);color:var(--gold-bright);letter-spacing:.06em;line-height:2;
+}
+.goal-close small{display:block;font-family:var(--sans);font-weight:400;font-size:11.5px;color:var(--faint);letter-spacing:.2em;margin-top:8px}
+
+/* ---------- footer ---------- */
+.footer{border-top:1px solid var(--line);padding:54px 0 44px;text-align:center;position:relative}
+.footer .crest{width:52px;margin:0 auto 18px;opacity:.9}
+.f-motto{font-family:var(--latin);font-size:11px;letter-spacing:.4em;color:var(--gold)}
+.f-motto-kr{font-size:12px;color:var(--faint);margin-top:7px;letter-spacing:.14em}
+.f-div{margin:22px auto;color:var(--gold-dim);font-size:11px;letter-spacing:1em}
+.f-links{display:flex;justify-content:center;flex-wrap:wrap;gap:4px 20px;margin-bottom:22px}
+.f-links a{font-size:12.5px;color:var(--muted);transition:color .25s}
+.f-links a:hover{color:var(--gold-bright)}
+.f-small{display:grid;gap:5px;font-size:11.5px;color:var(--faint);line-height:1.8}
+
+/* ---------- sim mode tabs + chant maker ---------- */
+.sim-modes{display:flex;gap:7px;margin-bottom:14px;background:#0a0d1d;border:1px solid var(--line);border-radius:99px;padding:4px}
+.sim-mode{flex:1;padding:8px 10px;border-radius:99px;font-size:12.5px;font-weight:700;color:var(--muted);transition:all .25s;white-space:nowrap}
+.sim-mode[aria-pressed="true"]{background:linear-gradient(135deg,#efd58e,#c9a456);color:#221a06}
+.maker{display:grid;gap:13px;margin-bottom:16px}
+.maker .frow{display:grid;gap:6px}
+.maker label{font-size:11px;font-weight:700;letter-spacing:.12em;color:var(--faint)}
+.maker input[type=text],.maker textarea{
+  width:100%;border:1px solid var(--line);border-radius:10px;background:#0a0d1d;color:var(--ink);
+  font-family:var(--serif);font-size:14px;padding:11px 13px;resize:vertical;transition:border-color .25s;
+}
+.maker input[type=text]:focus,.maker textarea:focus{outline:none;border-color:var(--gold)}
+.maker textarea{min-height:64px;line-height:1.7}
+.maker .hintln{font-size:10.5px;color:var(--faint);font-weight:400;letter-spacing:0}
+.picks{display:flex;flex-wrap:wrap;gap:6px}
+.pick{width:38px;height:38px;display:grid;place-items:center;border:1px solid var(--line);border-radius:10px;font-size:18px;background:#0a0d1d;transition:all .2s}
+.pick:hover{border-color:var(--line2)}
+.pick[aria-pressed="true"]{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold) inset}
+.cpick{width:30px;height:30px;border-radius:50%;border:2px solid transparent;transition:transform .2s}
+.cpick[aria-pressed="true"]{border-color:#fff;transform:scale(1.12)}
+.maker-acts{display:flex;gap:9px}
+.maker-acts .btn{flex:1;padding:11px;font-size:13.5px}
+
+/* ---------- arena / battle ---------- */
+.arena{margin-top:8px}
+.party-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:20px}
+.party-head h3{font-family:var(--serif);font-weight:800;font-size:clamp(18px,2.8vw,24px)}
+.party-count{font-family:var(--latin);font-size:12px;letter-spacing:.16em;color:var(--gold-bright)}
+.roster{display:grid;grid-template-columns:repeat(auto-fill,minmax(168px,1fr));gap:13px}
+.unit{
+  position:relative;border:1px solid var(--line);border-radius:14px;padding:15px 15px 16px;cursor:pointer;
+  background:linear-gradient(180deg,rgba(24,28,52,.7),rgba(12,15,31,.92));transition:transform .25s,border-color .25s,box-shadow .25s;
+}
+.unit:hover{transform:translateY(-3px);border-color:var(--line2)}
+.unit[aria-pressed="true"]{border-color:var(--acc);box-shadow:0 0 0 1px var(--acc) inset,0 14px 32px rgba(0,0,0,.4)}
+.unit .uchk{position:absolute;top:11px;right:11px;width:22px;height:22px;border-radius:50%;border:1.5px solid var(--line2);display:grid;place-items:center;font-size:11px;color:#10112a;background:transparent;transition:all .2s}
+.unit[aria-pressed="true"] .uchk{background:var(--acc);border-color:var(--acc)}
+.unit .uava{width:46px;height:46px;border-radius:10px;display:grid;place-items:center;font-size:24px;margin-bottom:10px;
+  background:radial-gradient(circle at 50% 35%, color-mix(in srgb,var(--acc) 35%,transparent),transparent 70%);border:1px solid var(--line)}
+.unit h4{font-family:var(--serif);font-weight:800;font-size:16px;margin-bottom:2px}
+.unit .urole{font-size:10.5px;color:var(--acc);letter-spacing:.08em;margin-bottom:10px}
+.ustats{display:flex;gap:11px;margin-bottom:9px}
+.ustat{font-size:11px;color:var(--muted)}
+.ustat b{color:var(--ink);font-weight:700}
+.uskill{font-size:11px;color:var(--faint);line-height:1.55;border-top:1px dashed rgba(212,178,95,.13);padding-top:8px}
+.uskill em{font-style:normal;color:var(--gold-bright);font-weight:700}
+.party-go{display:flex;justify-content:center;margin-top:26px}
+.party-go .btn{min-width:240px}
+.party-go .btn:disabled{opacity:.45;cursor:not-allowed;transform:none!important;box-shadow:none}
+
+.battle{display:none}
+.battle.on{display:block}
+.bt-banner{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.bt-wave{font-family:var(--latin);font-size:12px;letter-spacing:.2em;color:var(--gold-bright)}
+.bt-wave b{font-family:var(--serif);font-size:15px;margin-left:8px;letter-spacing:.06em}
+.bt-enemy{font-size:12px;color:var(--faint);letter-spacing:.1em}
+.bt-stage{
+  position:relative;border:1px solid var(--line2);border-radius:14px;overflow:hidden;
+  background:linear-gradient(180deg,#0b0f22 0%,#0a0d1d 60%,#070912 100%);
+}
+.bt-stage canvas{display:block;width:100%;height:auto;image-rendering:pixelated;image-rendering:crisp-edges}
+.bt-banner-msg{
+  position:absolute;inset:0;display:none;place-items:center;text-align:center;z-index:4;
+  background:rgba(6,8,16,.72);backdrop-filter:blur(3px);padding:20px;
+}
+.bt-banner-msg.show{display:grid;animation:bmsg .4s ease}
+@keyframes bmsg{from{opacity:0}to{opacity:1}}
+.bt-banner-msg h4{font-family:var(--serif);font-weight:800;font-size:clamp(22px,5vw,34px);color:var(--gold-bright);margin-bottom:8px;text-shadow:0 0 26px rgba(240,212,138,.4)}
+.bt-banner-msg p{font-size:13px;color:var(--muted);max-width:46ch;line-height:1.7}
+.bt-banner-msg .btn{margin-top:18px}
+.bt-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:14px;margin-top:14px;align-items:stretch}
+.bt-actions{border:1px solid var(--line);border-radius:13px;padding:15px 16px;background:rgba(12,15,31,.6);min-height:120px}
+.bt-actions .who{font-family:var(--serif);font-weight:800;font-size:15px;margin-bottom:3px}
+.bt-actions .who b{color:var(--gold-bright)}
+.bt-actions .prompt{font-size:11.5px;color:var(--faint);margin-bottom:13px;letter-spacing:.04em}
+.act-btns{display:grid;gap:8px}
+.act{display:flex;align-items:center;gap:10px;width:100%;text-align:left;padding:11px 13px;border:1px solid var(--line);border-radius:10px;background:#0a0d1d;color:var(--ink);font-size:13px;font-weight:600;transition:all .2s}
+.act:hover:not(:disabled){border-color:var(--gold);background:rgba(212,178,95,.06)}
+.act:disabled{opacity:.4;cursor:not-allowed}
+.act .ai{font-size:16px}
+.act .acd{margin-left:auto;font-size:10px;color:var(--faint);letter-spacing:.1em}
+.act.back{justify-content:center;color:var(--faint);font-weight:500}
+.bt-log{border:1px solid var(--line);border-radius:13px;padding:13px 15px;background:rgba(10,12,24,.7);display:flex;flex-direction:column}
+.bt-log h5{font-family:var(--latin);font-size:10px;letter-spacing:.24em;color:var(--gold-dim);margin-bottom:9px}
+.bt-log .logwrap{flex:1;overflow-y:auto;max-height:200px;display:flex;flex-direction:column;gap:7px}
+.bt-log p{font-size:12px;color:var(--muted);line-height:1.55;padding-left:13px;position:relative}
+.bt-log p::before{content:"›";position:absolute;left:0;color:var(--gold-dim)}
+.bt-log p.dmg{color:var(--crimson)}
+.bt-log p.heal{color:#86efac}
+.bt-log p.sys{color:var(--gold-bright);font-weight:700}
+.bt-log p.flavor{color:var(--faint);font-style:italic}
+
+/* ---------- arena expansions ---------- */
+.diff-row{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:22px;flex-wrap:wrap}
+.diff-label{font-family:var(--latin);font-size:11px;letter-spacing:.2em;color:var(--gold-dim)}
+.diff-pick{display:flex;gap:6px;background:#0a0d1d;border:1px solid var(--line);border-radius:99px;padding:4px}
+.diff{padding:7px 16px;border-radius:99px;font-size:12.5px;font-weight:700;color:var(--muted);transition:all .25s}
+.diff[aria-pressed="true"]{background:linear-gradient(135deg,#efd58e,#c9a456);color:#221a06}
+
+.bt-turnorder{display:flex;align-items:center;gap:5px;margin-bottom:10px;overflow-x:auto;padding-bottom:2px}
+.bt-turnorder .tolabel{font-family:var(--latin);font-size:9px;letter-spacing:.18em;color:var(--gold-dim);flex:none;margin-right:3px}
+.to-chip{flex:none;width:26px;height:26px;border-radius:8px;display:grid;place-items:center;font-size:13px;border:1px solid var(--line);background:#0a0d1d;position:relative;transition:opacity .3s}
+.to-chip.ally{box-shadow:inset 0 -2px 0 color-mix(in srgb,var(--acc) 70%,transparent)}
+.to-chip.enemy{box-shadow:inset 0 -2px 0 #d05050}
+.to-chip.now{outline:2px solid var(--gold-bright);outline-offset:1px}
+.to-chip.done{opacity:.28}
+
+.bt-party{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:9px;margin:14px 0 4px}
+.pcard{border:1px solid var(--line);border-radius:11px;padding:9px 11px;background:rgba(12,15,31,.6);transition:opacity .3s,border-color .25s}
+.pcard.active{border-color:var(--gold-bright);box-shadow:0 0 0 1px var(--gold-bright) inset}
+.pcard.dead{opacity:.38;filter:grayscale(.7)}
+.pcard .ptop{display:flex;align-items:center;gap:6px;margin-bottom:7px}
+.pcard .pico{width:20px;height:20px;border-radius:6px;display:grid;place-items:center;font-size:12px;
+  background:radial-gradient(circle,color-mix(in srgb,var(--acc) 40%,transparent),transparent 70%);border:1px solid var(--line);flex:none}
+.pcard .pname{font-family:var(--serif);font-weight:700;font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pcard .pstatus{margin-left:auto;display:flex;gap:2px;font-size:11px;flex:none}
+.bar{height:6px;border-radius:99px;background:#05060d;overflow:hidden;margin-bottom:4px}
+.bar i{display:block;height:100%;border-radius:99px;transition:width .35s ease}
+.bar.hp i{background:linear-gradient(90deg,#6bd38a,#46a767)}
+.bar.hp.low i{background:linear-gradient(90deg,#e0b040,#d05050)}
+.bar.sp i{background:linear-gradient(90deg,#c084fc,#f0d48a)}
+.bar.sp.full i{background:linear-gradient(90deg,#f0d48a,#fff3cf);box-shadow:0 0 8px rgba(240,212,138,.7)}
+.pnums{display:flex;justify-content:space-between;font-size:9.5px;color:var(--faint);letter-spacing:.04em;margin-bottom:5px}
+.pnums b{color:var(--ink);font-weight:700}
+.pnums .spv.ready{color:var(--gold-bright)}
+
+.act.ult{border-color:color-mix(in srgb,var(--gold-bright) 55%,var(--line));background:linear-gradient(135deg,rgba(240,212,138,.14),rgba(192,132,252,.1))}
+.act.ult:hover:not(:disabled){border-color:var(--gold-bright);box-shadow:0 0 16px rgba(240,212,138,.25)}
+.act .ahot{margin-left:auto;font-size:9px;letter-spacing:.12em;color:var(--gold-bright);font-weight:700;border:1px solid color-mix(in srgb,var(--gold-bright) 40%,transparent);border-radius:5px;padding:2px 5px}
+
+@media (max-width:560px){
+  .bt-party{grid-template-columns:repeat(auto-fit,minmax(96px,1fr))}
+  .pcard .pname{font-size:11px}
+}
+
+/* ---------- responsive ---------- */
+@media (max-width:760px){
+  .bt-grid{grid-template-columns:1fr}
+  .bt-log .logwrap{max-height:130px}
+}
+@media (max-width:960px){
+  .nav-links{display:none}
+  .burger{display:flex}
+  .story-grid,.magic-grid,.acad-grid,.fac-wrap{grid-template-columns:1fr}
+  .keyvisual{position:static;aspect-ratio:16/10;max-width:560px}
+  .tablets{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr 1fr}
+  .step:nth-child(2)::after{content:none}
+  .bg-han{font-size:clamp(150px,38vw,260px);opacity:.8}
+}
+@media (max-width:620px){
+  .kw-grid{grid-template-columns:1fr}
+  .sim-result{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr}
+  .step::after{content:"⌄";right:auto;left:50%;top:auto;bottom:-15px;transform:translateX(-50%)}
+  .step:nth-child(2)::after{content:"⌄"}
+  .step:last-child::after{content:none}
+  .mtop{flex-direction:column;align-items:flex-start}
+  .will-top{flex-wrap:wrap}
+  .wbar{order:3;flex-basis:100%}
+  .will q{margin-left:0}
+  .hstat{flex:1;min-width:33%}
+}
+
+/* ---------- reduced motion ---------- */
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  html{scroll-behavior:auto}
+  .js .reveal{opacity:1;transform:none}
+}
+</style>
+<script>document.documentElement.className += ' js';</script>
 </head>
-<body>
+<body id="top">
+<canvas id="stars" aria-hidden="true"></canvas>
 
-    <header>
-        <div class="logo">ACADEMY.log</div>
-        <nav class="nav-links">
-            <a href="#hero">HOME</a>
-            <a href="#story">LORE</a>
-            <a href="#characters">CHARACTERS</a>
-        </nav>
-    </header>
+<div class="page">
 
-    <main>
-        <section id="hero" class="hero">
-            <h1 class="reveal"><span class="subtitle">오직 검술만이 존재하는 세계,</span>전설의 귀인들이<br>강림하시었다.</h1>
-            <p class="reveal" style="transition-delay: 0.2s;">이세계인들은 이들의 수치스러운 '중2병 영창'을<br>고대의 비전 마법으로 오해하기 시작했다.</p>
-            <button class="btn reveal" style="transition-delay: 0.4s;">에피소드 시작하기</button>
-        </section>
+<!-- ===================== NAV ===================== -->
+<header class="nav" id="nav">
+  <div class="container nav-inner">
+    <a class="logo" href="#hero" aria-label="맨 위로">
+      <svg class="crest" viewBox="0 0 120 120" aria-hidden="true">
+        <path d="M60 12 L100 28 V62 C100 90 80 104 60 112 C40 104 20 90 20 62 V28 Z"
+              fill="rgba(212,178,95,.06)" stroke="#d4b25f" stroke-width="2.6" stroke-linejoin="round"/>
+        <path d="M60 20 L93 33 V61 C93 84 77 96 60 103 C43 96 27 84 27 61 V33 Z"
+              fill="none" stroke="#d4b25f" stroke-width="1" opacity=".45"/>
+        <path d="M42 88 L80 40 M73 35 L86 48 M78 88 L40 40 M34 48 L47 35"
+              fill="none" stroke="#f0d48a" stroke-width="2" stroke-linecap="round"/>
+        <path d="M60 24 L62.4 30 L68.5 32.4 L62.4 34.8 L60 41 L57.6 34.8 L51.5 32.4 L57.6 30 Z" fill="#f0d48a"/>
+        <circle cx="52" cy="96" r="1.7" fill="#d4b25f"/><circle cx="60" cy="100" r="1.7" fill="#d4b25f"/><circle cx="68" cy="96" r="1.7" fill="#d4b25f"/>
+      </svg>
+      <span class="logo-tx"><b>SORVIL</b><span>소르빌 기사 아카데미</span></span>
+    </a>
+    <nav class="nav-links" aria-label="주요 메뉴">
+      <a href="#story">시놉시스</a>
+      <a href="#magic">영창 마법</a>
+      <a href="#legend">창립 설화</a>
+      <a href="#characters">등장인물</a>
+      <a href="#arena">전장</a>
+      <a href="#academy">아카데미</a>
+      <a href="#goal">최종 목표</a>
+    </nav>
+    <button class="burger" id="burger" aria-label="메뉴 열기" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+<div class="mmenu" id="mmenu">
+  <nav aria-label="모바일 메뉴">
+    <a href="#story">시놉시스</a>
+    <a href="#magic">영창 마법</a>
+    <a href="#legend">창립 설화</a>
+    <a href="#characters">등장인물</a>
+    <a href="#arena">전장</a>
+    <a href="#academy">아카데미</a>
+    <a href="#goal">최종 목표</a>
+  </nav>
+</div>
 
-        <section id="story" class="section">
-            <h2 class="section-title reveal">창립 설화 : 파프니르의 토벌</h2>
-            <div class="story-container">
-                <div class="placeholder-img reveal">[ 거대한 동상이 세워진 아카데미 중앙 광장 BG ]</div>
-                <div class="story-text reveal" style="transition-delay: 0.2s;">
-                    <h3>"용이 다시 눈을 뜨는 날, 하늘은 네 명의 기사를 보내리라."</h3>
-                    <p>수백 년 전, 세상을 멸망시키려던 고대 드래곤 '파프니르'를 토벌하고 아카데미를 세운 전설의 4인방.</p>
-                    <p>심연의 기사 디에고, 대검의 심장 막시모, 유성우의 무희 마르셀라... 그리고 이름조차 알려지지 않은 심검의 현자.</p>
-                    <p>아카데미 입학식 당일, 하늘이 열리며 단상 위로 냅다 추락한 대한민국 주민센터 소속 3인방은 완벽하게 이 전설의 재림으로 오해받게 되는데...</p>
-                </div>
+<!-- ===================== HERO ===================== -->
+<header class="hero" id="hero">
+  <svg class="mcircle hero-circle" viewBox="0 0 200 200" aria-hidden="true">
+    <defs><path id="mcp-hero" d="M100,100 m-76,0 a76,76 0 1,1 152,0 a76,76 0 1,1 -152,0"/></defs>
+    <circle class="mc-ring" cx="100" cy="100" r="97"/>
+    <circle class="mc-ring" cx="100" cy="100" r="88"/>
+    <circle class="mc-ring mc-dash" cx="100" cy="100" r="58"/>
+    <circle class="mc-ring" cx="100" cy="100" r="36"/>
+    <rect class="mc-deco" x="59" y="59" width="82" height="82" transform="rotate(45 100 100)"/>
+    <rect class="mc-deco" x="59" y="59" width="82" height="82"/>
+    <path class="mc-deco" d="M100 64 L136 100 L100 136 L64 100 Z"/>
+    <g class="mc-dot">
+      <circle cx="100" cy="4" r="2.2"/><circle cx="100" cy="196" r="2.2"/>
+      <circle cx="4" cy="100" r="2.2"/><circle cx="196" cy="100" r="2.2"/>
+    </g>
+    <text class="mc-runes"><textPath href="#mcp-hero">✦ ANIMA GLADII ✦ VOX MAGNA POTESTAS ✦ PUDOR EST POTENTIA ✦ SORVIL ✦</textPath></text>
+  </svg>
+
+  <div class="container hero-inner">
+    <svg class="crest" viewBox="0 0 120 120" aria-hidden="true">
+      <path d="M60 12 L100 28 V62 C100 90 80 104 60 112 C40 104 20 90 20 62 V28 Z"
+            fill="rgba(212,178,95,.06)" stroke="#d4b25f" stroke-width="2.6" stroke-linejoin="round"/>
+      <path d="M60 20 L93 33 V61 C93 84 77 96 60 103 C43 96 27 84 27 61 V33 Z"
+            fill="none" stroke="#d4b25f" stroke-width="1" opacity=".45"/>
+      <path d="M42 88 L80 40 M73 35 L86 48 M78 88 L40 40 M34 48 L47 35"
+            fill="none" stroke="#f0d48a" stroke-width="2" stroke-linecap="round"/>
+      <path d="M60 24 L62.4 30 L68.5 32.4 L62.4 34.8 L60 41 L57.6 34.8 L51.5 32.4 L57.6 30 Z" fill="#f0d48a"/>
+      <circle cx="52" cy="96" r="1.7" fill="#d4b25f"/><circle cx="60" cy="100" r="1.7" fill="#d4b25f"/><circle cx="68" cy="96" r="1.7" fill="#d4b25f"/>
+    </svg>
+
+    <p class="hero-eyebrow">Sorvil Knight Academy</p>
+    <p class="hero-eyebrow-kr">용의 무덤 위에 세워진 학교 · 제214기 신입생 모집 중</p>
+
+    <h1 class="hero-title">
+      <span class="bq">「</span>검술이 전부인 세계에 소환됐는데,<br>
+      <span class="hl">마법 발동 조건이 너무 오글거립니다</span><span class="bq">」</span>
+    </h1>
+
+    <p class="hero-motto">위력은 <i>절륜</i>. 대사는 절망.</p>
+    <p class="hero-desc">
+      마법이 존재하지 않는 검의 세계. 그곳에 떨어진 공무원 셋(전원 생계형).
+      유일한 무기는 — 입 밖으로 내기 죽도록 부끄러운 <strong>'영창 마법'</strong>뿐.
+      그리고 이 세계는 그것을, '천재적인 검술 특기'라 부르기로 했다.
+    </p>
+
+    <div class="hero-chips">
+      <span class="chip">#이세계전생</span>
+      <span class="chip">#아카데미</span>
+      <span class="chip">#판타지</span>
+      <span class="chip">#착각계_코미디</span>
+    </div>
+
+    <div class="hero-cta">
+      <a class="btn btn-gold" href="#magic">⚡ 영창 만들기</a>
+      <a class="btn btn-ghost" href="#arena">⚔ 전장 출진</a>
+    </div>
+
+    <div class="hstats">
+      <div class="hstat"><b>3 / 4</b><span>전승자 확인</span></div>
+      <div class="hstat"><b>0 %</b><span>세계의 마법 인지도</span></div>
+      <div class="hstat"><b>측정 불가</b><span>평균 수치심 수치</span></div>
+    </div>
+  </div>
+
+  <div class="scue" aria-hidden="true">SCROLL<i>⌄</i></div>
+</header>
+
+<!-- ===================== TICKER ===================== -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track" id="tickerTrack">
+    <span><b>【공지】</b>제214기 입학을 환영합니다 — 반 배정 결과는 중앙광장 게시판 참조</span>
+    <span><b>【경고】</b>'고대의 숲' 무단 출입 적발 시, 혹한기 훈련 2회 부과</span>
+    <span><b>【속보】</b>A반 신입생, 대련 중 정체불명의 '선언형 검술' 시전… 학생회장 "인정 못 해"</span>
+    <span><b>【모집】</b>추계 무도회 운영위원 모집 — 댄스 가능자 우대</span>
+    <span><b>【분실】</b>녹색 수첩(검술 메모 다수) 습득 — 주인은 B반 교무실로</span>
+    <span><b>【정정】</b>어제 목격된 '흑색 화염'은 조리 실습 사고가 아닌 '특기 시연'이었습니다</span>
+  </div>
+</div>
+
+<main>
+
+<!-- ===================== STORY ===================== -->
+<section class="section" id="story">
+  <div class="bg-han" aria-hidden="true">劍</div>
+  <div class="container sec-inner">
+    <div class="sec-head reveal">
+      <p class="eyebrow">Synopsis · 第一章</p>
+      <h2 class="sec-title">마법이 없는 세계에,<br><span class="gtx">마법사 셋이 떨어졌다.</span></h2>
+    </div>
+
+    <div class="story-grid">
+      <div class="story-copy reveal">
+        <p>
+          <strong>마법? 그런 건 없다.</strong> 이 세계의 전투는 검이 전부다.
+          베고, 막고, 단련한다. 수백 년 동안 그래 왔고, 앞으로도 그럴 예정이었다 —
+          어느 날, 하늘에서 <strong>대한민국 공무원 세 명</strong>이 떨어지기 전까지는.
+        </p>
+        <p>
+          사회복무요원 <strong>황동윤</strong>(24, 오타쿠), 사회복무요원 <strong>심형욱</strong>(23, 메카덕),
+          그리고 주민센터 9급 <strong>홍수희</strong>(27, 민원 응대의 달인).
+          셋에게 주어진 건 이 세계 유일의 마법, <strong>'영창 마법'</strong>.
+          단, 발동 조건이 치명적이다. <strong>오글거리는 대사를 육성으로 외치고, 포즈까지 완벽하게 취해야 한다.</strong>
+        </p>
+        <p class="punch">
+          문제는 — 이 세계엔 '마법'이라는 개념 자체가 없다는 것.<br>
+          사람들 눈에 그것은, <em>너무나도 천재적인 검술 특기</em>로 보였다.
+        </p>
+        <p>
+          "흑염룡이여, 깨어나라"를 외치는 순간 수치심으로 죽고 싶은 시전자.
+          그 옆에서 <strong>"방금 그 보법… 메모해도 될까요?"</strong>라며 눈을 빛내는 검술 오타쿠.
+          오해는 눈덩이처럼 불어나고, 셋은 어느새 소르빌 기사 아카데미의
+          <strong>'역대급 특기 신입생'</strong>이 되어 있었다.
+        </p>
+        <p>
+          귀환의 열쇠는 재앙의 드래곤. 절박하게 집에 가고 싶은 한 명과,
+          은근히 여기가 좋아진 두 명의 — 동상이몽 아카데미 라이프가 시작된다.
+        </p>
+      </div>
+
+      <figure class="keyvisual ph reveal" style="--acc:#d4b25f">
+        <div class="ph-stack">
+          <span class="ph-ico">🗡️</span>
+          <span class="ph-tag">KEY&nbsp;VISUAL</span>
+          <span class="ph-sub">메인 일러스트 — 전승 3인방 + 아카데미 전경<br>(이미지 준비 중)</span>
+        </div>
+      </figure>
+    </div>
+
+    <div class="kw-grid">
+      <div class="kw card reveal"><span class="kico">🌀</span><h3>이세계 전생</h3><p>소환된 건 용사도 현자도 아닌, 대한민국 생계형 공무원 3인. 스펙: 민원 응대, 공익 짬밥, 오타쿠 지식.</p></div>
+      <div class="kw card reveal"><span class="kico">🏰</span><h3>아카데미</h3><p>검술만이 전부인 기사양성학교 '소르빌'. 입학부터 대련, 마물 토벌 실습, 무도회와 운동회까지 — 풀코스 학원물.</p></div>
+      <div class="kw card reveal"><span class="kico">🐲</span><h3>판타지</h3><p>재앙의 드래곤, 고대의 숲, 마물, 그리고 수백 년 전 네 영웅의 전설. 정통 판타지의 무대 위에서 —</p></div>
+      <div class="kw card reveal"><span class="kico">🎭</span><h3>착각계 코미디</h3><p>본인들: "제발 아무도 보지 마라." 세계: "저것이 검술의 정점인가…" 오해가 오해를 부르는 인지 부조화 개그.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== MAGIC ===================== -->
+<section class="section" id="magic">
+  <div class="bg-han" aria-hidden="true">詠</div>
+  <div class="container sec-inner">
+    <div class="sec-head reveal">
+      <p class="eyebrow">Chant Magic · 詠唱魔法</p>
+      <h2 class="sec-title">위력은 절륜.<br><span class="gtx">대사는 절망.</span></h2>
+      <p class="sec-desc">이 세계 유일의 마법, '영창 마법'. 전승자에게만 허락된 힘이지만 — 발동 조건이 시전자의 영혼을 갉아먹는다.</p>
+    </div>
+
+    <div class="magic-grid">
+      <div class="rules reveal">
+        <div class="rule card">
+          <span class="rule-no">壹</span>
+          <div><h3>제1조 — 육성 영창</h3><p>지정된 대사를 <strong>반드시 입 밖으로, 또렷한 육성으로</strong> 외쳐야 한다. 속삭임, 복화술, 립싱크는 발동 불가. 시스템은 진심만을 인정한다.</p></div>
+        </div>
+        <div class="rule card">
+          <span class="rule-no">貳</span>
+          <div><h3>제2조 — 지정 포즈</h3><p>대사와 함께 <strong>명확한 포즈·동작</strong>을 완수해야 한다. 팔 각도, 손가락 모양, 회전 동작까지 — 디테일이 무너지면 마법도 무너진다.</p></div>
+        </div>
+        <div class="rule card">
+          <span class="rule-no">參</span>
+          <div><h3>제3조 — 위력 절륜</h3><p>조건만 갖추면 위력은 <strong>이 세계의 상식을 초월</strong>한다. 단칼에 마물 소멸, 지형 변형, 유성우 소환. 가성비는 확실하다. 정신적 비용을 제외하면.</p></div>
+        </div>
+        <div class="rule card">
+          <span class="rule-no">肆</span>
+          <div><h3>제4조 — 인지 불가</h3><p>이 세계 원주민은 '마법'이라는 개념을 모른다. 따라서 영창 마법은 <strong>'특이한 검술 특기'</strong> 혹은 <strong>'천재적 재능'</strong>으로 번역되어 인식된다. 정정은 불가능하다. 이미 늦었다.</p></div>
+        </div>
+        <p class="rules-note">※ 수치심은 위력에 영향을 주지 않습니다. 다만 시전자의 수명에 영향을 줄 뿐.</p>
+      </div>
+
+      <div class="sim card reveal" id="sim">
+        <div class="sim-head">
+          <h3>영창 마법 시뮬레이터</h3>
+          <span class="live">LIVE&nbsp;DEMO</span>
+        </div>
+
+        <div class="sim-modes" role="group" aria-label="시뮬레이터 모드">
+          <button class="sim-mode" type="button" data-mode="preset" aria-pressed="true">전승자 체험</button>
+          <button class="sim-mode" type="button" data-mode="custom" aria-pressed="false">✦ 영창 만들기</button>
+        </div>
+
+        <div class="pills" id="simPills" role="group" aria-label="시전자 선택">
+          <button class="pill" type="button" data-caster="dy" aria-pressed="true">황동윤 · 흑염룡</button>
+          <button class="pill" type="button" data-caster="hu" aria-pressed="false">심형욱 · 그랜드 칼리버</button>
+          <button class="pill" type="button" data-caster="sh" aria-pressed="false">홍수희 · 스텔라</button>
+        </div>
+
+        <div class="maker" id="maker" hidden>
+          <div class="frow">
+            <label for="mkName">시전자 이름</label>
+            <input type="text" id="mkName" maxlength="14" placeholder="예: 이름 없는 검귀" value="이름 없는 검귀">
+          </div>
+          <div class="frow">
+            <label>실루엣</label>
+            <div class="picks" id="mkSil" role="group" aria-label="실루엣 선택"></div>
+          </div>
+          <div class="frow">
+            <label>마법진 색</label>
+            <div class="picks" id="mkColor" role="group" aria-label="색 선택"></div>
+          </div>
+          <div class="frow">
+            <label for="mkDir">포즈 지시문</label>
+            <input type="text" id="mkDir" maxlength="40" placeholder="(검을 거꾸로 쥐고 하늘을 향해 치켜든다)">
+          </div>
+          <div class="frow">
+            <label for="mkLines">영창 대사 <span class="hintln">— 한 줄에 한 문장씩</span></label>
+            <textarea id="mkLines" placeholder="어둠보다 깊은 어둠이여 —&#10;지금 이 검에 깃들어라!"></textarea>
+          </div>
+          <div class="frow">
+            <label for="mkFin">피니시 영창 <span class="hintln">— 가장 크게 외칠 한마디 (필수)</span></label>
+            <input type="text" id="mkFin" maxlength="34" placeholder="예: 흑염의 송곳니 ── 폭쇄!!!">
+          </div>
+          <div class="maker-acts">
+            <button class="btn btn-ghost" type="button" id="mkRandom">🎲 랜덤 영창</button>
+            <button class="btn btn-ghost" type="button" id="mkShare">⎘ 영창서 복사</button>
+          </div>
+        </div>
+
+        <div class="stage" id="simStage" style="--acc:#a78bfa">
+          <svg class="mcircle" viewBox="0 0 200 200" aria-hidden="true">
+            <defs><path id="mcp-sim" d="M100,100 m-66,0 a66,66 0 1,1 132,0 a66,66 0 1,1 -132,0"/></defs>
+            <circle class="mc-ring" cx="100" cy="100" r="95"/>
+            <circle class="mc-ring" cx="100" cy="100" r="87"/>
+            <circle class="mc-ring mc-dash" cx="100" cy="100" r="54"/>
+            <text class="mc-runes"><textPath href="#mcp-sim">PUDOR EST POTENTIA · VOX FACIT MAGIAM · </textPath></text>
+            <path class="mc-deco" d="M100 13 L187 100 L100 187 L13 100 Z"/>
+            <path class="mc-deco" d="M100 30 L170 100 L100 170 L30 100 Z" opacity=".4"/>
+            <circle class="mc-dot" cx="100" cy="13" r="2.4"/><circle class="mc-dot" cx="187" cy="100" r="2.4"/>
+            <circle class="mc-dot" cx="100" cy="187" r="2.4"/><circle class="mc-dot" cx="13" cy="100" r="2.4"/>
+          </svg>
+          <div class="sil" id="simSil" aria-hidden="true">🕶️</div>
+          <div class="flash" aria-hidden="true"></div>
+          <div class="stamp" aria-hidden="true">威力 : 絶倫</div>
+          <div class="stage-cap">SORVIL ARENA — TRAINING MODE</div>
+        </div>
+
+        <div class="chant" id="chantBox" aria-live="polite">
+          <span class="hint">시전자를 고르고, 아래 버튼을 누르세요. 영창은 취소할 수 없습니다.</span>
+        </div>
+
+        <div class="gauge-row">
+          <span class="glabel">수치심</span>
+          <div class="gauge"><i id="gaugeFill"></i></div>
+          <span class="gstate" id="gaugeState">평온</span>
+        </div>
+
+        <button class="btn btn-gold castbtn" id="castBtn" type="button">⚡ 영창 개시</button>
+
+        <div class="sim-result" id="simResult" hidden>
+          <div class="bub bub-inner">
+            <span class="blabel">시전자 내심</span>
+            <p id="resInner"></p>
+          </div>
+          <div class="bub bub-out">
+            <span class="blabel">목격자 반응</span>
+            <p id="resOut1"></p>
+            <p id="resOut2"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== LEGEND ===================== -->
+<section class="section" id="legend">
+  <div class="bg-han" aria-hidden="true">傳</div>
+  <div class="container sec-inner">
+    <div class="sec-head reveal">
+      <p class="eyebrow">Founding Legend · 創立說話</p>
+      <h2 class="sec-title">중앙 광장의 거대한 동상,<br><span class="gtx">네 명의 기사 이야기.</span></h2>
+      <p class="sec-desc">수백 년 전, 세상을 멸망시키려던 고대 드래곤 '파프니르'가 토벌된 자리. 그 위에 소르빌 기사 아카데미가 세워졌다.</p>
+    </div>
+
+    <figure class="statue-ph ph reveal" style="--acc:#d4b25f">
+      <div class="ph-stack">
+        <span class="ph-ico">🏛️</span>
+        <span class="ph-tag">STATUE&nbsp;OF&nbsp;THE&nbsp;FOUR</span>
+        <span class="ph-sub">중앙광장 '영웅의 터' — 네 기사의 동상 (이미지 준비 중)</span>
+      </div>
+    </figure>
+
+    <blockquote class="prophecy reveal">
+      <p>"용이 다시 눈을 뜨는 날,<br>하늘은 사람들을 위해 네 명의 기사를 보내리라."</p>
+      <small>— 동상 기단부에 새겨진 예언</small>
+    </blockquote>
+
+    <div class="tablets">
+      <article class="tablet card reveal">
+        <span class="tno">Ⅰ</span>
+        <p class="tepi">제1의 영웅 · 심연의 기사</p>
+        <h3>디에고</h3>
+        <p class="tverse">"그의 검은 심연과도 같은 어둠이 남아, 용의 단단한 비늘조차 단칼에 베어내 속살을 비추었다."</p>
+      </article>
+      <article class="tablet card reveal">
+        <span class="tno">Ⅱ</span>
+        <p class="tepi">제2의 영웅 · 대검의 심장</p>
+        <h3>막시모</h3>
+        <p class="tverse">"피가 끓어오르는 맹렬한 투기와 함께, 그 누구도 뽑아들지 못한 대검으로 용의 발톱을 튕겨내고 대지를 울리게 하였다."</p>
+      </article>
+      <article class="tablet card reveal">
+        <span class="tno">Ⅲ</span>
+        <p class="tepi">제3의 영웅 · 유성우의 무희</p>
+        <h3>마르셀라</h3>
+        <p class="tverse">"눈부신 빛의 예복을 입고 전장을 누볐으며, 그녀가 검을 들어 올릴 때마다 하늘에서 형형색색의 섬광이 떨어져 용의 눈을 멀게 하였다."</p>
+      </article>
+      <article class="tablet card mys reveal">
+        <span class="tno">Ⅳ</span>
+        <p class="tepi">제4의 영웅 · 심검의 현자</p>
+        <h3>？？？</h3>
+        <p class="tverse">"검을 쥐지 않고도 승리한 유일한 자. 그의 손짓으로 용의 목이 떨어졌다. 후대는 이를 검술의 궁극 — '심검(心劍)'이라 일컫는다. 그러나 그는 이름조차 남기지 않고, 토벌 이후 홀연히 사라졌다."</p>
+      </article>
+    </div>
+
+    <p class="legend-note">
+      ※ 어딘가 낯익은 구도라고 생각한 독자가 있다면, 기분 탓이다.<br>
+      한손검의 어둠, 대검의 굉음, 빛의 예복과 유성우 — 전부 우연의 일치다. 아마도.
+    </p>
+  </div>
+</section>
+
+<!-- ===================== CHARACTERS ===================== -->
+<section class="section" id="characters">
+  <div class="bg-han" aria-hidden="true">士</div>
+  <div class="container sec-inner">
+    <div class="sec-head reveal">
+      <p class="eyebrow">Characters · 登場人物</p>
+      <h2 class="sec-title">전승자, 교관,<br><span class="gtx">그리고 오해하는 사람들.</span></h2>
+      <p class="sec-desc">카드를 선택하면 인물 정보를 열람할 수 있습니다. 일부 기록은 열람 권한이 제한됩니다.</p>
+    </div>
+
+    <div class="tabs reveal" role="tablist" aria-label="인물 분류">
+      <button class="tab" id="tab-hero" role="tab" aria-selected="true" aria-controls="grid-hero" type="button">이세계 전승자 <i class="tbadge">3 / 4</i></button>
+      <button class="tab" id="tab-staff" role="tab" aria-selected="false" aria-controls="grid-staff" type="button">교직원 <i class="tbadge">3</i></button>
+      <button class="tab" id="tab-students" role="tab" aria-selected="false" aria-controls="grid-students" type="button">학생 <i class="tbadge">5</i></button>
+    </div>
+
+    <div class="cgrid" id="grid-hero" role="tabpanel" aria-labelledby="tab-hero"></div>
+    <div class="cgrid" id="grid-staff" role="tabpanel" aria-labelledby="tab-staff" hidden></div>
+    <div class="cgrid" id="grid-students" role="tabpanel" aria-labelledby="tab-students" hidden></div>
+
+    <noscript><p class="cnote">⚠ 인물 카드는 JavaScript 활성화 시 표시됩니다.</p></noscript>
+    <p class="cnote">※ 인물 카드의 초상은 추후 일러스트로 교체될 예정입니다. 현재는 인장(印章)으로 대체 표기 중.</p>
+  </div>
+</section>
+
+<!-- ===================== ARENA ===================== -->
+<section class="section" id="arena">
+  <div class="bg-han" aria-hidden="true">戰</div>
+  <div class="container sec-inner">
+    <div class="sec-head reveal">
+      <p class="eyebrow">Battle Arena · 出陣</p>
+      <h2 class="sec-title">파티를 편성하고,<br><span class="gtx">전장으로 출진하라.</span></h2>
+      <p class="sec-desc">최대 3명을 골라 마물 토벌대를 꾸리세요. 마물 무리 → 라이벌 → 재앙의 드래곤. 영창 스킬·상태이상·수치심 게이지(오의)까지 다루는 도트 턴제 전투로 귀환의 길을 연다.</p>
+    </div>
+
+    <div class="arena card reveal" style="padding:clamp(18px,2.6vw,26px);border-radius:18px">
+
+      <!-- PARTY SELECT -->
+      <div id="partySelect">
+        <div class="party-head">
+          <h3>토벌대 편성</h3>
+          <span class="party-count" id="partyCount">선택 0 / 3</span>
+        </div>
+        <div class="roster" id="roster"></div>
+        <div class="diff-row">
+          <span class="diff-label">난이도</span>
+          <div class="diff-pick" id="difficulty" role="group" aria-label="난이도 선택">
+            <button class="diff" type="button" data-diff="easy" aria-pressed="false">입학생</button>
+            <button class="diff" type="button" data-diff="normal" aria-pressed="true">기사</button>
+            <button class="diff" type="button" data-diff="hard" aria-pressed="false">소드마스터</button>
+          </div>
+        </div>
+        <div class="party-go">
+          <button class="btn btn-gold" id="goBattle" type="button" disabled>⚔ 출진하기</button>
+        </div>
+      </div>
+
+      <!-- BATTLE -->
+      <div class="battle" id="battle">
+        <div class="bt-banner">
+          <span class="bt-wave">WAVE <b id="btWave">1 / 3</b></span>
+          <span class="bt-enemy" id="btEnemyName">— 마물 무리 —</span>
+        </div>
+        <div class="bt-turnorder" id="btOrder" aria-label="턴 순서"></div>
+        <div class="bt-stage">
+          <canvas id="btCanvas" width="480" height="240" role="img" aria-label="전투 화면"></canvas>
+          <div class="bt-banner-msg" id="btMsg" aria-live="polite">
+            <div>
+              <h4 id="btMsgTitle"></h4>
+              <p id="btMsgText"></p>
+              <button class="btn btn-gold" id="btMsgBtn" type="button"></button>
             </div>
-        </section>
+          </div>
+        </div>
+        <div class="bt-party" id="btParty"></div>
+        <div class="bt-grid">
+          <div class="bt-actions" id="btActions">
+            <p class="who" id="btWho"></p>
+            <p class="prompt" id="btPrompt"></p>
+            <div class="act-btns" id="btActBtns"></div>
+          </div>
+          <div class="bt-log">
+            <h5>BATTLE LOG · 전투 기록</h5>
+            <div class="logwrap" id="btLog"></div>
+          </div>
+        </div>
+      </div>
 
-        <section id="characters" class="section">
-            <h2 class="section-title reveal">전승 3인방 프로필 데이터</h2>
-            <div class="char-showcase reveal" style="transition-delay: 0.2s;">
-                <div class="char-tabs">
-                    <button class="tab-btn active" onclick="switchChar('char1')">황동윤</button>
-                    <button class="tab-btn" onclick="switchChar('char2')">심형욱</button>
-                    <button class="tab-btn" onclick="switchChar('char3')">홍수희</button>
-                </div>
+    </div>
+    <p class="cnote" style="margin-top:18px">※ 도트 스프라이트와 전투는 모두 브라우저에서 실시간 생성됩니다. 외부 이미지·에셋 없이 작동합니다.</p>
+  </div>
+</section>
 
-                <div id="char1" class="char-content active">
-                    <div class="placeholder-img char-portrait">[ 황동윤 일러스트 (중2병 포즈) ]</div>
-                    <div class="char-info">
-                        <h3>황동윤 <span class="char-class">제1의 영웅?</span></h3>
-                        <div class="char-tags">
-                            <span class="tag">#INTP</span> <span class="tag">#어둠의_다크니스</span> <span class="tag">#사회복무요원</span> <span class="tag">#A반</span>
-                        </div>
-                        <p>무직 백수 시절의 영양 과다로 입대한 사회복무요원. 특기생 대우를 받자 기고만장해져 이세계 라이프를 만끽 중이다.</p>
-                        <div class="quote">
-                            "크큭... 제 왼팔에 봉인된 흑염룡이 오늘따라 날뛰는군요."
-                        </div>
-                        <button class="btn chat-btn">캐릭터와 대화하기</button>
-                    </div>
-                </div>
+<!-- ===================== ACADEMY ===================== -->
+<section class="section" id="academy">
+  <div class="bg-han" aria-hidden="true">學</div>
+  <div class="container sec-inner">
+    <div class="sec-head reveal">
+      <p class="eyebrow">Academy Life · 騎士養成</p>
+      <h2 class="sec-title">소르빌 기사 아카데미,<br><span class="gtx">1년 2학기제 풀코스.</span></h2>
+      <p class="sec-desc">입학부터 혹한기 훈련까지. 검과 명예, 그리고 정체불명의 '특기 시연'으로 채워지는 학사일정.</p>
+    </div>
 
-                <div id="char2" class="char-content">
-                    <div class="placeholder-img char-portrait">[ 심형욱 일러스트 (대검 장착) ]</div>
-                    <div class="char-info">
-                        <h3>심형욱 <span class="char-class">제2의 영웅?</span></h3>
-                        <div class="char-tags">
-                            <span class="tag">#INTJ</span> <span class="tag">#열혈_메카물</span> <span class="tag">#공학도</span> <span class="tag">#A반</span>
-                        </div>
-                        <p>체중 미달로 입대한 공학도. 평소엔 차갑고 염세적이지만 로봇과 기계 앞에서는 텐션이 폭발한다. 그의 대검은 무려 조립/거대화가 가능하다.</p>
-                        <div class="quote">
-                            "이 종이 더미를 섬멸하기 위해... 시스템 리미터를 해제한다!"
-                        </div>
-                        <button class="btn chat-btn">캐릭터와 대화하기</button>
-                    </div>
-                </div>
+    <div class="acad-grid">
+      <div class="timeline reveal" aria-label="학사일정">
+        <div class="tl-item"><span class="tl-month">3月</span><h3>입학 · 반 배정</h3><p>제214기 입학식. 전승 3인방, A반·B반으로 분리 배치되다.</p></div>
+        <div class="tl-item"><span class="tl-month">4月</span><h3>신입생 대련</h3><p>첫 공개 대련. '선언형 검술'이 최초로 목격된 날. 학생회장의 위장이 처음으로 아파온 날이기도 하다.</p></div>
+        <div class="tl-item"><span class="tl-month">5月</span><h3>마물 토벌 실습</h3><p>고대의 숲 외곽 실전 훈련. 흑색 화염 1회, 유성우 1회 관측됨. 공식 기록: "특기 시연".</p></div>
+        <div class="tl-item"><span class="tl-month">6月</span><h3>중간고사 · 대련</h3><p>이론과 실기. 이론 시험에 '검술'이 아닌 '민원 응대 모범 답안'을 적어낸 자가 있다는 소문.</p></div>
+        <div class="tl-item hot"><span class="tl-month">10月</span><h3>무도회 · 운동회</h3><span class="hotchip">HOT</span><p>아카데미 최대 행사. 사교의 장이자, 1년치 오해가 집대성되는 축제.</p></div>
+        <div class="tl-item"><span class="tl-month">12月</span><h3>기말 · 최종 평가</h3><p>1년의 총결산. 평가 항목에 '독창성'이 신설되었다. 원인 제공자: 불명(전원 짐작 중).</p></div>
+        <div class="tl-item"><span class="tl-month">1月</span><h3>겨울방학 · 혹한기 훈련</h3><p>지원자 한정… 이라고 쓰고 벌점자 소집이라 읽는다. 고대의 숲 무단 출입자 다수 참가 예정.</p></div>
+      </div>
 
-                <div id="char3" class="char-content">
-                    <div class="placeholder-img char-portrait">[ 홍수희 일러스트 (프릴 예복) ]</div>
-                    <div class="char-info">
-                        <h3>홍수희 <span class="char-class">제3의 영웅?</span></h3>
-                        <div class="char-tags">
-                            <span class="tag">#ESFJ</span> <span class="tag">#마법소녀</span> <span class="tag">#9급_주무관</span> <span class="tag">#귀환희망</span>
-                        </div>
-                        <p>민원인과 공익들에게 시달리던 9급 공무원. 어떻게든 이 수치스러운 마법소녀 생활을 청산하고 지구로 칼퇴근하기 위해 드래곤 토벌을 노린다.</p>
-                        <div class="quote">
-                            "아 진짜! 제발 좀 정상적으로 싸우면 안 돼요?!"
-                        </div>
-                        <button class="btn chat-btn">캐릭터와 대화하기</button>
-                    </div>
-                </div>
+      <figure class="ph reveal" style="--acc:#d4b25f;aspect-ratio:4/4.6">
+        <div class="ph-stack">
+          <span class="ph-ico">🏰</span>
+          <span class="ph-tag">CAMPUS&nbsp;VIEW</span>
+          <span class="ph-sub">아카데미 전경 일러스트 (이미지 준비 중)</span>
+        </div>
+      </figure>
+    </div>
 
-            </div>
-        </section>
-    </main>
+    <div class="sports">
+      <div class="sports-head reveal">
+        <h3>추계 운동회 — 공식 종목</h3>
+        <small>AUTUMN GAMES · 種目案內</small>
+      </div>
+      <div class="sgrid">
+        <div class="sport card reveal"><span class="sno">EVENT 01</span><h4>2인 3각 검술 대련</h4><p>발목을 묶은 채 2:2 대련. 호흡이 어긋나면 검보다 먼저 동료와 충돌한다. 우정 파괴율 1위.</p></div>
+        <div class="sport card reveal"><span class="sno">EVENT 02</span><h4>골렘과 오러 줄다리기</h4><p>훈련용 골렘 1기 vs 학생 10명. 오러를 두른 밧줄은 끊어지지 않는다. 끊어지는 건 허리뿐.</p></div>
+        <div class="sport card reveal"><span class="sno">EVENT 03</span><h4>마물 알 굴리기</h4><p>대형 마물 알(공인 모조품)을 굴려 결승선까지. 진품이 섞여 들어온 사건 이후, 검수 절차가 3배로 늘었다.</p></div>
+        <div class="sport card reveal"><span class="sno">EVENT 04</span><h4>오러 박 터뜨리기</h4><p>공중 보호막이 걸린 박을 투척과 검기로 격파. 작년 우승 기록은 '정체불명의 흑염 일격'. 기록 보류 중.</p></div>
+        <div class="sport card reveal"><span class="sno">EVENT 05</span><h4>군마 기마전</h4><p>마구간의 군마 위에서 벌이는 기마전. 군마의 인내심이 곧 팀의 수명. 낙마는 패배보다 빠르다.</p></div>
+        <div class="sport card reveal"><span class="sno">EVENT 06</span><h4>슬라임 장애물 계주</h4><p>점착성 슬라임 구간을 포함한 계주. 바통보다 신발을 먼저 잃는 경기. 완주율 47%.</p></div>
+      </div>
+    </div>
 
-    <footer>
-        <p>&copy; 2026 이세계 아카데미 전생기 프로젝트. All rights reserved.</p>
-    </footer>
+    <div class="fac-wrap">
+      <div>
+        <div class="sports-head reveal">
+          <h3>주요 시설</h3>
+          <small>FACILITIES · 施設案內</small>
+        </div>
+        <div class="fac-grid">
+          <div class="fac card reveal"><span class="fico">🏛️</span><b>중앙광장</b><span>네 영웅의 동상 소재. 집회·의식의 중심.</span></div>
+          <div class="fac card reveal"><span class="fico">⚔️</span><b>대련장</b><span>공식 대련 개최지. 관람석 상시 만석.</span></div>
+          <div class="fac card reveal"><span class="fico">🛏️</span><b>기숙사</b><span>전교생 의무 입사. 소등 후 영창 금지.</span></div>
+          <div class="fac card reveal"><span class="fico">📜</span><b>강의동</b><span>검술 이론·전술학·기사도 교양 수업.</span></div>
+          <div class="fac card reveal"><span class="fico">🛡️</span><b>훈련장</b><span>기본기 단련 구역. 발렌티나 교관 상주.</span></div>
+          <div class="fac card reveal"><span class="fico">📚</span><b>서고동</b><span>검술서·전승 기록 보관. '마법' 항목 없음.</span></div>
+          <div class="fac card reveal"><span class="fico">🌲</span><b>고대의 숲</b><span>마물 서식지. 무단 출입 시 혹한기 훈련 2회.</span></div>
+        </div>
+      </div>
 
-    <script>
-        // Scroll Reveal Animation
-        const revealElements = document.querySelectorAll('.reveal');
-        
-        const revealOnScroll = () => {
-            const windowHeight = window.innerHeight;
-            revealElements.forEach(el => {
-                const elementTop = el.getBoundingClientRect().top;
-                if (elementTop < windowHeight - 50) {
-                    el.classList.add('active');
-                }
-            });
-        };
+      <div class="uniform card reveal">
+        <h4>교복 규정 · 制服</h4>
+        <div class="swatches" aria-hidden="true">
+          <span class="sw" style="background:#f4f1e8;color:#777">白</span>
+          <span class="sw" style="background:#27457c;color:#cdd9ef">靑</span>
+          <span class="sw" style="background:#15151c;color:#888">黑</span>
+          <span class="sw" style="background:#6e7077;color:#dadce2">灰</span>
+        </div>
+        <p>
+          <strong>남학생</strong> — 백색 셔츠 · 청색 넥타이 · 흑색 바지.<br>
+          <strong>여학생</strong> — 블라우스 · 스커트 조합 허용.<br>
+          공통 — <strong>회색 코트는 어깨에 걸치는 것</strong>이 전통.<br>
+          <i>※ 소매에 팔을 꿰는 행위는 교칙 위반은 아니나, 선배들의 따가운 시선을 받는다.</i>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
 
-        window.addEventListener('scroll', revealOnScroll);
-        window.addEventListener('load', revealOnScroll);
+<!-- ===================== GOAL ===================== -->
+<section class="section" id="goal">
+  <div class="bg-han" aria-hidden="true">龍</div>
+  <div class="container sec-inner">
+    <div class="sec-head reveal">
+      <p class="eyebrow">Final Quest · 最終目標</p>
+      <h2 class="sec-title">드래곤을 잡으면<br><span class="gtx">집에 갈 수 있습니다. 아마도.</span></h2>
+      <p class="sec-desc">귀환의 조건은 명확하다. 문제는, 전원이 귀환을 원하는 게 아니라는 것.</p>
+    </div>
 
-        // Character Tab Switching
-        function switchChar(charId) {
-            // Update tabs
-            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
+    <div class="steps">
+      <div class="step card reveal"><span class="stno">STEP 01</span><h3>재앙 토벌</h3><p>세계를 위협하는 재앙의 드래곤을 토벌한다.</p></div>
+      <div class="step card reveal"><span class="stno">STEP 02</span><h3>알 회수</h3><p>드래곤의 알을 손에 넣는다. 깨뜨리면 처음부터.</p></div>
+      <div class="step card reveal"><span class="stno">STEP 03</span><h3>동상 봉헌</h3><p>'영웅의 터' 동상에 알을 제물로 바친다.</p></div>
+      <div class="step card final reveal"><span class="stno">STEP 04</span><h3>지구 귀환</h3><p>대한민국으로 귀환. 단, 탑승 인원 — 미정.</p></div>
+    </div>
 
-            // Update content
-            document.querySelectorAll('.char-content').forEach(content => {
-                content.classList.remove('active');
-            });
-            document.getElementById(charId).classList.add('active');
+    <div class="wills card reveal">
+      <div class="wills-head">
+        <h3>귀환 의지 측정 결과</h3>
+        <small>RETURN&nbsp;MOTIVATION&nbsp;INDEX · 非公式</small>
+      </div>
+      <div class="will over" style="--acc:#f9a8d4">
+        <div class="will-top"><span class="wdot"></span><b>홍수희</b><div class="wbar"><i style="--w:100%"></i></div><span class="wpct" data-n="999" data-suffix="%">0%</span></div>
+        <q>"변신할 때마다 사회적 자아가 죽어요. 드래곤 어디 있어요. 지금 잡으러 가요."</q>
+      </div>
+      <div class="will" style="--acc:#a78bfa">
+        <div class="will-top"><span class="wdot"></span><b>황동윤</b><div class="wbar"><i style="--w:3%"></i></div><span class="wpct" data-n="3" data-suffix="%">0%</span></div>
+        <q>"한국 가면 누가 날 특기생이라 불러주냐? …아 물론 가야지, 가야 하는데. (눈동자 흔들림)"</q>
+      </div>
+      <div class="will" style="--acc:#67e8f9">
+        <div class="will-top"><span class="wdot"></span><b>심형욱</b><div class="wbar"><i style="--w:7%"></i></div><span class="wpct" data-n="7" data-suffix="%">0%</span></div>
+        <q>"이 세계의 대검 합체 기구는 연구 가치가 있다. 귀환은… 데이터 수집 완료 후에. (완료 예정일: 미정)"</q>
+      </div>
+    </div>
+
+    <p class="goal-close reveal">
+      "용이 다시 눈을 뜨는 날 ──<br>하늘이 보낸 기사들은, 일단 출근 중이다."
+      <small>SORVIL KNIGHT ACADEMY · 214TH CLASS</small>
+    </p>
+  </div>
+</section>
+
+</main>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="footer">
+  <div class="container">
+    <svg class="crest" viewBox="0 0 120 120" aria-hidden="true">
+      <path d="M60 12 L100 28 V62 C100 90 80 104 60 112 C40 104 20 90 20 62 V28 Z"
+            fill="rgba(212,178,95,.06)" stroke="#d4b25f" stroke-width="2.6" stroke-linejoin="round"/>
+      <path d="M42 88 L80 40 M73 35 L86 48 M78 88 L40 40 M34 48 L47 35"
+            fill="none" stroke="#f0d48a" stroke-width="2" stroke-linecap="round"/>
+      <path d="M60 24 L62.4 30 L68.5 32.4 L62.4 34.8 L60 41 L57.6 34.8 L51.5 32.4 L57.6 30 Z" fill="#f0d48a"/>
+    </svg>
+    <p class="f-motto">PUDOR&nbsp;EST&nbsp;POTENTIA</p>
+    <p class="f-motto-kr">— 수치심은 곧 힘이다 · 소르빌 기사 아카데미 교훈(비공인) —</p>
+    <p class="f-div">⚜ ⚜ ⚜</p>
+    <nav class="f-links" aria-label="푸터 메뉴">
+      <a href="#story">시놉시스</a>
+      <a href="#magic">영창 마법</a>
+      <a href="#legend">창립 설화</a>
+      <a href="#characters">등장인물</a>
+      <a href="#arena">전장</a>
+      <a href="#academy">아카데미</a>
+      <a href="#goal">최종 목표</a>
+    </nav>
+    <div class="f-small">
+      <span>본 페이지는 AI 캐릭터·스토리 소개를 위한 팬 컨셉 랜딩 페이지입니다.</span>
+      <span>등장하는 인물·단체·흑염룡은 실존과 무관하며, 모든 이미지 슬롯은 placeholder입니다.</span>
+      <span>© 2026 소르빌 기사 아카데미 홍보위원회 (자칭)</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ===================== MODAL ===================== -->
+<div class="modal" id="cmodal" role="dialog" aria-modal="true" aria-label="인물 상세 정보">
+  <div class="modal-bk" data-close></div>
+  <div class="modal-card" id="mCard">
+    <button class="mclose" id="mClose" type="button" aria-label="닫기" data-close>✕</button>
+    <div id="mBody"></div>
+  </div>
+</div>
+
+</div><!-- /.page -->
+
+<script>
+(function(){
+'use strict';
+var $ = function(s, c){ return (c||document).querySelector(s); };
+var $$ = function(s, c){ return Array.prototype.slice.call((c||document).querySelectorAll(s)); };
+var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ============ 1. STARS ============ */
+(function(){
+  var cv = $('#stars');
+  if(!cv || reduceMotion){ if(cv) cv.remove(); return; }
+  var ctx = cv.getContext('2d');
+  if(!ctx){ cv.remove(); return; }
+  var stars = [], W, H, raf;
+  function resize(){
+    W = cv.width = window.innerWidth;
+    H = cv.height = window.innerHeight;
+    var n = Math.min(150, Math.floor(W * H / 11000));
+    stars = [];
+    for(var i = 0; i < n; i++){
+      stars.push({
+        x: Math.random() * W, y: Math.random() * H,
+        r: Math.random() * 1.15 + .25,
+        a: Math.random() * Math.PI * 2,
+        sp: .25 + Math.random() * .9,
+        gold: Math.random() < .22
+      });
+    }
+  }
+  function tick(t){
+    ctx.clearRect(0, 0, W, H);
+    for(var i = 0; i < stars.length; i++){
+      var s = stars[i];
+      var tw = .28 + .72 * Math.abs(Math.sin(s.a + t * .00045 * s.sp));
+      ctx.globalAlpha = tw * .85;
+      ctx.fillStyle = s.gold ? '#f0d48a' : '#dfe6ff';
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, 6.2832);
+      ctx.fill();
+    }
+    raf = requestAnimationFrame(tick);
+  }
+  resize();
+  window.addEventListener('resize', resize);
+  raf = requestAnimationFrame(tick);
+  document.addEventListener('visibilitychange', function(){
+    if(document.hidden){ cancelAnimationFrame(raf); }
+    else { raf = requestAnimationFrame(tick); }
+  });
+})();
+
+/* ============ 2. NAV ============ */
+(function(){
+  var nav = $('#nav'), burger = $('#burger'), mmenu = $('#mmenu');
+  function onScroll(){ nav.classList.toggle('scrolled', window.scrollY > 8); }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  function closeMenu(){
+    burger.classList.remove('open'); mmenu.classList.remove('open');
+    burger.setAttribute('aria-expanded', 'false');
+  }
+  burger.addEventListener('click', function(){
+    var open = !mmenu.classList.contains('open');
+    burger.classList.toggle('open', open);
+    mmenu.classList.toggle('open', open);
+    burger.setAttribute('aria-expanded', String(open));
+  });
+  $$('.mmenu a').forEach(function(a){ a.addEventListener('click', closeMenu); });
+
+  /* scroll spy */
+  var links = $$('.nav-links a');
+  var map = {};
+  links.forEach(function(a){ map[a.getAttribute('href').slice(1)] = a; });
+  if('IntersectionObserver' in window){
+    var spy = new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if(e.isIntersecting && map[e.target.id]){
+          links.forEach(function(a){ a.classList.remove('active'); });
+          map[e.target.id].classList.add('active');
         }
-    </script>
+      });
+    }, {rootMargin: '-38% 0px -55% 0px'});
+    Object.keys(map).forEach(function(id){
+      var sec = document.getElementById(id);
+      if(sec) spy.observe(sec);
+    });
+  }
+})();
+
+/* ============ 3. REVEAL ============ */
+(function(){
+  var els = $$('.reveal');
+  if(!('IntersectionObserver' in window) || reduceMotion){
+    els.forEach(function(el){ el.classList.add('in'); }); return;
+  }
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, {threshold: .12, rootMargin: '0px 0px -6% 0px'});
+  els.forEach(function(el){ io.observe(el); });
+})();
+
+/* ============ 4. TICKER ============ */
+(function(){
+  var tr = $('#tickerTrack');
+  if(!tr) return;
+  tr.innerHTML += tr.innerHTML; /* seamless loop */
+})();
+
+/* ============ 5. CHARACTER DATA ============ */
+var CHARS = [
+  /* ---- 이세계 전승자 ---- */
+  { id:'dy', grid:'hero', acc:'#a78bfa', ico:'👓', name:'황동윤', alias:'돼공',
+    role:'A반 · 특기 신입생 · 흑염룡 보유자',
+    meta:[['AGE','24세 · 사회복무요원'],['ARMS','한손 외날검'],['SOUL','INTP · 7w8 · 혼돈 중립']],
+    desc:'무직 백수에서 체중 초과로 사회복무요원이 된 오타쿠. 일본 애니·버튜버 지식만큼은 석사급. \'특기 신입생\' 대우에 어깨가 하늘까지 올라갔다.',
+    profile:[['신분','대한민국 사회복무요원 (체중 초과 판정) → 소르빌 A반 신입생'],['무기','한손 외날검 — 영창 시 칠흑의 화염이 깃든다'],['성향','INTP · 7w8(7-3-8) · sx/so · 혼돈 중립'],['외형','흑발 흑안 · 매우 짧은 크루컷 · 안경 · 남색 모자 · 자주색 셔츠 + 교복 코트는 어깨에']],
+    ability:{ name:'흑염룡(黑炎龍) — 개방', text:'왼팔에 \'봉인\'된 흑염룡을 해방하는 영창 마법. 봉인 붕대를 움켜쥐고 지정 대사를 육성으로 완창하면, 검에 칠흑의 화염이 깃들어 마물을 일격에 소멸시킨다. 위력: 절륜. 대사: 절망. 시전 후 3초간 누구와도 눈을 마주치지 못한다.' },
+    quote:'진정해라, 나의 왼팔이여… 아직 그때가 아니다.',
+    notes:['과장된 말투 + 오타쿠 말투 콤보. 흥분하면 일본어 단어가 샌다.','특기생 대우와 여학생들의 추파에 흠뻑 취해, 귀환 의지 3%.','영창 마법을 제일 부끄러워하면서 제일 자주 쓴다. 모순의 남자.'] },
+
+  { id:'hu', grid:'hero', acc:'#67e8f9', ico:'🤖', name:'심형욱', alias:'멸공',
+    role:'A반 · 특기 신입생 · 그랜드 칼리버 운용자',
+    meta:[['AGE','23세 · 사회복무요원 · 공학도'],['ARMS','두손 대검 (변신·합체)'],['SOUL','INTJ · 5w4 · 질서 중립']],
+    desc:'메카물에 심취한 냉소적 공학도. 평소엔 영하의 말투지만 로봇 얘기만 나오면 과열된다. 자신의 대검 합체 기구를 \'연구 대상\'이라 부른다.',
+    profile:[['신분','대한민국 사회복무요원 (체중 미달 판정) · 공학도 → 소르빌 A반 신입생'],['무기','두손 대검 — 변신 로봇처럼 분해·재조립되어 거대화'],['성향','INTJ · 5w4(5-1-4) · sp/sx · 질서 중립'],['외형','매우 짧은 크루컷 · 남색 모자 · 자주색 셔츠 + 교복 코트는 어깨에']],
+    ability:{ name:'진(眞)·합체 — 그랜드 칼리버', text:'합체 시퀀스 선언과 함께 대검이 분해·재조립되며 거대화하는 영창 마법. 출력 선언, 안전장치 해제 승인까지 풀코스 낭독이 필수 조건. 생략 시 그냥 무거운 쇳덩이가 된다. 본인은 이 모든 대사를 \'시스템 사양\'이라 부르며 책임을 회피 중.' },
+    quote:'전 기관, 출력 120%. …이 대사를 설계한 자, 면담을 요청한다.',
+    notes:['말투 온도차 극심 — 평소 -10℃, 메카 화제 시 +120℃.','귀환보다 이세계 합체 기구의 데이터 수집이 우선. 완료 예정일: 미정.','영창 도중 가장 무표정한 인물. 그래서 더 무섭다는 평.'] },
+
+  { id:'sh', grid:'hero', acc:'#f9a8d4', ico:'🌟', name:'홍수희', alias:'주무관',
+    role:'B반 · 특기 신입생 · 별의 힘 계약자',
+    meta:[['AGE','27세 · 주민센터 9급 공무원'],['ARMS','레이피어'],['SOUL','ESFJ · 2w1 · 중립 선']],
+    desc:'민원인과 공익들에게 단련된 \'미소의 달인\'. 직업병으로 어떤 상황에도 밝게 응대하지만, 시선이 집중되는 순간 수치심 게이지가 폭주한다.',
+    profile:[['신분','대한민국 주민센터 9급 공무원 → 소르빌 B반 신입생'],['무기','레이피어 — 변신 후 빛의 예복과 유성우를 다룬다'],['성향','ESFJ · 2w1(2-6-9) · so/sp · 중립 선'],['외형','갈발 갈안 · 일자 앞머리 + 웨이브 머리 · 아이보리 블라우스 · 갈색 치마 + 교복 코트는 어깨에']],
+    ability:{ name:'스텔라 — 메이크 업', text:'세일러문식 마법소녀 변신 영창. 레이피어를 들어 올려 회전하면 별의 힘이 깃든 빛의 예복이 전개되고, 검을 들어 올릴 때마다 유성우가 떨어진다. 변신 시퀀스는 풀버전 강제 재생 — 스킵 기능은 존재하지 않는다.' },
+    quote:'별의 가호 아래… (제가 스물일곱입니다, 여러분.)',
+    notes:['귀환 의지 측정 불가(게이지 초과). 드래곤 토벌 의욕 전교 1위.','변신 후 모습이 창립 설화 \'유성우의 무희\'와 닮았다는 소문이 돈다.','좌우명: 미소는 공무원의 갑옷이다.'] },
+
+  { id:'mys', grid:'hero', locked:true, acc:'#94a3b8', ico:'⛓️', name:'？？？', alias:'미확인',
+    role:'제4의 전승자 · 소재 불명',
+    meta:[['AGE','???'],['ARMS','???'],['SOUL','열람 제한']],
+    desc:'예언이 말한 \'네 명의 기사\' 중 마지막 한 명. 확인된 전승자는 셋뿐 — 네 번째는 아직 나타나지 않았다. 혹은, 이미 어딘가에 있다.' },
+
+  /* ---- 교직원 ---- */
+  { id:'helios', grid:'staff', acc:'#f0d48a', ico:'☕', name:'헬리오스', alias:'교장',
+    role:'아카데미 교장 · 소드마스터',
+    meta:[['AGE','노년 · 퇴역 기사'],['ARMS','불명 (전성기 일화만 전설)'],['SOUL','INTP · 5w4 · 참 중립']],
+    desc:'허허 웃으며 속을 알 수 없는 교장. 4인방의 본질과 잠재력을 꿰뚫어 보는 듯한 태도를 보인다. 어쩌면, 전부 알고 있는지도 모른다.',
+    profile:[['신분','소르빌 기사 아카데미 교장 · 퇴역 기사'],['소문','세계관 최강. 드래곤을 잡아봤다는 설이 있으나 본인은 웃기만 한다'],['성향','INTP · 5w4 · sp/so · 참 중립'],['외형','백발 짧은 머리 · 짧은 수염 · 흑안 · 흑색 셔츠 + 적색 넥타이 + 아이보리 조끼 + 흑색 코트는 어깨에']],
+    ability:{ name:'세계관 최강 (소문)', text:'공식 기록 없음. 다만 교내 최강 논쟁의 유일한 합의점이 \'교장만 빼고\'라는 사실이 모든 것을 말해준다. 4인방의 \'특기\'를 보고도 놀라지 않은 유일한 인물.' },
+    quote:'허허… 재미있는 아이들이 들어왔구나.',
+    notes:['찻잔을 내려놓는 타이밍이 늘 의미심장하다.','\'심검의 현자\' 이야기가 나오면 미소가 1.2배 깊어진다.','집무실 창문은 항상 중앙광장 동상 쪽을 향해 있다.'] },
+
+  { id:'isabel', grid:'staff', acc:'#f472b6', ico:'🌸', name:'이사벨', alias:'마망',
+    role:'A반 담임 · 교관',
+    meta:[['AGE','성인 여성 · 교관'],['ARMS','검 + 검은 갑주'],['SOUL','ENFJ · 2w1 · 중립 선']],
+    desc:'학생들을 진심으로 걱정하며 부드럽게 지도하는 A반 담임. 영창 마법을 \'훌륭한 특기\'라 믿어 의심치 않는, 착각계의 일등 공신.',
+    profile:[['신분','A반 담임 교관'],['지도 방침','응원 · 공감 · 무한 긍정'],['성향','ENFJ · 2w1 · so/sx · 중립 선'],['외형','분홍 머리 · 적안 · 땋은 머리를 어깨에 · 검은 갑주 + 분홍 망토']],
+    ability:{ name:'무한 신선 리액션', text:'영창 마법을 볼 때마다, 매번 처음 보는 것처럼 놀란다. 적응이라는 개념이 존재하지 않는다. 그리고 매번 진심으로 감탄하고 응원한다. 시전자의 수치심을 정확히 2배로 증폭시키는 무자각 디버프.' },
+    quote:'어머나! 오늘도 정말 멋진 특기네요!',
+    notes:['놀람 리액션 누적 횟수: 집계 포기.','학생 고민 상담 예약은 2주 대기.','동윤의 \'왼팔 통증\' 호소를 진지하게 걱정해 파스를 처방한 적이 있다.'] },
+
+  { id:'valentina', grid:'staff', acc:'#7dd3fc', ico:'🛡️', name:'발렌티나', alias:'철혈',
+    role:'B반 담임 · 교관',
+    meta:[['AGE','성인 여성 · 교관'],['ARMS','검 + 검은 갑주'],['SOUL','ESTJ · 1w2 · 질서 중립']],
+    desc:'실력 제일 · 원칙주의의 B반 담임. 신분 고하를 막론하고 실력과 노력만으로 학생을 평가한다. 영창 마법에 놀라긴 하지만, 그것과 훈련은 별개다.',
+    profile:[['신분','B반 담임 교관'],['지도 방침','기본기 · 기본기 · 기본기'],['성향','ESTJ · 1w2 · sp/so · 질서 중립'],['외형','하늘색 머리 · 청안 · 숏컷 · 검은 갑주 + 하늘색 망토']],
+    ability:{ name:'기본기 지상주의', text:'어떤 화려한 특기를 목격해도 결론은 하나로 수렴한다 — \'기본기 훈련 추가\'. 훈련 면제 신청 승인률 0%. 다만 노력하는 자는 출신과 무관하게 반드시 알아보고, 정당하게 평가한다.' },
+    quote:'화려하군. 인정한다. — 기본기 2시간 추가.',
+    notes:['수희의 노력을 가장 먼저 알아본 교관.','입버릇: 땀은 거짓말을 하지 않는다.','이사벨과는 지도 방침 정반대지만 사이는 좋다.'] },
+
+  /* ---- 학생 ---- */
+  { id:'alejandro', grid:'students', acc:'#fbbf24', ico:'👑', name:'알레한드로', alias:'학생회장',
+    role:'A반 · 학생회장 · 귀족파 리더',
+    meta:[['AGE','재학생 · 몬토 가문 후계자'],['ARMS','검 (정통파)'],['SOUL','ENTJ · 3w4 · 질서 악']],
+    desc:'4인방이 오기 전까지 만년 1등이었던 명문가의 후계자. \'이상한 기술\'을 절대 인정하지 않으며 사사건건 시비를 건다. 요즘 위장약을 달고 산다.',
+    profile:[['신분','명문 몬토 가문 후계자 · 학생회장'],['파벌','귀족파 리더'],['성향','ENTJ · 3w4 · so/sp · 질서 악'],['외형','금발 · 녹안 · 짧은 머리 · 이마가 보이는 앞머리']],
+    ability:{ name:'만년 1등 (前)', text:'귀족파를 이끄는 정치력과 흠잡을 데 없는 정통 검술. 노력형 수재이기에, \'선언형 검술\' 따위에 밀리는 현실이 더더욱 받아들여지지 않는다. 시비 성공률 0%, 도전 횟수는 비공개.' },
+    quote:'저런 요란한 기술 따위, 인정 못 해…!!',
+    notes:['시비 → 패배 → 위장통의 무한 루프 진행 중.','최근 검색 기록: \'기합 검술\', \'선언 보법\', \'위장에 좋은 차\'.','사실 순수 노력형. 그래서 더 분하다.'] },
+
+  { id:'lucas', grid:'students', acc:'#9ca3af', ico:'🗡️', name:'루카스', alias:'그림자',
+    role:'A반 · 학생회장 직속',
+    meta:[['AGE','재학생 · 카사스 가문 차남'],['ARMS','양날 한손검'],['SOUL','ESTP · 8w7 · 혼돈 악']],
+    desc:'성적은 낮지만 알레한드로에 대한 충성으로 자리를 보전하는 둘째 도련님. 더러운 일을 도맡지만, 어딘가 미워할 수 없는 잔챙이 포지션.',
+    profile:[['신분','카사스 가문 차남 · 학생회 소속'],['업무','시비 걸기 · 뒷정리 · 미행 등 그림자 업무 일체'],['성향','ESTP · 8w7 · sp/so · 혼돈 악'],['외형','흑발 흑안 · 언더컷 · 올백 헤어번']],
+    ability:{ name:'더러운 일 전담', text:'성적 대신 충성으로 특혜를 얻어내는 처세술의 달인. 회장의 손이 닿지 않는 곳을 도맡는다. 다만 싸움은 잘 거는데 마무리를 못 하는 것이 치명적 약점.' },
+    quote:'회장님이 인정 안 하시면, 나도 인정 안 해. (몰래 따라해 본다)',
+    notes:['몰래 영창 포즈를 연습하다 들킨 전적 2회.','회장의 위장약 심부름 담당.','본인도 슬슬 \'그 기술\'이 멋있다고 생각하기 시작했다.'] },
+
+  { id:'carolina', grid:'students', acc:'#f87171', ico:'🔥', name:'캐롤리나', alias:'열혈',
+    role:'B반 · 평민 · 만년 2인자',
+    meta:[['AGE','재학생 · 평민 출신'],['ARMS','두손 대검'],['SOUL','ESFP · 7w8 · 중립 선']],
+    desc:'평민 출신 만년 2인자. 귀족이고 뭐고 강하면 인정, 멋있으면 광팬. 4인방의 \'특기\'를 보고 눈이 별이 된 1호 팬.',
+    profile:[['신분','평민 출신 재학생'],['전적','알레한드로의 턱밑까지 추격한 만년 2위'],['성향','ESFP · 7w8 · sx/so · 중립 선'],['외형','적발 적안 · 비대칭 앞머리']],
+    ability:{ name:'열혈 노력', text:'재능의 벽을 체력과 근성으로 들이받는 스타일. 응원 소리가 대련장에서 제일 크고, 본인이 싸울 때는 함성이 제일 크다. 최근 \'외치면 나도 되는 거 아냐?\'라는 가설을 세우고 자작 대사를 연습 중.' },
+    quote:'방금 거 완전 멋있잖아!? 대사 알려줘!!',
+    notes:['자작 영창 1호: "불꽃보다 뜨거운 나 — 등장!!" (효과 없음 확인).','수희를 언니라 부르며 따른다.','신분 차별하는 귀족은 실력으로 입을 다물게 한다.'] },
+
+  { id:'silvia', grid:'students', acc:'#bfdbfe', ico:'❄️', name:'실비아', alias:'부학생회장',
+    role:'B반 · 1학년(월반) · 대공가 영애',
+    meta:[['AGE','재학생 · 에데뷔스 대공가'],['ARMS','레이피어'],['SOUL','INTJ · 1w2 · 질서 중립']],
+    desc:'북부 대공가의 영애이자 알레한드로의 약혼녀. 가문의 명예와 전통을 중시하는 쿨데레. 약혼자의 패배를 \'데이터\'로 정리하는 차가움의 틈새로, 가끔 호기심이 샌다.',
+    profile:[['신분','에데뷔스 대공가 영애 · 부학생회장 · 알레한드로의 약혼녀'],['특이','월반 입학 — 1학년이지만 부학생회장'],['성향','INTJ · 1w2 · sp/so · 질서 중립'],['외형','백발 청안 · 단정한 앞머리 · 하이 포니테일']],
+    ability:{ name:'쿨데레 관찰안', text:'감정 표현은 영하권이지만 관찰력은 교관급. \'기록 차원\'이라는 명목으로 영창 마법을 다시 시키는 유일한 인물. 본인은 어디까지나 가문과 학생회의 공무라고 주장한다.' },
+    quote:'…방금 그 구절. 기록 차원에서, 한 번 더.',
+    notes:['약혼자가 시비 걸다 패배할 때마다 수첩에 무언가를 적는다.','\'소란스럽다\'고 말하면서 가장 앞자리에서 관전한다.','클라라와 수첩 정보를 교환하는 사이라는 소문이 있다.'] },
+
+  { id:'clara', grid:'students', acc:'#86efac', ico:'📓', name:'클라라', alias:'검술 오타쿠',
+    role:'B반 · 검술 이론파',
+    meta:[['AGE','재학생'],['ARMS','양날 한손검'],['SOUL','INTP · 5w6 · 중립 선']],
+    desc:'이론에 빠삭한 순수 검술 오타쿠. 4인방의 \'특기\'를 가장 가까이서 기록하는 인물로, 착각계 확산의 학술적 주범. 본인은 그저 행복하다.',
+    profile:[['신분','B반 재학생'],['소지품','녹색 수첩 (검술 메모 다수 · 분실 시 전교 비상)'],['성향','INTP · 5w6 · sp/sx · 중립 선'],['외형','녹발 녹안 · 히메컷 옆머리 · 로우 포니테일']],
+    ability:{ name:'검술 아카이브', text:'타인의 검술을 전부 수첩에 기록·분석하는 이론파. 영창 마법조차 \'기합 선언과 연동된 신형식 검술\'로 분류해 페이지를 갱신 중이다. 분석은 정밀하지만 전제가 틀렸으므로, 결론은 매번 장대하게 빗나간다.' },
+    quote:'방금 그 보법…! 메모해도 될까요? 한 번만 더!',
+    notes:['논문(자칭) 집필 중: \'기합 선언과 출력의 상관관계에 대하여\'.','수첩 분실 공지의 그 수첩 주인. 무사히 회수했다.','본인의 검술 실력도 상위권이라는 게 함정.'] }
+];
+
+/* ============ 6. CARD RENDER ============ */
+(function(){
+  var grids = { hero: $('#grid-hero'), staff: $('#grid-staff'), students: $('#grid-students') };
+
+  function cardHTML(c){
+    var metaRows = c.meta.map(function(m){
+      return '<span><b>' + m[0] + '</b>' + m[1] + '</span>';
+    }).join('');
+    return '' +
+      '<div class="cport ph"><div class="ph-stack">' +
+        '<span class="ph-ico">' + c.ico + '</span>' +
+        '<span class="ph-tag">PORTRAIT</span>' +
+        '<span class="ph-sub">' + (c.locked ? '기록 봉인됨' : '일러스트 준비 중') + '</span>' +
+      '</div></div>' +
+      '<div class="cbody">' +
+        '<div class="crow"><h3>' + c.name + '</h3><span class="alias">' + c.alias + '</span></div>' +
+        '<p class="crole">' + c.role + '</p>' +
+        '<div class="cmeta">' + metaRows + '</div>' +
+        '<p class="cdesc">' + c.desc + '</p>' +
+        '<span class="cmore">' + (c.locked ? '⛓ 열람 권한 없음' : '기록 열람 ❯') + '</span>' +
+      '</div>';
+  }
+
+  CHARS.forEach(function(c){
+    var el = document.createElement('article');
+    el.className = 'ccard card' + (c.locked ? ' locked' : '');
+    el.style.setProperty('--acc', c.acc);
+    el.setAttribute('tabindex', '0');
+    el.setAttribute('role', 'button');
+    el.setAttribute('aria-haspopup', 'dialog');
+    el.setAttribute('aria-label', c.name + ' 상세 정보 열기');
+    el.dataset.id = c.id;
+    el.innerHTML = cardHTML(c);
+    el.addEventListener('click', function(){ openModal(c, el); });
+    el.addEventListener('keydown', function(e){
+      if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); openModal(c, el); }
+    });
+    grids[c.grid].appendChild(el);
+  });
+
+  /* ---- tabs ---- */
+  var tabs = $$('.tab');
+  tabs.forEach(function(tab){
+    tab.addEventListener('click', function(){
+      tabs.forEach(function(t){
+        var sel = t === tab;
+        t.setAttribute('aria-selected', String(sel));
+        var panel = document.getElementById(t.getAttribute('aria-controls'));
+        if(panel) panel.hidden = !sel;
+      });
+    });
+  });
+
+  /* ---- modal ---- */
+  var modal = $('#cmodal'), mCard = $('#mCard'), mBody = $('#mBody');
+  var lastFocus = null;
+
+  function openModal(c, trigger){
+    lastFocus = trigger || document.activeElement;
+    mCard.style.setProperty('--acc', c.acc);
+    mBody.innerHTML = c.locked ? lockedHTML(c) : modalHTML(c);
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    $('#mClose').focus();
+  }
+  function closeModal(){
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+    if(lastFocus) lastFocus.focus();
+  }
+  window.__openChar = openModal;
+
+  function modalHTML(c){
+    var prows = c.profile.map(function(p){
+      return '<div class="prow"><b>' + p[0] + '</b><span>' + p[1] + '</span></div>';
+    }).join('');
+    var notes = c.notes.map(function(n){ return '<li>' + n + '</li>'; }).join('');
+    var tags = c.meta.map(function(m){ return '<span class="chip">' + m[1] + '</span>'; }).join('');
+    return '' +
+      '<div class="mtop">' +
+        '<div class="mport ph"><div class="ph-stack"><span class="ph-ico">' + c.ico + '</span><span class="ph-tag">PORTRAIT</span></div></div>' +
+        '<div class="mid">' +
+          '<p class="mrole">' + c.role + '</p>' +
+          '<h2>' + c.name + ' <span class="alias">' + c.alias + '</span></h2>' +
+          '<div class="mtags">' + tags + '</div>' +
+        '</div>' +
+      '</div>' +
+      '<div class="mbody">' +
+        '<div class="msec"><h4>PROFILE · 신상 기록</h4><div class="mprofile">' + prows + '</div></div>' +
+        '<div class="msec"><h4>ABILITY · 특기</h4><div class="mability"><b>' + c.ability.name + '</b><p>' + c.ability.text + '</p></div></div>' +
+        '<div class="msec"><h4>QUOTE · 어록</h4><blockquote class="mquote">"' + c.quote + '"</blockquote></div>' +
+        '<div class="msec"><h4>NOTES · 관찰 기록</h4><ul class="mnotes">' + notes + '</ul></div>' +
+      '</div>';
+  }
+
+  function lockedHTML(c){
+    return '' +
+      '<div class="mtop">' +
+        '<div class="mport ph"><div class="ph-stack"><span class="ph-ico">⛓️</span><span class="ph-tag">SEALED</span></div></div>' +
+        '<div class="mid">' +
+          '<p class="mrole">' + c.role + '</p>' +
+          '<h2>？？？</h2>' +
+          '<div class="mtags"><span class="chip">열람 등급: 교장 전결</span></div>' +
+        '</div>' +
+      '</div>' +
+      '<div class="mbody">' +
+        '<div class="msec"><h4>ACCESS DENIED · 열람 제한</h4><div class="mprofile">' +
+          '<div class="prow"><b>사유</b><span>본 기록은 \'제4의 전승자\' 관련 문서로 분류되어 봉인되었습니다.</span></div>' +
+          '<div class="prow"><b>현황</b><span>예언의 네 기사 중 확인된 전승자는 3명. 마지막 한 명은 — 소재 불명.</span></div>' +
+          '<div class="prow"><b>비고</b><span>후속 정보는 이야기의 진행과 함께 공개됩니다.</span></div>' +
+        '</div></div>' +
+        '<div class="msec"><h4>FRAGMENT · 기록 파편</h4><blockquote class="mquote">"검을 쥐지 않고도 승리한 유일한 자 — 그는 이름조차 남기지 않고 사라졌다."</blockquote></div>' +
+      '</div>';
+  }
+
+  modal.addEventListener('click', function(e){
+    if(e.target.closest('[data-close]')) closeModal();
+  });
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape' && modal.classList.contains('open')) closeModal();
+  });
+})();
+/* ============ 7. CHANT SIMULATOR + MAKER ============ */
+(function(){
+  var CASTERS = {
+    dy: {
+      name:'황동윤', acc:'#a78bfa', sil:'👓',
+      dir:'(왼팔의 봉인 붕대를 움켜쥔다)',
+      lines:[
+        '…진정해라, 나의 왼팔이여. 아직 그때가 아니다…',
+        '어둠보다 깊은 어둠이여 — 지금 봉인을 거역하고, 내 검에 깃들어라!'
+      ],
+      fin:'흑염룡(黑炎龍) ── 개방!!!',
+      inner:[
+        '(집에 가고 싶다… 아니 여기 살고 싶다… 아니 죽고 싶다…)',
+        '(제발 아무도 못 봤기를. 특히 클라라. 제발 수첩 꺼내지 마.)',
+        '(어쩌지. 방금 좀 멋있었던 것 같다. …아니야. 정신 차려.)'
+      ]
+    },
+    hu: {
+      name:'심형욱', acc:'#67e8f9', sil:'🤖',
+      dir:'(대검을 지면에 꽂고, 오른팔을 하늘로 뻗는다)',
+      lines:[
+        '전 기관, 출력 120%. 안전장치 해제 — 승인.',
+        '강철의 혼이여, 지금 하나가 되어라. 합체 시퀀스 — 기동.'
+      ],
+      fin:'진(眞)·합체 ── 그랜드 칼리버!!!',
+      inner:[
+        '(출력은 완벽. 멘탈 출력은 4%.)',
+        '(이 대사를 설계한 시스템 개발자. 면담을 요청한다.)',
+        '(데이터는 남는다. 수치심도 남는다. 영구적으로.)'
+      ]
+    },
+    sh: {
+      name:'홍수희', acc:'#f9a8d4', sil:'🌟',
+      dir:'(레이피어를 하늘로 들어 올리고, 그 자리에서 한 바퀴 회전한다)',
+      lines:[
+        '별의 가호 아래, 빛의 계약에 따라 ──'
+      ],
+      fin:'스텔라 ── 메이크 업!!!',
+      inner:[
+        '(주민센터로 돌아가고 싶다. 민원인 백 명이 그립다.)',
+        '(27살입니다. 스물일곱. 방금 회전까지 했어요.)',
+        '(웃자. 웃어야 해. 미소는 공무원의 갑옷이니까.)'
+      ]
+    }
+  };
+
+  var WITNESS = [
+    ['클라라', '"방금 그 영창… 아니, \'기합 선언\'! 보법과 연동된 신형식이군요. 메모하겠습니다 — 한 번만 더!"'],
+    ['알레한드로', '"저, 저런 요란한 기술 따위… 인정 못 해! 인정 못 한다고!! (위장을 부여잡는다)"'],
+    ['이사벨', '"어머나…! 오늘도 정말 훌륭한 특기네요! 선생님은 매번 처음 보는 것처럼 놀라워요!"'],
+    ['발렌티나', '"화려하군. 인정한다. — 단, 기본기 훈련 2시간 추가다."'],
+    ['헬리오스', '"허허… 재미있는 아이들이야. (찻잔을 의미심장하게 내려놓는다)"'],
+    ['캐롤리나', '"뭐야 방금 거!! 완전 멋있잖아!? 나도 외치면 되는 거야? 대사 알려줘!!"'],
+    ['실비아', '"…소란스럽군요. (3초간 응시) …방금 그 구절, 기록 차원에서 한 번 더 해보세요."'],
+    ['루카스', '"칫… 회장님이 인정 안 하시면 나도 인정 안 해. (몰래 손동작을 따라해 본다)"']
+  ];
+
+  var GSTATES = [[0,'평온'],[25,'동요'],[55,'손발 실종'],[80,'자아 이탈'],[100,'임계 돌파!!']];
+
+  /* ---- chuunibyou word banks (for 랜덤 영창) ---- */
+  var BANK = {
+    sil: ['🔥','🌑','⚡','🌟','🗡️','🐉','🥷','🌙','❄️','👁️','💫','🩸','👓','🤖'],
+    color: ['#a78bfa','#67e8f9','#f9a8d4','#f87171','#fbbf24','#86efac','#bfdbfe','#c084fc','#fb923c','#5eead4'],
+    name: ['이름 없는 검귀','심연을 걷는 자','흑야의 계승자','별을 베는 자','봉인된 왼손','마지막 영창자'],
+    dir: [
+      '(오른쪽 눈을 손으로 가리며 천천히 무릎을 꿇는다)',
+      '(검을 거꾸로 쥐고 하늘을 향해 치켜든다)',
+      '(왼팔의 붕대를 이로 풀어헤친다)',
+      '(코트 자락을 휘날리며 한 바퀴 회전한다)',
+      '(검지와 중지를 모아 이마에 가져다 댄다)',
+      '(등 뒤의 검을 뽑아 지면에 깊이 꽂는다)'
+    ],
+    open: [
+      '어리석은 자들이여, 진정한 힘이 무엇인지 보여주마…',
+      '내 안에 잠든 또 하나의 인격이 — 지금 눈을 뜬다.',
+      '큭… 오른쪽 눈이 다시 욱신거리기 시작했다…',
+      '이 봉인을 푸는 순간, 세계의 균형은 무너진다.',
+      '운명의 톱니바퀴여, 지금 이 자리에서 역회전하라.',
+      '심연을 들여다본 자만이, 심연의 검을 쥘 수 있는 법.'
+    ],
+    mid: [
+      '어둠이여, 빛이여 — 내 검끝에서 하나가 되어라!',
+      '금단의 계약에 따라, 잠든 권능이여 현현하라!',
+      '이 일격에, 내 모든 흑역사를 건다!',
+      '삼라만상이여, 나의 검 앞에 무릎 꿇어라!'
+    ],
+    finAdj: ['흑염','심연','천공','멸망','유성','칠흑','파멸','창천','월광','극광','무한','절대'],
+    finNoun: ['의 송곳니','의 심판','의 진혼곡','의 파동','의 낙인','의 칼날','룡','의 결계'],
+    finVerb: ['개방!!!','해방!!!','폭쇄!!!','강림!!!','발현!!!','전개!!!','점화!!!','각성!!!']
+  };
+  var CUSTOM_INNER = [
+    '(…방금 내가 무슨 말을 한 거지.)',
+    '(돌이킬 수 없다. 이미 외쳐버렸다.)',
+    '(누구와도 눈을 마주치지 마. 절대로.)',
+    '(위력은 만족스럽다. 자존감은 사망했다.)',
+    '(오늘 밤 이불 킥 예약 완료.)',
+    '(그래도… 좀 멋있지 않았나? …아니야.)'
+  ];
+
+  var stage = $('#simStage'), sil = $('#simSil'), chant = $('#chantBox');
+  var gFill = $('#gaugeFill'), gState = $('#gaugeState');
+  var btn = $('#castBtn'), result = $('#simResult');
+  var pills = $$('#simPills .pill');
+  var resInner = $('#resInner'), resOut1 = $('#resOut1'), resOut2 = $('#resOut2');
+  if(!stage || !btn) return;
+
+  var modeBtns = $$('.sim-mode');
+  var pillsWrap = $('#simPills'), maker = $('#maker');
+  var mkName = $('#mkName'), mkDir = $('#mkDir'), mkLines = $('#mkLines'), mkFin = $('#mkFin');
+  var mkSilWrap = $('#mkSil'), mkColorWrap = $('#mkColor');
+  var mkRandom = $('#mkRandom'), mkShare = $('#mkShare');
+
+  var mode = 'preset', current = 'dy', busy = false;
+  var customSil = '🔥', customColor = '#fb923c';
+
+  function setGauge(p){
+    gFill.style.width = p + '%';
+    var label = GSTATES[0][1];
+    for(var i = 0; i < GSTATES.length; i++){ if(p >= GSTATES[i][0]) label = GSTATES[i][1]; }
+    gState.textContent = label;
+  }
+  function resetStage(acc, silText){
+    stage.classList.remove('casting','burst');
+    stage.style.setProperty('--acc', acc);
+    sil.textContent = silText;
+    chant.innerHTML = '<span class="hint">' +
+      (mode === 'custom' ? '나만의 영창을 완성하고, 아래 버튼을 누르세요. 부끄러움은 본인 몫입니다.'
+                         : '시전자를 고르고, 아래 버튼을 누르세요. 영창은 취소할 수 없습니다.') + '</span>';
+    result.hidden = true;
+    setGauge(0);
+  }
+
+  /* ---- preset pills ---- */
+  function selectCaster(id){
+    if(busy) return;
+    current = id;
+    var c = CASTERS[id];
+    pills.forEach(function(p){ p.setAttribute('aria-pressed', String(p.dataset.caster === id)); });
+    resetStage(c.acc, c.sil);
+  }
+  pills.forEach(function(p){ p.addEventListener('click', function(){ selectCaster(p.dataset.caster); }); });
+
+  /* ---- maker picks ---- */
+  BANK.sil.forEach(function(em){
+    var b = document.createElement('button');
+    b.type = 'button'; b.className = 'pick'; b.textContent = em;
+    b.setAttribute('aria-pressed', String(em === customSil));
+    b.addEventListener('click', function(){
+      customSil = em;
+      $$('.pick', mkSilWrap).forEach(function(x){ x.setAttribute('aria-pressed', String(x === b)); });
+      if(mode === 'custom' && !busy) sil.textContent = em;
+    });
+    mkSilWrap.appendChild(b);
+  });
+  BANK.color.forEach(function(col){
+    var b = document.createElement('button');
+    b.type = 'button'; b.className = 'pick cpick'; b.style.background = col;
+    b.setAttribute('aria-label', col); b.setAttribute('aria-pressed', String(col === customColor));
+    b.addEventListener('click', function(){
+      customColor = col;
+      $$('.cpick', mkColorWrap).forEach(function(x){ x.setAttribute('aria-pressed', String(x === b)); });
+      if(mode === 'custom' && !busy) stage.style.setProperty('--acc', col);
+    });
+    mkColorWrap.appendChild(b);
+  });
+
+  function buildCustom(){
+    var lines = (mkLines.value || '').split('\n').map(function(s){ return s.trim(); }).filter(Boolean);
+    var fin = (mkFin.value || '').trim();
+    if(!fin){ fin = (mkLines.value.trim() ? lines.pop() : '') || '이름 없는 일격 ── 발동!!!'; }
+    var dir = (mkDir.value || '').trim() || '(천천히 검을 들어 올린다)';
+    return {
+      name: (mkName.value || '').trim() || '이름 없는 검귀',
+      acc: customColor, sil: customSil, dir: dir,
+      lines: lines.length ? lines : ['…지금, 내 안의 모든 것을 건다.'],
+      fin: fin, inner: CUSTOM_INNER
+    };
+  }
+
+  function fillRandom(){
+    var pick = function(a){ return a[Math.floor(Math.random()*a.length)]; };
+    customSil = pick(BANK.sil); customColor = pick(BANK.color);
+    $$('.pick', mkSilWrap).forEach(function(x){ x.setAttribute('aria-pressed', String(x.textContent === customSil)); });
+    $$('.cpick', mkColorWrap).forEach(function(x){ x.setAttribute('aria-pressed', String(x.style.background.replace(/\s/g,'') === customColor || x.getAttribute('aria-label') === customColor)); });
+    mkName.value = pick(BANK.name);
+    mkDir.value = pick(BANK.dir);
+    var n = Math.random() < .5 ? 1 : 2, arr = [pick(BANK.open)];
+    if(n === 2) arr.push(pick(BANK.mid));
+    mkLines.value = arr.join('\n');
+    mkFin.value = pick(BANK.finAdj) + pick(BANK.finNoun) + ' ── ' + pick(BANK.finVerb);
+    if(mode === 'custom' && !busy){ stage.style.setProperty('--acc', customColor); sil.textContent = customSil; }
+  }
+  mkRandom.addEventListener('click', fillRandom);
+
+  mkShare.addEventListener('click', function(){
+    var c = buildCustom();
+    var txt = '《' + c.name + '의 영창서》\n' +
+      '포즈: ' + c.dir + '\n' +
+      c.lines.join('\n') + '\n▶ ' + c.fin + '\n— 소르빌 기사 아카데미 영창 메이커';
+    var done = function(){
+      var t = mkShare.textContent; mkShare.textContent = '✓ 복사됨';
+      setTimeout(function(){ mkShare.textContent = t; }, 1400);
+    };
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(txt).then(done, function(){ window.prompt('복사하세요:', txt); });
+    } else { window.prompt('복사하세요:', txt); }
+  });
+
+  /* ---- mode switch ---- */
+  modeBtns.forEach(function(b){
+    b.addEventListener('click', function(){
+      if(busy) return;
+      mode = b.dataset.mode;
+      modeBtns.forEach(function(x){ x.setAttribute('aria-pressed', String(x === b)); });
+      var custom = mode === 'custom';
+      pillsWrap.hidden = custom; maker.hidden = !custom;
+      if(custom){ resetStage(customColor, customSil); }
+      else { selectCaster(current); }
+    });
+  });
+
+  selectCaster('dy');
+
+  /* ---- shared cast runner ---- */
+  function sleep(ms){ return new Promise(function(r){ setTimeout(r, ms); }); }
+  function pick(arr){ return arr[Math.floor(Math.random() * arr.length)]; }
+  function typeLine(el, text, speed){
+    return new Promise(function(resolve){
+      if(reduceMotion){ el.textContent = text; resolve(); return; }
+      var caret = document.createElement('i');
+      caret.className = 'caret'; caret.textContent = '▍';
+      el.appendChild(caret);
+      var i = 0;
+      (function step(){
+        if(i < text.length){
+          caret.insertAdjacentText('beforebegin', text.charAt(i)); i++;
+          setTimeout(step, speed + Math.random() * 22);
+        } else { caret.remove(); resolve(); }
+      })();
+    });
+  }
+
+  function lockInputs(on){
+    pills.forEach(function(p){ p.disabled = on; });
+    modeBtns.forEach(function(b){ b.disabled = on; });
+    $$('input,textarea,button', maker).forEach(function(el){ if(el !== btn) el.disabled = on; });
+  }
+
+  async function runChant(c){
+    busy = true; btn.disabled = true; lockInputs(true);
+    stage.style.setProperty('--acc', c.acc);
+    sil.textContent = c.sil;
+    stage.classList.remove('burst'); stage.classList.add('casting');
+    result.hidden = true; chant.innerHTML = ''; setGauge(0);
+    btn.textContent = '…영창 중 (취소 불가)';
+
+    var dir = document.createElement('span');
+    dir.className = 'ln ln-dir'; dir.textContent = c.dir;
+    chant.appendChild(dir);
+    setGauge(15);
+    await sleep(reduceMotion ? 150 : 800);
+
+    var total = c.lines.length;
+    for(var i = 0; i < total; i++){
+      var ln = document.createElement('span'); ln.className = 'ln';
+      chant.appendChild(ln);
+      await typeLine(ln, c.lines[i], 42);
+      setGauge(Math.round(25 + 45 * ((i + 1) / total)));
+      await sleep(reduceMotion ? 100 : 380);
+    }
+
+    setGauge(88);
+    var fin = document.createElement('span'); fin.className = 'ln ln-final';
+    chant.appendChild(fin);
+    await typeLine(fin, c.fin, 60);
+
+    stage.classList.add('burst'); setGauge(100);
+    await sleep(reduceMotion ? 200 : 900);
+
+    var w1 = pick(WITNESS), w2 = pick(WITNESS);
+    while(w2[0] === w1[0]){ w2 = pick(WITNESS); }
+    resInner.textContent = pick(c.inner);
+    resOut1.innerHTML = '<b>' + w1[0] + '</b> — ' + w1[1];
+    resOut2.innerHTML = '<b>' + w2[0] + '</b> — ' + w2[1];
+    result.hidden = false;
+    $$('.bub', result).forEach(function(b, i){
+      b.classList.remove('show');
+      setTimeout(function(){ b.classList.add('show'); }, 80 + i * 220);
+    });
+
+    btn.textContent = (mode === 'custom') ? '⚡ 다시 외치기' : '⚡ 한 번 더 외치기 (본인 동의 없음)';
+    btn.disabled = false; lockInputs(false); busy = false;
+  }
+
+  btn.addEventListener('click', function(){
+    if(busy) return;
+    runChant(mode === 'custom' ? buildCustom() : CASTERS[current]);
+  });
+})();
+
+/* ============ 8. RETURN-WILL GAUGES ============ */
+(function(){
+  var wills = $$('.will');
+  if(!wills.length) return;
+
+  function countUp(el){
+    var target = parseInt(el.dataset.n, 10) || 0;
+    var suffix = el.dataset.suffix || '';
+    if(reduceMotion){ el.textContent = target + suffix; return; }
+    var t0 = null, dur = 1300;
+    function frame(t){
+      if(!t0) t0 = t;
+      var k = Math.min(1, (t - t0) / dur);
+      k = 1 - Math.pow(1 - k, 3); /* easeOutCubic */
+      el.textContent = Math.round(target * k) + suffix;
+      if(k < 1) requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  }
+
+  function arm(w){
+    w.classList.add('in');
+    var pct = $('.wpct', w);
+    if(pct) countUp(pct);
+  }
+
+  if(!('IntersectionObserver' in window)){
+    wills.forEach(arm); return;
+  }
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(e.isIntersecting){ arm(e.target); io.unobserve(e.target); }
+    });
+  }, {threshold: .4});
+  wills.forEach(function(w){ io.observe(w); });
+})();
+
+/* ============ 9. BATTLE ARENA ============ */
+(function(){
+  var canvas = $('#btCanvas');
+  if(!canvas) return;
+  var ctx = canvas.getContext('2d');
+  if(!ctx) return;
+  ctx.imageSmoothingEnabled = false;
+  var W = canvas.width, H = canvas.height;
+
+  /* ---------- sprites (pixel rows) ---------- */
+  var HUMAN = [
+    "............","...oooo.....","..oHHHHo....",".oHHHHHHo...",
+    ".oHssssHo...",".osesseso...",".ossssso....","..osssso....",
+    "...oaao.....","..oabbao....",".oabbbbao...",".oabbbbao...",
+    ".obbbbbbo...","..obbbbo....","..ob..bo....","..oo..oo...."
+  ];
+  var SLIME = [
+    "............","............","...gGGg.....","..gGGGGg....",
+    ".gGGGGGGg...",".gGGGGGGg...",".gGeGGeGg...",".gGGGGGGg...",
+    ".gGGwwGGg...","..gGGGGg....","..g.gg.g....","............"
+  ];
+  var GOBLIN = [
+    "...o....o...","...oo..oo...","..oppppppo..",".opRppppRpo.",
+    ".opppmmpppo.","..oppppppo..","...obbbbo...","..obbbbbbo..",
+    "..obbbbbbo..","..obbbbbbo..","...ob..bo...","...ob..bo...",
+    "...oo..oo...","............"
+  ];
+  var DRAGON = [
+    "............ww..","..........wwDw..","....DDD...wDDDw.","...DDDDD.wDDDDw.",
+    "..DDoooDDDDDDDw.",".DDoGGoDDDDDDDD.",".DDoooDDDDDDDDD.","WWDDDDDDDDDDDDD.",
+    ".WDDDDDDDDDDDDDD","..DDDDDDDDDDDDD.",".DDDDDDDDDDDDDDD",".DDoD..DDD..DoD.",
+    ".oo.....D....oo."
+  ];
+
+  var BASE = { '.':null, 'o':'#08080f', 's':'#f0c9a4', 'e':'#14141e' };
+  function pal(extra){ var p={}; for(var k in BASE) p[k]=BASE[k]; for(var k2 in extra) p[k2]=extra[k2]; return p; }
+  var SLIME_PAL  = { '.':null,'g':'#2f7a4a','G':'#46a767','w':'#cfeede','e':'#0e1f16' };
+  var GOBLIN_PAL = { '.':null,'o':'#0a0a10','p':'#6a9a4a','R':'#e05050','m':'#2a1414','b':'#3a3030' };
+  var DRAGON_PAL = { '.':null,'o':'#160810','D':'#5a2540','G':'#f0d48a','W':'#f3ead6','w':'#823a56' };
+  var DRAGON_RAGE = { '.':null,'o':'#1c0608','D':'#8a2030','G':'#ffe08a','W':'#fff0e0','w':'#c03048' };
+
+  function drawSprite(rows, palette, cx, cy, scale, flip, whiteAmt){
+    var w=rows[0].length, h=rows.length;
+    var px=Math.round(cx-w*scale/2), py=Math.round(cy-h*scale/2);
+    for(var y=0;y<h;y++){
+      var row=rows[y];
+      for(var x=0;x<w;x++){
+        var ch=row.charAt(flip?(w-1-x):x), col=palette[ch];
+        if(!col) continue;
+        var dx=px+x*scale, dy=py+y*scale;
+        ctx.fillStyle=col; ctx.fillRect(dx,dy,scale,scale);
+        if(whiteAmt>0){ ctx.globalAlpha=whiteAmt; ctx.fillStyle='#fff'; ctx.fillRect(dx,dy,scale,scale); ctx.globalAlpha=1; }
+      }
+    }
+  }
+
+  /* ---------- roster (with ultimates) ---------- */
+  var ROSTER = [
+    {id:'dy', name:'황동윤', role:'흑염룡 / 한손검', acc:'#a78bfa', ico:'👓',
+      max:70, atk:22, spd:8, sprite:HUMAN, palette:pal({'H':'#1b1b22','b':'#6f55a3','a':'#a78bfa'}),
+      skill:{name:'흑염룡 개방', type:'single', mult:2.0, cd:2, ico:'🔥', flavor:'흑염룡(黑炎龍) ── 개방!!!'},
+      ult:{name:'흑염룡・진 멸각', type:'single', mult:3.2, ico:'🐉', burn:{turns:3,dmg:6}, flavor:'흑염룡(黑炎龍)・진(眞) ── 멸각!!!'}},
+    {id:'hu', name:'심형욱', role:'그랜드 칼리버 / 대검', acc:'#67e8f9', ico:'🤖',
+      max:82, atk:20, spd:6, sprite:HUMAN, palette:pal({'H':'#1b1b22','b':'#2f7d8a','a':'#67e8f9'}),
+      skill:{name:'그랜드 칼리버', type:'single', mult:2.6, cd:3, ico:'⚙️', flavor:'진(眞)·합체 ── 그랜드 칼리버!!!'},
+      ult:{name:'천공패도', type:'single', mult:3.8, ico:'🛰️', pierce:true, flavor:'최종오의 ── 천공패도(天空覇道)!!!'}},
+    {id:'sh', name:'홍수희', role:'스텔라 / 레이피어', acc:'#f9a8d4', ico:'🌟',
+      max:66, atk:16, spd:9, sprite:HUMAN, palette:pal({'H':'#8a5a3a','b':'#caa0c0','a':'#f9a8d4'}),
+      skill:{name:'유성우', type:'all', mult:1.15, cd:2, ico:'🌠', flavor:'스텔라 ── 메이크 업!!! 별이 쏟아진다'},
+      ult:{name:'스텔라・인피니티', type:'all', mult:1.8, ico:'🌌', healAllies:0.2, flavor:'스텔라 ── 인피니티!!! (아군 회복)'}},
+    {id:'carol', name:'캐롤리나', role:'열혈 / 대검', acc:'#f87171', ico:'🔥',
+      max:88, atk:19, spd:7, sprite:HUMAN, palette:pal({'H':'#b03a3a','b':'#7a2f2f','a':'#f87171'}),
+      skill:{name:'열혈 각성', type:'buff', cd:3, ico:'💢', flavor:'불꽃보다 뜨겁게 — 공격력이 끓어오른다'},
+      ult:{name:'초열혈・불꽃 그 자체', type:'all', mult:1.5, ico:'☄️', selfBuff:1.6, flavor:'초열혈 ── 내가 곧 불꽃이다!!!'}},
+    {id:'clara', name:'클라라', role:'분석 / 한손검', acc:'#86efac', ico:'📓',
+      max:58, atk:14, spd:11, sprite:HUMAN, palette:pal({'H':'#3a7a4a','b':'#2f5e3a','a':'#86efac'}),
+      skill:{name:'약점 분석', type:'mark', mult:0.6, cd:2, ico:'🔍', flavor:'그 보법… 메모 완료. 약점이 드러난다'},
+      ult:{name:'완전 해석', type:'all', mult:1.1, ico:'📕', markAll:true, stunTop:1, flavor:'완전 해석 ── 모든 약점, 기록 완료.'}},
+    {id:'silvia', name:'실비아', role:'연격 / 레이피어', acc:'#bfdbfe', ico:'❄️',
+      max:62, atk:18, spd:12, sprite:HUMAN, palette:pal({'H':'#d2d8e8','b':'#5a6b8a','a':'#bfdbfe'}),
+      skill:{name:'레이피어 연격', type:'double', mult:0.75, cd:2, ico:'🤺', flavor:'기록 차원에서 — 두 번.'},
+      ult:{name:'성진 연무', type:'multi', mult:0.7, hits:4, ico:'💫', stun:1, flavor:'레이피어 ── 성진(星辰) 연무!!!'}}
+  ];
+
+  /* ---------- waves ---------- */
+  var WAVES = [
+    { name:'— 마물 무리 —', enemies:[
+      {name:'슬라임', ico:'🟢', sprite:SLIME, palette:SLIME_PAL, max:30, atk:8, spd:5, scale:5},
+      {name:'슬라임', ico:'🟢', sprite:SLIME, palette:SLIME_PAL, max:30, atk:8, spd:5, scale:5},
+      {name:'마물 고블린', ico:'👹', sprite:GOBLIN, palette:GOBLIN_PAL, max:48, atk:12, spd:7, scale:5}
+    ]},
+    { name:'— 귀족파의 도전 —', enemies:[
+      {name:'루카스', ico:'🥷', sprite:HUMAN, palette:pal({'H':'#15151c','b':'#33343f','a':'#9ca3af'}), max:58, atk:14, spd:9, scale:5,
+        taunt:['"회장님이 인정 안 하면 나도 인정 안 해!"','"이, 이 정도쯤이야…!"']},
+      {name:'알레한드로', ico:'👑', sprite:HUMAN, palette:pal({'H':'#d4b25f','b':'#6a5a2a','a':'#fbbf24'}), max:95, atk:18, spd:10, scale:5, boss:true,
+        taunt:['"저런 요란한 기술 따위… 인정 못 해!"','"나는 노력으로 여기까지 왔다!"','"크윽… 위장이…!"']}
+    ]},
+    { name:'— 재앙의 드래곤 —', enemies:[
+      {name:'재앙의 드래곤', ico:'🐲', sprite:DRAGON, palette:DRAGON_PAL, max:200, atk:22, spd:6, scale:6, boss:true, dragon:true,
+        taunt:['그르르… 대지가 울린다.','드래곤이 날개를 펼친다 — 브레스 징조!']}
+    ]}
+  ];
+
+  var DIFF = {
+    easy:   {hp:0.8, atk:0.8, label:'입학생'},
+    normal: {hp:1.0, atk:1.0, label:'기사'},
+    hard:   {hp:1.3, atk:1.2, label:'소드마스터'}
+  };
+
+  /* ---------- dom ---------- */
+  var elSelect=$('#partySelect'), elBattle=$('#battle'), elRoster=$('#roster');
+  var elCount=$('#partyCount'), elGo=$('#goBattle');
+  var elWave=$('#btWave'), elEnemyName=$('#btEnemyName'), elOrder=$('#btOrder'), elParty=$('#btParty');
+  var elWho=$('#btWho'), elPrompt=$('#btPrompt'), elActBtns=$('#btActBtns'), elLog=$('#btLog');
+  var elMsg=$('#btMsg'), elMsgTitle=$('#btMsgTitle'), elMsgText=$('#btMsgText'), elMsgBtn=$('#btMsgBtn');
+
+  /* ---------- party select ---------- */
+  var selected=[], difficulty='normal';
+  function skillDesc(s){
+    if(s.type==='single') return '단일 대상 강타 (×'+s.mult+')';
+    if(s.type==='all') return '적 전체 공격 (×'+s.mult+')';
+    if(s.type==='double') return '단일 2회 연속타';
+    if(s.type==='multi') return '단일 '+s.hits+'회 연속타';
+    if(s.type==='buff') return '자신 공격력 대폭 상승';
+    if(s.type==='mark') return '적 약점 노출 (피해 +25%)';
+    return '';
+  }
+  function ultDesc(u){
+    var parts=[];
+    if(u.type==='single') parts.push('단일 초강타 ×'+u.mult);
+    else if(u.type==='all') parts.push('적 전체 ×'+u.mult);
+    else if(u.type==='multi') parts.push('단일 '+u.hits+'연타 ×'+u.mult);
+    if(u.burn) parts.push('화상');
+    if(u.pierce) parts.push('방어 무시');
+    if(u.healAllies) parts.push('아군 회복');
+    if(u.selfBuff) parts.push('자버프');
+    if(u.markAll) parts.push('전체 약점');
+    if(u.stunTop||u.stun) parts.push('기절');
+    return parts.join(' · ');
+  }
+  function renderRoster(){
+    elRoster.innerHTML='';
+    ROSTER.forEach(function(u){
+      var el=document.createElement('button');
+      el.type='button'; el.className='unit'; el.style.setProperty('--acc',u.acc);
+      el.setAttribute('aria-pressed','false');
+      el.innerHTML=
+        '<span class="uchk">✓</span>'+
+        '<div class="uava">'+u.ico+'</div>'+
+        '<h4>'+u.name+'</h4>'+
+        '<p class="urole">'+u.role+'</p>'+
+        '<div class="ustats">'+
+          '<span class="ustat">HP <b>'+u.max+'</b></span>'+
+          '<span class="ustat">ATK <b>'+u.atk+'</b></span>'+
+          '<span class="ustat">SPD <b>'+u.spd+'</b></span>'+
+        '</div>'+
+        '<p class="uskill">✦ <em>'+u.skill.name+'</em> — '+skillDesc(u.skill)+'<br>🔥 <em>오의 · '+u.ult.name+'</em></p>';
+      el.addEventListener('click',function(){ toggleSelect(u,el); });
+      elRoster.appendChild(el);
+    });
+    updateCount();
+  }
+  function toggleSelect(u,el){
+    var i=selected.indexOf(u.id);
+    if(i>=0){ selected.splice(i,1); el.setAttribute('aria-pressed','false'); }
+    else { if(selected.length>=3) return; selected.push(u.id); el.setAttribute('aria-pressed','true'); }
+    updateCount();
+  }
+  function updateCount(){
+    elCount.textContent='선택 '+selected.length+' / 3';
+    elGo.disabled=selected.length===0;
+    $$('.unit').forEach(function(el,idx){
+      var u=ROSTER[idx], full=selected.length>=3 && selected.indexOf(u.id)<0;
+      el.style.opacity=full?'.5':'';
+    });
+  }
+  $$('#difficulty .diff').forEach(function(b){
+    b.addEventListener('click',function(){
+      difficulty=b.dataset.diff;
+      $$('#difficulty .diff').forEach(function(x){ x.setAttribute('aria-pressed',String(x===b)); });
+    });
+  });
+  elGo.addEventListener('click', startBattle);
+
+  /* ---------- battle state ---------- */
+  var allies=[], enemies=[], waveIndex=0, activeUnit=null, ended=false;
+  var floaters=[], targeting=false, pendingTarget=null, raf=null, rafRunning=false, resolveTurn=null;
+  var curOrder=[], curIdx=0, pcards={};
+
+  function mkAlly(def){
+    return { ref:def, id:def.id, side:'ally', name:def.name, ico:def.ico, max:def.max, hp:def.max,
+      atk:def.atk, spd:def.spd, sprite:def.sprite, palette:def.palette, acc:def.acc, scale:5,
+      skill:def.skill, ult:def.ult, skillCd:0, sp:0, spMax:100, atkBuff:1, buffTurns:0,
+      guard:false, marked:0, burn:0, burnDmg:0, stun:0, alive:true, fx:0, flash:0, cx:0, cy:0, box:null };
+  }
+  function mkEnemy(def){
+    var d=DIFF[difficulty];
+    return { ref:def, side:'enemy', name:def.name, ico:def.ico||'☠️',
+      max:Math.round(def.max*d.hp), hp:Math.round(def.max*d.hp), atk:Math.round(def.atk*d.atk),
+      spd:def.spd, sprite:def.sprite, palette:def.palette, acc:'#d05050', scale:def.scale||5,
+      boss:!!def.boss, dragon:!!def.dragon, enraged:false, taunt:def.taunt||null, actCount:0,
+      marked:0, burn:0, burnDmg:0, stun:0, guard:false, alive:true, fx:0, flash:0, cx:0, cy:0, box:null };
+  }
+
+  function ysFor(n){
+    if(n<=1) return [H*0.5];
+    if(n===2) return [H*0.36,H*0.66];
+    return [H*0.28,H*0.52,H*0.76];
+  }
+  function layout(){
+    var ay=ysFor(allies.length);
+    allies.forEach(function(u,i){ u.cx=96+i*10; u.cy=ay[i]; });
+    var ey=ysFor(enemies.length);
+    enemies.forEach(function(u,i){ u.cx=384-i*10; u.cy=ey[i]; });
+  }
+
+  function startBattle(){
+    allies=selected.map(function(id){ return mkAlly(ROSTER.filter(function(r){return r.id===id;})[0]); });
+    waveIndex=0; ended=false; floaters=[]; activeUnit=null; curOrder=[]; curIdx=0;
+    spawnWave(0);
+    buildParty();
+    elSelect.hidden=true; elBattle.classList.add('on'); hideMsg();
+    elLog.innerHTML='';
+    log('출진! 마물 토벌대가 전장에 도착했다. (난이도: '+DIFF[difficulty].label+')','sys');
+    startRaf(); battleLoop();
+  }
+  function spawnWave(idx){
+    var w=WAVES[idx], counts={};
+    w.enemies.forEach(function(d){ counts[d.name]=(counts[d.name]||0)+1; });
+    enemies=w.enemies.map(function(def){ return mkEnemy(def); });
+    var seen={};
+    enemies.forEach(function(u){
+      if(counts[u.name]>1){ seen[u.name]=(seen[u.name]||0)+1; u.label=u.name+' '+String.fromCharCode(64+seen[u.name]); }
+      else u.label=u.name;
+    });
+    layout();
+    elWave.textContent=(idx+1)+' / '+WAVES.length;
+    elEnemyName.textContent=w.name;
+  }
+
+  /* ---------- helpers ---------- */
+  function sleep(ms){ return new Promise(function(r){ setTimeout(r,ms); }); }
+  function rnd(a,b){ return a+Math.random()*(b-a); }
+  function aliveAllies(){ return allies.filter(function(u){return u.alive;}); }
+  function aliveEnemies(){ return enemies.filter(function(u){return u.alive;}); }
+  function nameOf(u){ return u.label||u.name; }
+
+  function log(text,cls){
+    var p=document.createElement('p');
+    if(cls) p.className=cls;
+    p.textContent=text; elLog.appendChild(p);
+    elLog.scrollTop=elLog.scrollHeight;
+    while(elLog.children.length>50) elLog.removeChild(elLog.firstChild);
+  }
+  function floater(u,text,color){ floaters.push({x:u.cx,y:u.cy-30,vy:-0.6,life:1,text:text,color:color}); }
+
+  function gainSP(u,n){
+    if(u.side!=='ally') return;
+    u.sp=Math.min(u.spMax, u.sp+n); updateParty();
+  }
+  function heal(u,amt){
+    amt=Math.round(amt); u.hp=Math.min(u.max,u.hp+amt);
+    floater(u,'+'+amt,'#86efac'); updateParty();
+  }
+
+  function dealDamage(src,tgt,mult,opts){
+    opts=opts||{};
+    var dmg=src.atk*mult*rnd(.85,1.15)*(src.atkBuff||1);
+    var crit=Math.random()<.12; if(crit) dmg*=1.6;
+    if(tgt.marked>0){ dmg*=1.25; tgt.marked--; }
+    if(tgt.guard && !opts.pierce) dmg*=0.5;
+    dmg=Math.max(1,Math.round(dmg));
+    tgt.hp=Math.max(0,tgt.hp-dmg);
+    tgt.flash=1; tgt.fx=(tgt.side==='enemy'?7:-7);
+    floater(tgt,'-'+dmg+(crit?'!':''),crit?'#ffd35b':'#ff6b6b');
+    log(src.name+' → '+nameOf(tgt)+' : '+dmg+' 피해'+(crit?' (치명타!)':''),'dmg');
+    if(tgt.side==='ally') gainSP(tgt,12);
+    if(tgt.hp<=0){ tgt.alive=false; log(nameOf(tgt)+' 격파!','sys'); }
+    else updateParty();
+    return dmg;
+  }
+  function applyBurn(tgt,b){ tgt.burn=Math.max(tgt.burn,b.turns); tgt.burnDmg=b.dmg; floater(tgt,'화상','#fb923c'); }
+  function applyStun(tgt,n){ tgt.stun=Math.max(tgt.stun,n); floater(tgt,'기절','#c084fc'); }
+
+  async function lunge(u,dir){ u.fx=dir*14; await sleep(reduceMotion?0:150); }
+
+  /* ---------- ally actions ---------- */
+  function showActions(u){
+    targeting=false; pendingTarget=null; canvas.style.cursor='default';
+    elWho.innerHTML='▶ <b>'+u.name+'</b> 의 차례';
+    elPrompt.textContent='행동을 선택하세요.';
+    elActBtns.innerHTML='';
+    addAct('⚔','검격','기본 공격',false,function(){ chooseTarget(function(t){ doAlly(u,'basic',t); }); });
+    var s=u.skill, cdOk=u.skillCd<=0;
+    addAct(s.ico,s.name,cdOk?skillDesc(s):'',!cdOk,function(){
+      if(s.type==='single'||s.type==='double'||s.type==='mark') chooseTarget(function(t){ doAlly(u,'skill',t); });
+      else doAlly(u,'skill',null);
+    }, cdOk?'':'CD '+u.skillCd);
+    var ul=u.ult, ultReady=u.sp>=u.spMax;
+    addAct(ul.ico,'오의 · '+ul.name, ultReady?ultDesc(ul):('수치심 '+u.sp+'%'), !ultReady, function(){
+      if(ul.type==='single'||ul.type==='multi') chooseTarget(function(t){ doAlly(u,'ult',t); });
+      else doAlly(u,'ult',null);
+    }, ultReady?'READY':'', ultReady?'ult':'');
+    addAct('🛡','방어','받는 피해 절반',false,function(){
+      u.guard=true; log(u.name+' 방어 태세.','flavor'); finishTurn();
+    });
+  }
+  function addAct(ico,label,desc,disabled,cb,cd,cls){
+    var b=document.createElement('button');
+    b.type='button'; b.className='act'+(cls?(' '+cls):''); b.disabled=!!disabled;
+    var right = cd==='READY' ? '<span class="ahot">READY</span>' : (cd?'<span class="acd">'+cd+'</span>':'');
+    b.innerHTML='<span class="ai">'+ico+'</span><span>'+label+
+      (desc?'<br><span style="font-size:10.5px;color:var(--faint);font-weight:400">'+desc+'</span>':'')+'</span>'+right;
+    b.addEventListener('click',cb);
+    elActBtns.appendChild(b);
+  }
+  function chooseTarget(cb){
+    targeting=true; pendingTarget=cb; canvas.style.cursor='crosshair';
+    elPrompt.textContent='대상을 선택하세요. (적을 클릭하거나 아래 버튼)';
+    elActBtns.innerHTML='';
+    aliveEnemies().forEach(function(t){
+      var b=document.createElement('button');
+      b.type='button'; b.className='act';
+      b.innerHTML='<span class="ai">🎯</span><span>'+nameOf(t)+
+        '<br><span style="font-size:10.5px;color:var(--faint);font-weight:400">HP '+t.hp+' / '+t.max+'</span></span>';
+      b.addEventListener('click',function(){ pickTarget(t); });
+      elActBtns.appendChild(b);
+    });
+    var back=document.createElement('button');
+    back.type='button'; back.className='act back'; back.textContent='← 뒤로';
+    back.addEventListener('click',function(){ targeting=false; pendingTarget=null; canvas.style.cursor='default'; showActions(activeUnit); });
+    elActBtns.appendChild(back);
+  }
+  function pickTarget(t){
+    if(!targeting) return;
+    var cb=pendingTarget; targeting=false; pendingTarget=null; canvas.style.cursor='default';
+    if(cb) cb(t);
+  }
+  canvas.addEventListener('click',function(e){
+    if(!targeting) return;
+    var rect=canvas.getBoundingClientRect();
+    var cx=(e.clientX-rect.left)*(W/rect.width), cy=(e.clientY-rect.top)*(H/rect.height);
+    var hit=null;
+    aliveEnemies().forEach(function(t){
+      var bx=t.box; if(bx && cx>=bx.x && cx<=bx.x+bx.w && cy>=bx.y && cy<=bx.y+bx.h) hit=t;
+    });
+    if(hit) pickTarget(hit);
+  });
+
+  async function doAlly(u,kind,target){
+    elActBtns.innerHTML=''; elPrompt.textContent=''; canvas.style.cursor='default';
+    if(kind==='basic'){
+      gainSP(u,20); await lunge(u,1); dealDamage(u,target,1.0);
+    } else if(kind==='skill'){
+      var s=u.skill;
+      log('✦ '+u.name+' : "'+s.flavor+'"','flavor');
+      u.skillCd=s.cd+1; gainSP(u,20); await lunge(u,1);
+      if(s.type==='single') dealDamage(u,target,s.mult);
+      else if(s.type==='double'){ dealDamage(u,target,s.mult); await sleep(reduceMotion?0:180); if(target.alive) dealDamage(u,target,s.mult); }
+      else if(s.type==='mark'){ dealDamage(u,target,s.mult); target.marked=2; floater(target,'약점','#86efac'); }
+      else if(s.type==='all'){ aliveEnemies().forEach(function(t){ dealDamage(u,t,s.mult); }); }
+      else if(s.type==='buff'){ u.atkBuff=1.6; u.buffTurns=3; floater(u,'ATK▲','#ffd35b'); log(u.name+' 공격력 상승!','heal'); updateParty(); }
+    } else if(kind==='ult'){
+      var ul=u.ult;
+      log('🔥🔥 '+u.name+' 【오의】 : "'+ul.flavor+'"','sys');
+      u.sp=0; updateParty(); await lunge(u,1);
+      if(ul.type==='single'){ dealDamage(u,target,ul.mult,{pierce:ul.pierce}); if(ul.burn && target.alive) applyBurn(target,ul.burn); }
+      else if(ul.type==='multi'){
+        for(var i=0;i<ul.hits;i++){ if(!target.alive) break; dealDamage(u,target,ul.mult,{pierce:ul.pierce}); await sleep(reduceMotion?0:120); }
+        if(ul.stun && target.alive) applyStun(target,ul.stun);
+      } else if(ul.type==='all'){
+        aliveEnemies().forEach(function(t){ dealDamage(u,t,ul.mult); });
+        if(ul.markAll) aliveEnemies().forEach(function(t){ t.marked=2; });
+        if(ul.stunTop){ var es=aliveEnemies().slice().sort(function(a,b){return b.hp-a.hp;}); if(es[0]) applyStun(es[0],ul.stunTop); }
+        if(ul.selfBuff){ u.atkBuff=ul.selfBuff; u.buffTurns=3; floater(u,'ATK▲','#ffd35b'); updateParty(); }
+        if(ul.healAllies){ aliveAllies().forEach(function(a){ heal(a, a.max*ul.healAllies); }); }
+      }
+    }
+    await sleep(reduceMotion?60:420);
+    finishTurn();
+  }
+  function finishTurn(){
+    elWho.textContent=''; elPrompt.textContent=''; elActBtns.innerHTML='';
+    if(resolveTurn){ var r=resolveTurn; resolveTurn=null; r(); }
+  }
+  function playerTurn(u){ return new Promise(function(res){ resolveTurn=res; showActions(u); }); }
+
+  /* ---------- enemy turn ---------- */
+  async function enemyTurn(u){
+    elWho.innerHTML='☠ <b>'+nameOf(u)+'</b> 의 차례';
+    elPrompt.textContent='적이 행동 중…'; elActBtns.innerHTML='';
+    await sleep(reduceMotion?120:520);
+    if(u.dragon && !u.enraged && u.hp < u.max*0.4){
+      u.enraged=true; u.atk=Math.round(u.atk*1.3); u.palette=DRAGON_RAGE; u.flash=1;
+      log('재앙의 드래곤이 광폭화한다! (공격 강화 · 브레스 빈발)','sys');
+      await sleep(reduceMotion?100:500);
+    }
+    if(u.taunt && Math.random()<.5) log('☠ '+nameOf(u)+' : "'+u.taunt[Math.floor(Math.random()*u.taunt.length)]+'"','flavor');
+    u.actCount++;
+    var breathEvery=u.enraged?2:4;
+    if(u.dragon && u.actCount%breathEvery===0){
+      log('재앙의 드래곤이 브레스를 내뿜는다!','sys');
+      await lunge(u,-1);
+      aliveAllies().forEach(function(t){ dealDamage(u,t,0.7); });
+    } else {
+      var targets=aliveAllies().slice().sort(function(a,b){ return a.hp-b.hp; });
+      var tgt=Math.random()<.6?targets[0]:targets[Math.floor(Math.random()*targets.length)];
+      await lunge(u,-1);
+      dealDamage(u,tgt,u.boss?1.15:1.0);
+    }
+    await sleep(reduceMotion?60:420);
+  }
+
+  /* ---------- status tick ---------- */
+  async function tickStatus(u){
+    if(u.burn>0){
+      var d=u.burnDmg; u.burn--;
+      u.hp=Math.max(0,u.hp-d); u.flash=1;
+      floater(u,'-'+d,'#fb923c'); log(nameOf(u)+' 화상 피해 '+d,'dmg');
+      if(u.side==='ally') updateParty();
+      if(u.hp<=0){ u.alive=false; log(nameOf(u)+' 격파!','sys'); }
+      await sleep(reduceMotion?0:260);
+    }
+    if(!u.alive) return false;
+    if(u.stun>0){ u.stun--; log(nameOf(u)+' 기절 — 행동 불가!','flavor'); await sleep(reduceMotion?40:520); return false; }
+    return true;
+  }
+
+  /* ---------- main loop ---------- */
+  function initiative(){
+    return allies.concat(enemies).filter(function(u){return u.alive;})
+      .sort(function(a,b){ return (b.spd-a.spd)||(Math.random()-0.5); });
+  }
+  async function battleLoop(){
+    while(!ended){
+      curOrder=initiative(); curIdx=0; renderOrder();
+      for(var k=0;k<curOrder.length && !ended;k++){
+        var u=curOrder[k]; curIdx=k; renderOrder();
+        if(!u.alive) continue;
+        activeUnit=u; updateParty();
+        var canAct=await tickStatus(u);
+        if(aliveEnemies().length===0){ await nextWave(); break; }
+        if(aliveAllies().length===0){ defeat(); return; }
+        if(!u.alive || !canAct){ activeUnit=null; continue; }
+        if(u.side==='ally'){
+          u.guard=false;
+          if(u.buffTurns>0){ u.buffTurns--; if(u.buffTurns===0){ u.atkBuff=1; log(u.name+' 의 열혈이 가라앉았다.','flavor'); updateParty(); } }
+          await playerTurn(u);
+          if(u.skillCd>0) u.skillCd--;
+        } else {
+          await enemyTurn(u);
+        }
+        activeUnit=null; updateParty();
+        if(aliveEnemies().length===0){ await nextWave(); break; }
+        if(aliveAllies().length===0){ defeat(); return; }
+        await sleep(reduceMotion?30:120);
+      }
+    }
+  }
+
+  async function nextWave(){
+    if(waveIndex>=WAVES.length-1){ victory(); return; }
+    showMsg('WAVE '+(waveIndex+1)+' 클리어','적을 모두 격파했다. 다음 적이 다가온다…',null);
+    await sleep(reduceMotion?500:1500);
+    waveIndex++;
+    aliveAllies().forEach(function(u){ u.hp=u.max; u.guard=false; u.atkBuff=1; u.buffTurns=0; u.skillCd=0; u.burn=0; u.stun=0; });
+    spawnWave(waveIndex); updateParty(); hideMsg();
+    log('전열을 정비한다 — 생존자의 체력이 회복되었다. (수치심은 유지)','heal');
+    log('—— WAVE '+(waveIndex+1)+' : '+WAVES[waveIndex].name+' ——','sys');
+    await sleep(reduceMotion?100:500);
+  }
+  function victory(){
+    ended=true;
+    log('재앙의 드래곤 토벌 완료! 드래곤의 알을 회수했다.','sys');
+    showMsg('🐲 토벌 완료!','드래곤의 알을 손에 넣었다. 이제 \'영웅의 터\' 동상에 봉헌하면 — 귀환의 문이 열린다. (탑승 인원은 여전히 협의 중)','다시 도전');
+  }
+  function defeat(){
+    ended=true;
+    log('토벌대 전멸… 의무실로 후송되었다.','sys');
+    showMsg('전멸…','토벌대가 쓰러졌다. 다행히 사망자는 없다 — 이세계 의무실은 생각보다 우수하다. 파티를 재편성해 다시 도전하자.','다시 도전');
+  }
+
+  function showMsg(title,text,btnLabel){
+    elMsgTitle.textContent=title; elMsgText.textContent=text;
+    if(btnLabel){ elMsgBtn.textContent=btnLabel; elMsgBtn.style.display=''; } else elMsgBtn.style.display='none';
+    elMsg.classList.add('show');
+  }
+  function hideMsg(){ elMsg.classList.remove('show'); }
+  elMsgBtn.addEventListener('click',function(){
+    hideMsg(); elBattle.classList.remove('on'); elSelect.hidden=false; stopRaf();
+  });
+
+  /* ---------- turn order timeline ---------- */
+  function renderOrder(){
+    if(!elOrder) return;
+    var html='<span class="tolabel">TURN</span>';
+    curOrder.forEach(function(u,i){
+      if(!u.alive && i>curIdx) return;
+      var cls='to-chip '+(u.side==='ally'?'ally':'enemy');
+      if(i===curIdx) cls+=' now';
+      else if(i<curIdx) cls+=' done';
+      var style=u.side==='ally'?(' style="--acc:'+u.acc+'"'):'';
+      html+='<span class="'+cls+'"'+style+' title="'+nameOf(u)+'">'+(u.ico||'•')+'</span>';
+    });
+    elOrder.innerHTML=html;
+  }
+
+  /* ---------- party status panel ---------- */
+  function buildParty(){
+    elParty.innerHTML=''; pcards={};
+    allies.forEach(function(u){
+      var c=document.createElement('div');
+      c.className='pcard'; c.style.setProperty('--acc',u.acc);
+      c.innerHTML=
+        '<div class="ptop"><span class="pico">'+u.ico+'</span>'+
+          '<span class="pname">'+u.name+'</span><span class="pstatus"></span></div>'+
+        '<div class="pnums"><span>HP <b class="hpv"></b></span><span class="spv">수치심 <b class="spvn"></b></span></div>'+
+        '<div class="bar hp"><i></i></div>'+
+        '<div class="bar sp"><i></i></div>';
+      elParty.appendChild(c);
+      pcards[u.id]={ el:c, hp:c.querySelector('.bar.hp'), hpi:c.querySelector('.bar.hp i'),
+        sp:c.querySelector('.bar.sp'), spi:c.querySelector('.bar.sp i'),
+        hpv:c.querySelector('.hpv'), spv:c.querySelector('.spv'), spvn:c.querySelector('.spvn'),
+        status:c.querySelector('.pstatus') };
+    });
+    updateParty();
+  }
+  function updateParty(){
+    allies.forEach(function(u){
+      var p=pcards[u.id]; if(!p) return;
+      var hr=Math.max(0,u.hp/u.max);
+      p.hpi.style.width=(hr*100)+'%';
+      p.hp.classList.toggle('low',hr<0.3);
+      p.hpv.textContent=Math.max(0,u.hp)+' / '+u.max;
+      var sr=u.sp/u.spMax, ready=u.sp>=u.spMax;
+      p.spi.style.width=(sr*100)+'%';
+      p.sp.classList.toggle('full',ready);
+      p.spv.classList.toggle('ready',ready);
+      p.spvn.textContent=ready?'오의!':(u.sp+'%');
+      p.el.classList.toggle('dead',!u.alive);
+      p.el.classList.toggle('active',activeUnit===u);
+      var st='';
+      if(u.guard) st+='🛡';
+      if(u.atkBuff>1) st+='⬆';
+      if(u.burn>0) st+='🔥';
+      if(u.stun>0) st+='💫';
+      p.status.textContent=st;
+    });
+  }
+
+  /* ---------- render loop ---------- */
+  function drawBar(u){
+    var w=44, x=Math.round(u.cx-w/2);
+    var hh=u.sprite.length*u.scale, y=Math.round(u.cy+hh/2)+4;
+    ctx.fillStyle='#05060d'; ctx.fillRect(x-1,y-1,w+2,6);
+    var rate=Math.max(0,u.hp/u.max);
+    ctx.fillStyle=u.side==='ally'?'#6bd38a':'#d05050';
+    if(u.side==='ally'&&rate<.3) ctx.fillStyle='#e0b040';
+    ctx.fillRect(x,y,Math.round(w*rate),4);
+  }
+  function render(){
+    ctx.clearRect(0,0,W,H);
+    var g=ctx.createLinearGradient(0,0,0,H); g.addColorStop(0,'#0c1124'); g.addColorStop(1,'#070912');
+    ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
+    ctx.fillStyle='rgba(212,178,95,.06)'; ctx.fillRect(0,Math.round(H*0.82),W,2);
+    ctx.fillStyle='rgba(255,255,255,.04)';
+    for(var i=0;i<26;i++){ var sx=(i*53)%W, sy=(i*29)%Math.round(H*0.7); ctx.fillRect(sx,sy,1,1); }
+
+    allies.concat(enemies).forEach(function(u){
+      if(!u.alive){ u.box=null; return; }
+      u.fx*=0.82; if(Math.abs(u.fx)<.4) u.fx=0;
+      u.flash*=0.84; if(u.flash<.03) u.flash=0;
+      var bob=reduceMotion?0:Math.sin(Date.now()/420+u.cx)*1.5;
+      drawSprite(u.sprite,u.palette,u.cx+u.fx,u.cy+bob,u.scale,u.side==='enemy',u.flash);
+      var w=u.sprite[0].length*u.scale, h=u.sprite.length*u.scale;
+      u.box={ x:u.cx-w/2, y:u.cy-h/2, w:w, h:h };
+      drawBar(u);
+      if(activeUnit===u){
+        ctx.fillStyle='#f0d48a';
+        var my=Math.round(u.cy-h/2-10+(reduceMotion?0:Math.sin(Date.now()/200)*2));
+        ctx.beginPath(); ctx.moveTo(u.cx-4,my); ctx.lineTo(u.cx+4,my); ctx.lineTo(u.cx,my+5); ctx.fill();
+      }
+    });
+    if(targeting){
+      aliveEnemies().forEach(function(t){
+        ctx.fillStyle='#ff6b6b';
+        var my=Math.round(t.cy-t.sprite.length*t.scale/2-9+Math.sin(Date.now()/160)*2);
+        ctx.beginPath(); ctx.moveTo(t.cx-4,my); ctx.lineTo(t.cx+4,my); ctx.lineTo(t.cx,my+5); ctx.fill();
+      });
+    }
+    for(var f=floaters.length-1;f>=0;f--){
+      var fl=floaters[f]; fl.y+=fl.vy; fl.life-=0.018;
+      if(fl.life<=0){ floaters.splice(f,1); continue; }
+      ctx.globalAlpha=Math.max(0,fl.life);
+      ctx.font='bold 13px monospace'; ctx.textAlign='center';
+      ctx.fillStyle='#000'; ctx.fillText(fl.text,fl.x+1,fl.y+1);
+      ctx.fillStyle=fl.color; ctx.fillText(fl.text,fl.x,fl.y);
+      ctx.globalAlpha=1;
+    }
+    if(rafRunning) raf=requestAnimationFrame(render);
+  }
+  function startRaf(){ if(!rafRunning){ rafRunning=true; raf=requestAnimationFrame(render); } }
+  function stopRaf(){ rafRunning=false; if(raf) cancelAnimationFrame(raf); }
+
+  renderRoster();
+})();
+})();
+</script>
 </body>
 </html>
