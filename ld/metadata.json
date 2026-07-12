@@ -1,0 +1,6 @@
+{
+  "name": "OSIRIS M-7 Lockdown",
+  "description": "Interactive promotional website for an AI chat character set in a sci-fi survival horror world.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
