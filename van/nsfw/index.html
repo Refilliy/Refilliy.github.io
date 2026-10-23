@@ -347,12 +347,14 @@
     .roster-controls { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 3.5rem; }
     .filter { border: 1px solid var(--line); padding: .72rem 1rem; color: var(--paper-dim); background: transparent; font-size: .7rem; font-weight: 750; letter-spacing: .08em; cursor: pointer; transition: .2s; }
     .filter:hover, .filter.active { border-color: var(--acid); color: var(--ink); background: var(--acid); }
-    .character-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(.7rem, 1.5vw, 1.2rem); margin-top: 1.5rem; }
-    .character-card { border: 0; padding: 0; text-align: left; background: none; cursor: pointer; animation: card-in .45s both; }
+    .character-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); align-items: stretch; gap: clamp(.7rem, 1.5vw, 1.2rem); margin-top: 1.5rem; }
+    .character-card { display: flex; flex-direction: column; width: 100%; min-width: 0; height: 100%; border: 0; padding: 0; text-align: left; background: none; cursor: pointer; animation: card-in .45s both; }
     .character-card[hidden] { display: none; }
     .portrait {
       position: relative;
       display: grid;
+      flex: 0 0 auto;
+      width: 100%;
       aspect-ratio: 2 / 3;
       place-items: center;
       overflow: hidden;
@@ -370,7 +372,7 @@
     .character-card:hover .portrait { border-color: var(--acid); }
     .character-card:hover .portrait::before { width: 60%; background: var(--acid); }
     .character-card:hover .portrait > img { filter: contrast(1.05); }
-    .character-card__info { min-height: 118px; padding: 1rem; border: 1px solid var(--line); border-top: 0; background: rgba(255,255,255,.018); }
+    .character-card__info { flex: 1; width: 100%; min-width: 0; min-height: 118px; padding: 1rem; border: 1px solid var(--line); border-top: 0; background: rgba(255,255,255,.018); }
     .character-card__group { display: block; margin-bottom: .5rem; color: var(--paper-dim); font: 600 .57rem/1 ui-monospace, monospace; letter-spacing: .11em; }
     .character-card h3 { margin: 0; font-size: clamp(1.1rem, 1.7vw, 1.45rem); letter-spacing: -.04em; }
     .character-card p { margin: .35rem 0 0; color: var(--paper-dim); font-size: .76rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -447,7 +449,8 @@
       .kicker { line-height: 1.45; letter-spacing: .14em; }
       .kicker::before { flex: 0 0 1.75rem; width: 1.75rem; }
       .section-title { max-width: 100%; font-size: clamp(2rem, 10.5vw, 3.9rem); line-height: 1.18; letter-spacing: -.045em; text-wrap: pretty; overflow-wrap: anywhere; }
-      .section-title em { -webkit-text-stroke-width: .75px; }
+      .section-title em { color: rgba(232,227,216,.72); -webkit-text-stroke: 0; text-shadow: none; font-weight: 500; }
+      .hero h1 span { color: rgba(232,227,216,.72); -webkit-text-stroke: 0; text-shadow: none; font-weight: 500; }
       .secret__copy h2 { max-width: 100%; font-size: clamp(2.35rem, 11vw, 3.6rem); line-height: 1.16; overflow-wrap: anywhere; }
       .timeline { grid-template-columns: 1fr; margin-left: .3rem; padding-left: 1.4rem; border-top: 0; border-left: 1px solid var(--line-strong); }
       .timeline__item { padding: 0 0 2.7rem 1.2rem; }
@@ -456,7 +459,7 @@
       .location-card:first-child { grid-column: auto; }
       .secret__classification { top: 4rem; }
       .secret__grid { gap: 3.5rem; }
-      .character-grid { grid-template-columns: repeat(2, 1fr); }
+      .character-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .character-card__info { min-height: 104px; padding: .8rem; }
       .character-card__group { font-size: .5rem; }
       .modal { padding: 0; align-items: end; }
