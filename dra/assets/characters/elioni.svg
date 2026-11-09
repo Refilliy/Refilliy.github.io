@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1536" height="640" viewBox="0 0 1536 640" role="img" aria-labelledby="title desc">
+  <title id="title">엘리오니 — 초상 기록</title>
+  <desc id="desc">엘리오니의 이미지를 위한 따뜻한 양피지색 장식 액자.</desc>
+  <defs>
+    <radialGradient id="parchment" cx="48%" cy="42%" r="75%"><stop offset="0" stop-color="#faf3e0"/><stop offset=".68" stop-color="#eee0c4"/><stop offset="1" stop-color="#ddc9a3"/></radialGradient>
+    <radialGradient id="wash"><stop offset="0" stop-color="#9e5b48" stop-opacity=".09"/><stop offset="1" stop-color="#9e5b48" stop-opacity="0"/></radialGradient>
+    <pattern id="fiber" width="74" height="62" patternUnits="userSpaceOnUse"><path d="M5 13h23M41 38h17M14 56h10" stroke="#806e4b" stroke-opacity=".055" stroke-width="1"/><circle cx="57" cy="10" r="1" fill="#806e4b" fill-opacity=".06"/></pattern>
+    <g id="corner" fill="none" stroke="#9a8254"><path d="M0 66V0h66" stroke-width="1.5"/><path d="M8 58V8h50" stroke-opacity=".55"/><path d="M19 40c0-11 8-19 19-19M13 26l13-13 13 13-13 13Z" stroke-opacity=".7"/></g>
+    <g id="sprig" fill="none" stroke="#9e5b48" stroke-linecap="round"><path d="M0 105C28 60 66 17 110-9" stroke-width="1.4"/><path d="M18 78c-19-15-20-29-17-39 17 9 24 22 17 39Zm20-25c-10-21-7-34 0-43 11 14 15 29 0 43Zm22-23c-2-21 4-32 14-37 6 16 3 29-14 37ZM29 65c25 4 40-3 49-15-21-4-36 1-49 15Zm23-25c26-2 37-12 41-25-21 2-33 11-41 25Zm24-22c25-8 33-20 33-34-19 7-29 17-33 34Z" stroke-width="1"/></g>
+  </defs>
+  <path fill="url(#parchment)" d="M0 0h1536v640H0z"/><path fill="url(#fiber)" d="M0 0h1536v640H0z"/>
+  <ellipse cx="768" cy="315" rx="520" ry="285" fill="url(#wash)"/>
+  <g fill="none" stroke="#9a8254"><rect x="32" y="32" width="1472" height="576" stroke-opacity=".37"/><rect x="40" y="40" width="1456" height="560" stroke-opacity=".18"/></g>
+  <use href="#corner" x="54" y="54"/><use href="#corner" transform="translate(1482 54) rotate(90)"/><use href="#corner" transform="translate(1482 586) rotate(180)"/><use href="#corner" transform="translate(54 586) rotate(270)"/>
+  <g fill="none" stroke="#9e5b48" stroke-opacity=".22"><path d="M180 320h278m620 0h278"/><path d="m174 320 6-6 6 6-6 6Zm1176 0 6-6 6 6-6 6Z"/><path d="M478 320h32m516 0h32" stroke-dasharray="2 7"/></g>
+  <g opacity=".24"><use href="#sprig" transform="translate(492 370) rotate(-16)"/><use href="#sprig" transform="translate(1044 370) scale(-1 1) rotate(-16)"/></g>
+  <g fill="none" stroke="#9e5b48"><ellipse cx="768" cy="290" rx="137" ry="172" stroke-opacity=".35"/><ellipse cx="768" cy="290" rx="145" ry="180" stroke-opacity=".13"/><path d="M768 106v21m-10-11 10-10 10 10-10 11Z" stroke-opacity=".55"/><path d="M768 453v23m-10-11 10-10 10 10-10 11Z" stroke-opacity=".45"/></g>
+  <text x="768" y="335" text-anchor="middle" fill="#9e5b48" fill-opacity=".16" font-family="Noto Serif KR, Batang, serif" font-size="146" font-weight="400">엘</text>
+  <text x="768" y="513" text-anchor="middle" fill="#77674b" font-family="Noto Serif KR, Batang, serif" font-size="30" letter-spacing="7">엘리오니</text>
+  <text x="768" y="549" text-anchor="middle" fill="#9a896a" font-family="Malgun Gothic, sans-serif" font-size="13" letter-spacing="5">초상 기록</text>
+  <text x="87" y="102" fill="#a18d66" font-family="Georgia, serif" font-size="16" letter-spacing="4">01</text>
+  <text x="1450" y="553" text-anchor="end" fill="#a18d66" fill-opacity=".65" font-family="Georgia, serif" font-size="11" letter-spacing="3">DRAGONIUM ACADEMIA</text>
+</svg>

@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>드라고니움 아카데미아 — 입학 안내서</title>
+  <meta name="description" content="드라고니움 아카데미아 입학 안내서. 세 기숙사와 함께할 인물들을 만나고, 당신의 첫 이야기를 시작하세요."><meta name="theme-color" content="#efe5cf">
+  <link rel="icon" href="assets/symbols/academy.webp" type="image/webp"><link rel="stylesheet" href="assets/guide.css"><link rel="stylesheet" href="assets/campus.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:wght@400;500;600&family=Nanum+Pen+Script&family=Noto+Sans+KR:wght@400;500;600;700&family=Noto+Serif+KR:wght@400;500;600&display=swap" rel="stylesheet">
+  <script defer src="assets/content.js"></script><script defer src="assets/campus3d.js"></script><script defer src="assets/app.js"></script>
+</head>
+<body class="guide-page">
+  <a class="skip-link" href="#main">본문으로 건너뛰기</a>
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="입학 초대장으로"><img src="assets/symbols/academy.webp" alt="" width="40" height="40"><span>DRAGONIUM<small>ACADEMIA</small></span></a>
+    <button class="menu-toggle" aria-expanded="false" aria-controls="main-nav"><span class="menu-icon" aria-hidden="true">☰</span><span class="sr-only">메뉴 열기</span></button>
+    <nav id="main-nav" class="main-nav" aria-label="안내서 목차"><a href="#world">세계관</a><a href="#houses">기숙사</a><a href="#characters">등장인물</a><a href="#campus">학교생활</a><a href="#begin" class="nav-cta">이야기 시작 ↗</a></nav>
+  </header>
+  <main id="main" class="guide-sheet">
+    <section class="guide-cover" aria-labelledby="guide-title">
+      <div class="cover-meta"><span>제3드라키아력 25년 · 3월</span><span>개원 200주년 기념</span></div>
+      <div class="cover-layout"><div class="cover-copy"><p class="pen-english" lang="en">An invitation to the skies</p><h1 id="guide-title">드라고니움<br>아카데미아</h1><p class="cover-subtitle">신입생을 위한 입학 안내서</p><span class="ink-rule" aria-hidden="true"></span><p class="cover-theme">혈통과 지위가 아닌,<br>관계와 행동으로 자신을 증명하는 곳.</p><a class="text-link" href="#houses">나의 기숙사 살펴보기 <span aria-hidden="true">↓</span></a></div><figure class="cover-art"><img src="assets/academy-hero.webp" alt="숲과 산 사이의 아카데미 성채와 하늘을 나는 드래곤 콘셉트 아트" width="1672" height="941" fetchpriority="high"><figcaption class="handwritten">우리의 첫 학기가 시작되는 곳.</figcaption></figure></div>
+      <div class="cover-bottom"><span>FANTASY · ACADEMY · DRAGONS</span><span class="handwritten">선택은 시작일 뿐, 증명은 당신의 몫.</span></div>
+    </section>
+    <section id="world" class="guide-section">
+      <div class="section-heading"><div><span class="section-number">01</span><h2>알아두면 좋은 세계</h2></div><span class="section-english" lang="en">A world to discover</span></div>
+      <div class="world-tabs" role="tablist" aria-label="세계관 기록"><button id="tab-empire" role="tab" aria-selected="true" aria-controls="panel-empire" data-world="empire">제국</button><button id="tab-bond" role="tab" aria-selected="false" aria-controls="panel-bond" tabindex="-1" data-world="bond">드래곤과 마법</button><button id="tab-street" role="tab" aria-selected="false" aria-controls="panel-street" tabindex="-1" data-world="street">상점가</button><button id="tab-history" role="tab" aria-selected="false" aria-controls="panel-history" tabindex="-1" data-world="history">연표</button></div>
+      <div class="world-panel" id="panel-empire" role="tabpanel" tabindex="0" aria-labelledby="tab-empire"><div class="world-prose"><h3>인간과 드래곤이 함께 세운 제국.</h3><p>초대 여제와 파트너 드래곤이 전쟁을 끝낸 뒤 세워진 드라그 통일제국. 지금은 드라키아 3세가 다스립니다.</p><details open class="archive-details"><summary>황실과 계승 이야기 <span aria-hidden="true">＋</span></summary><p>황족은 태초의 드래곤 드라키시아의 힘과 긴 수명을 혈통으로 계승합니다. 현 여제는 초대 여제의 손녀입니다.</p><p>황녀는 태어난 순서대로 드라키시아에게 선택받을 기회를 얻고, 선택받은 인물이 계승 자격을 갖습니다. 드라키시아는 현재 황궁 안에 새로운 알로 남아 있습니다.</p></details></div><aside class="margin-note imperial-note"><img class="imperial-symbol" src="assets/symbols/imperial.webp" alt="드라그 황가 문장" width="1080" height="1080" loading="lazy" decoding="async"><p class="handwritten">선택받았다는 사실이<br>가치를 증명할까요?</p></aside></div>
+      <div class="world-panel" id="panel-bond" role="tabpanel" tabindex="0" aria-labelledby="tab-bond" hidden><div class="world-prose"><h3>힘은, 서로를 이해하는 데서.</h3><p>인간과 드래곤은 파트너가 되어 교감하고 마법을 공유합니다. 반지·완드·수정구는 그 연결을 돕는 아티팩트입니다.</p><details open class="archive-details"><summary>마법과 드래곤 분류 <span aria-hidden="true">＋</span></summary><div id="magic-types" class="tag-list"></div><div id="dragon-types"></div><p class="quiet-note">엘더 드래곤은 수인화가 가능합니다. 분류의 정확한 위계와 성장 기준은 미공개입니다.</p></details></div><aside class="margin-note"><span aria-hidden="true">✧</span><p class="handwritten">같은 하늘을 나는,<br>단 하나의 파트너.</p></aside></div>
+      <div class="world-panel" id="panel-street" role="tabpanel" tabindex="0" aria-labelledby="tab-street" hidden><div class="world-prose"><h3>알이 당신을 선택하는 거리.</h3><p>팬드래건 스트리트는 드래곤 알을 공식 분양하는 국가 직영 특구입니다. 땅의 요정족이 첫 만남을 돕습니다.</p><details open class="archive-details"><summary>네 곳의 드래곤샵 <span aria-hidden="true">＋</span></summary><div id="shop-list" class="shop-list"></div></details></div><aside class="margin-note"><span aria-hidden="true">✧</span><p class="handwritten">어떤 만남이<br>당신을 기다릴까요?</p></aside></div>
+      <div class="world-panel history-panel" id="panel-history" role="tabpanel" tabindex="0" aria-labelledby="tab-history" hidden><ol class="timeline" id="timeline"></ol><aside class="margin-note"><p class="handwritten">그리고 이제,<br>당신의 첫 페이지.</p></aside></div>
+    </section>
+    <section id="houses" class="guide-section">
+      <div class="section-heading"><div><span class="section-number">02</span><h2>세 기숙사</h2></div><span class="section-english" lang="en">Find your place</span></div>
+      <div class="house-tabs" role="tablist" aria-label="기숙사"><button role="tab" id="house-tab-balaur" aria-selected="true" aria-controls="house-panel" data-house="balaur"><span class="house-dot red"></span>발라우르<small>도전과 증명</small></button><button role="tab" id="house-tab-ophion" aria-selected="false" aria-controls="house-panel" data-house="ophion" tabindex="-1"><span class="house-dot blue"></span>오피온<small>성찰과 지성</small></button><button role="tab" id="house-tab-ceto" aria-selected="false" aria-controls="house-panel" data-house="ceto" tabindex="-1"><span class="house-dot green"></span>케토<small>공존과 조화</small></button></div>
+      <div id="house-panel" class="house-panel" role="tabpanel" tabindex="0" aria-labelledby="house-tab-balaur"></div>
+      <p class="house-footnote">학생과 드래곤의 기질, 본인의 희망과 교수진 심사를 함께 반영합니다.</p>
+    </section>
+    <section id="characters" class="guide-section">
+      <div class="section-heading"><div><span class="section-number">03</span><h2>함께할 사람들 <span id="character-total" class="count">28</span></h2></div><span class="section-english" lang="en">Faces of our story</span></div>
+      <div class="directory-tools"><div class="filter-row" role="group" aria-label="인물 소속 필터"><button data-filter="all" aria-pressed="true">전체</button><button data-filter="balaur" aria-pressed="false">발라우르</button><button data-filter="ophion" aria-pressed="false">오피온</button><button data-filter="ceto" aria-pressed="false">케토</button><button data-filter="faculty" aria-pressed="false">교수진</button><button data-filter="street" aria-pressed="false">상점가</button><button data-filter="imperial" aria-pressed="false">황실</button><button data-filter="dragon" aria-pressed="false">드래곤</button></div><label class="search-field"><span aria-hidden="true">⌕</span><span class="sr-only">이름, 마법, 파트너로 인물 검색</span><input id="character-search" type="search" placeholder="인물 찾기" autocomplete="off"></label></div>
+      <p id="result-count" class="result-count" role="status" aria-live="polite"></p><div id="character-grid" class="character-grid"></div><button id="show-more" class="button button-outline more-button">모든 인물 보기 <span aria-hidden="true">＋</span></button>
+    </section>
+    <section id="campus" class="guide-section">
+      <div class="section-heading"><div><span class="section-number">04</span><h2>아카데미 시설 안내</h2></div><span class="section-english" lang="en">Little days, great adventures</span></div>
+      <div class="campus-atlas">
+        <div class="atlas-heading"><span lang="en">DRAGONIUM · CAMPUS GUIDE</span><span>일곱 곳의 배움터</span></div>
+        <div class="campus-layout">
+          <div class="campus-map">
+            <img class="campus-fallback" src="assets/campus-map.svg" width="1200" height="820" alt="중정형 본관과 세 기숙사, 비행훈련장, 치료동, 온실, 사육농장, 용의 숲을 배치한 입체 안내도">
+            <canvas id="campus-canvas" tabindex="0" aria-label="아카데미 입체 시설 안내도" aria-describedby="campus-help">아래 시설 목록에서 각 시설의 안내를 확인할 수 있습니다.</canvas>
+            <div id="map-points" role="group" aria-label="지도에서 시설 선택"></div>
+            <div class="map-controls" role="group" aria-label="입체 지도 조작" hidden>
+              <button type="button" data-map-action="left" aria-label="지도 왼쪽으로 회전" title="왼쪽으로 회전">↶</button>
+              <button type="button" data-map-action="right" aria-label="지도 오른쪽으로 회전" title="오른쪽으로 회전">↷</button>
+              <span class="map-control-divider" aria-hidden="true"></span>
+              <button type="button" data-map-action="out" aria-label="지도 축소" title="축소">−</button>
+              <button type="button" data-map-action="in" aria-label="지도 확대" title="확대">＋</button>
+              <button type="button" data-map-action="reset" class="map-reset" aria-label="지도 처음 시점으로" title="처음 시점으로">초기화</button>
+            </div>
+          </div>
+          <div class="atlas-caption"><p id="campus-help">좌우로 끌어 회전 · 번호를 눌러 시설 보기<span class="sr-only">. 키보드는 지도에 초점을 맞춘 뒤 좌우 화살표로 회전, 더하기·빼기로 확대·축소, Home으로 초기화합니다.</span></p><span>실제 플레이와는 차이가 있을 수 있습니다.</span></div>
+          <div class="campus-details"><div id="facility-tabs" class="facility-tabs" role="group" aria-label="시설 선택"></div><div id="facility-detail" aria-live="polite" aria-atomic="true"></div></div>
+        </div>
+      </div>
+      <details open class="archive-details school-record"><summary>학교에 관하여 <span aria-hidden="true">＋</span></summary><p>드래곤 테이밍·마법 교육에서 세계 최고 권위를 지닌 아카데미아는 개원 200주년에 금남 정책을 폐지하고 남녀공학으로 전환합니다. 황실과 상호 존중 관계를 유지하며, 황족에게 학교 운영의 특별한 권한을 부여하지 않습니다.</p></details>
+    </section>
+    <section id="begin" class="begin-section guide-section"><img src="assets/symbols/academy.webp" alt="" width="64" height="64"><p class="pen-english" lang="en">Your story, your choice.</p><h2>이제, 당신의 차례입니다.</h2><p class="handwritten">첫 페이지를 함께 펼쳐 볼까요?</p><div class="story-links"><a href="https://share.crack.wrtn.ai/7uuossr" class="button button-gold" target="_blank" rel="noopener noreferrer">세이프 이야기 시작 <span aria-hidden="true">↗</span><span class="sr-only"> (외부 사이트, 새 탭)</span></a><a href="https://share.crack.wrtn.ai/2gix8er" class="button button-outline" target="_blank" rel="noopener noreferrer">언세이프 이야기 시작 <span aria-hidden="true">↗</span><span class="sr-only"> (외부 사이트, 새 탭)</span></a></div><p class="external-note">크랙 AI 채팅 · 새 탭으로 열립니다.</p><details open class="genre-details"><summary>작품 장르</summary><p>판타지 · 아카데미 · 드래곤 · 파트너 청춘 성장 · 마법 배틀 · 비행 액션 · 황실 정치 · 일상 러브코미디</p></details></section>
+    <footer class="site-footer"><a href="index.html">초대장으로 돌아가기</a><span>DRAGONIUM ACADEMIA</span><a href="#main">맨 위로 ↑</a></footer>
+  </main>
+  <dialog id="character-dialog" class="character-dialog" aria-labelledby="dialog-name"><button class="dialog-close" aria-label="인물 프로필 닫기">×</button><div id="dialog-content"></div></dialog>
+  <noscript><p class="noscript-notice">인물 검색과 기숙사 탐색에는 JavaScript가 필요합니다. 이야기 시작 링크는 그대로 이용할 수 있습니다.</p></noscript>
+</body>
+</html>

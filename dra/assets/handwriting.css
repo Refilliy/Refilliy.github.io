@@ -1,0 +1,23 @@
+/* The invitation belongs to the same parchment handbook. Pen lettering is
+   limited to short notes and signatures; navigation and long copy stay printed. */
+.invitation-entry{--hand:'Nanum Pen Script','Segoe Print',cursive;--script:'Allura','Segoe Script',cursive;--gold:#8e7046;--gold-light:#695235;--text:#374136;--muted:#766c57;--line:#92794d4d;color-scheme:light;background:#dbccae;color:var(--text)}
+.invitation-backdrop{background:radial-gradient(ellipse at 50% 15%,#faf1dd99,#cbbb994d 90%),repeating-linear-gradient(95deg,#8d795005 0 1px,transparent 1px 5px);background-color:#d9c9a8}
+.invitation-header{border-color:#917b5033}.invitation-header .brand img{width:40px;height:40px;object-fit:contain;filter:none}.invitation-header .brand>span>span{color:#826943}.invitation-header .anniversary{color:#75603d}
+.invitation-intro .eyebrow{font:38px/1.2 var(--script);letter-spacing:0;color:#8d6949;text-transform:none;transform:rotate(-2deg);margin-bottom:12px}
+.invitation-intro h1{font-size:35px}.invitation-intro h1 em{color:#82613d}
+.envelope-face{box-shadow:0 19px 45px #5e4c332b,0 1px 0 #fff8 inset}.invitation-toggle:hover .envelope-face{box-shadow:0 24px 50px #5e4c3338}
+.envelope-recipient{font:25px/1.25 var(--hand);color:#5c5946;letter-spacing:0;transform:rotate(-1deg);margin-top:18px}.envelope-recipient>small{font:10px/1.2 var(--roman);letter-spacing:.15em;margin-bottom:6px}
+.open-invitation-label,.close-invitation-label{color:#6e5737}.invitation-toggle:focus-visible{outline-color:#795c35}
+.invitation-letter{box-shadow:0 20px 65px #65533235}.letter-body .letter-salutation{font:25px/1.5 var(--hand);color:#53513e;font-weight:400;transform:rotate(-1deg);margin-bottom:15px}
+.letter-signature{margin:23px 0 28px}.letter-signature strong{position:relative;font:54px/1.05 var(--script);letter-spacing:0;color:#43513e;transform:rotate(-5deg);padding:0 11px;margin:7px 0 10px}.letter-signature strong:after{content:'';position:absolute;left:2px;right:0;bottom:-3px;height:8px;border-bottom:1px solid #526044aa;border-radius:50%;transform:rotate(-5deg)}.letter-signature small{font:11px var(--sans);letter-spacing:.08em;color:#827255}
+.invitation-shortcuts{color:#70664e}.invitation-shortcuts a:hover{color:#3e503e}.invitation-footer{color:#756c55;border-color:#917b5033}
+.invitation-entry .skip-link{background:#354c40;color:#f4e7cc}
+@media(max-width:760px){.invitation-intro .eyebrow{font-size:35px}.invitation-intro h1{font-size:29px}.envelope-recipient{font-size:22px;margin-top:15px}.envelope-recipient>small{font-size:9px;margin-bottom:5px}.letter-body .letter-salutation{font-size:24px;line-height:1.5}.letter-signature strong{font-size:51px}.invitation-stage{padding-top:29px}.letter-body p:last-child{font-size:14px;text-align:center}}
+@media(max-width:370px){.envelope-recipient{font-size:21px}.invitation-intro h1{font-size:26px}.letter-body .letter-salutation{font-size:22px}}
+
+/* Press the crest into the wax with dark pigment and a recessed inner rim. */
+.wax-seal{isolation:isolate}
+.wax-seal:before{background:radial-gradient(ellipse at 50% 30%,#44171020,transparent 75%);border-color:#41170f66;box-shadow:inset 0 2px 4px #35120d88,inset 0 -1px 1px #e29b694d,0 1px 0 #cb805a66}
+.wax-seal img{width:52px;height:52px;object-fit:contain;opacity:.9;mix-blend-mode:multiply;filter:grayscale(1) sepia(1) saturate(1.5) brightness(.38) contrast(1.15) drop-shadow(0 1px .35px #eea07aa6)}
+.letter-crest{width:68px;height:68px;object-fit:contain;filter:none}
+@media(max-width:760px){.invitation-header .brand img{width:34px;height:34px}.wax-seal img{width:45px;height:45px}.letter-crest{width:60px;height:60px}}
