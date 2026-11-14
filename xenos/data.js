@@ -7,7 +7,7 @@ window.XENOS_CHARACTERS = [
     "group": "JUDAS",
     "role": "RUNNERS",
     "mark": "judas",
-    "desc": "주디스 크루의 리더. 기동을 맡는 러너이자, 열두 좌석 중 주디스의 이름을 지닌 카르디.",
+    "desc": "주다스 크루의 리더. 기동을 맡는 러너이자, 열두 좌석 중 주다스의 이름을 지닌 카르디.",
     "tag": "길을 여는 사람",
     "image": "assets/characters/00.webp"
   },
@@ -19,7 +19,7 @@ window.XENOS_CHARACTERS = [
     "group": "JUDAS",
     "role": "GUNNERS",
     "mark": "judas",
-    "desc": "주디스 크루의 원거리 화력 담당. 러너와 브루저가 움직일 수 있도록 전선을 지탱한다.",
+    "desc": "주다스 크루의 원거리 화력 담당. 러너와 브루저가 움직일 수 있도록 전선을 지탱한다.",
     "tag": "거리를 지배하는 화력",
     "image": "assets/characters/01.webp"
   },
@@ -31,7 +31,7 @@ window.XENOS_CHARACTERS = [
     "group": "JUDAS",
     "role": "BRUISERS",
     "mark": "judas",
-    "desc": "주디스 크루의 중무장 돌파 담당. 방독면과 거대한 기계 장갑 너머로, 막힌 길을 정면으로 마주한다.",
+    "desc": "주다스 크루의 중무장 돌파 담당. 방독면과 거대한 기계 장갑 너머로, 막힌 길을 정면으로 마주한다.",
     "tag": "가로막힌 길의 해답",
     "image": "assets/characters/02.webp"
   },
@@ -43,7 +43,7 @@ window.XENOS_CHARACTERS = [
     "group": "JUDAS",
     "role": "HACKERS",
     "mark": "judas",
-    "desc": "주디스 크루의 전자전 담당. 붉은 바이저와 기계 팔을 갖춘 해커로, 전장의 보이지 않는 문을 다룬다.",
+    "desc": "주다스 크루의 전자전 담당. 붉은 바이저와 기계 팔을 갖춘 해커로, 전장의 보이지 않는 문을 다룬다.",
     "tag": "보이지 않는 전선",
     "image": "assets/characters/03.webp"
   },
