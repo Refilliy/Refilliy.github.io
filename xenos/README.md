@@ -1,0 +1,38 @@
+# XENØS — Exlex public archive
+
+별도 입장 화면과 도시·세력·인물 소개로 구성한 반응형 정적 웹사이트입니다. HTML/CSS/JavaScript만 사용하며 npm 설치나 빌드가 필요 없습니다.
+
+## 미리보기
+압축을 풀고 index.html을 브라우저에서 여세요. 첫 대사 복사 기능은 HTTPS 환경에서 가장 안정적으로 작동합니다. 로컬 환경에서 자동 복사가 불가능하면 문장을 직접 선택하도록 안내합니다.
+
+## GitHub Pages 배포
+1. 새 GitHub 저장소를 만듭니다.
+2. 이 폴더의 **내용물**을 저장소 루트에 업로드합니다. index.html이 루트에 있어야 합니다.
+3. Settings → Pages → Build and deployment → Source를 **GitHub Actions**로 지정합니다.
+4. main 브랜치에 업로드하면 포함된 .github/workflows/pages.yml이 배포합니다. Actions에서 수동 실행도 가능합니다.
+5. 배포가 끝난 뒤 Settings → Pages의 URL로 접속합니다.
+
+브라우저 업로드에서 숨김 폴더가 빠졌다면 .github/workflows/pages.yml을 직접 생성하세요. 또는 Settings → Pages → Deploy from a branch → main / (root)를 선택하면 됩니다.
+
+## 수정 위치
+- index.html: 독립 입장 화면
+- archive.html: 본문 세계관·세력·규율·직군
+- data.js: 공개용 20명 인물 정보
+- app.js: 필터·검색·인물 모달·도시 탐색
+- style.css: 반응형 디자인과 모션
+- assets/characters: 사용자 제공 인물 배너 20장 (원본 WebP)
+- assets/marks: 사용자 제공 마크 17개 (투명도 보존, 무손실 WebP)
+- assets/city.webp: 사이트용으로 생성한 엑슬렉 도시 연출 이미지
+
+외부 라이브러리, CDN, 추적기, 외부 이미지 요청이 없습니다. 원본 설정 JSON, 계정 정보, 내부 생성 지침과 사건의 비공개 정보는 포함하지 않았습니다. 캐릭터의 상세 성격은 확정된 공개 설명에 맞춰 data.js에서 확장할 수 있습니다.
+
+실제 AI 채팅 서비스 링크가 제공되지 않아 채팅 연결은 넣지 않았습니다. ‘첫 대사 복사하기’만 실제 동작하며, 추후 확정된 작품 주소로 링크를 추가할 수 있습니다.
+
+영문명은 제공된 최신 인물 배너 표기를 따릅니다(MARTHA, HARTT, ROAN). 연합과 크루의 명칭은 첨부 설정의 ‘주디스 크루’를 따릅니다.
+
+도시 이미지는 세계관을 시각화한 연출 이미지이며 정확한 지리도는 아닙니다. 크루 12개 배열은 좌석 서열을 뜻하지 않습니다.
+
+## 프롤로그 웹툰
+입장 버튼 → prologue.html → archive.html로 연결됩니다. 소개 페이지 하단에서도 다시 볼 수 있습니다.
+원본 PNG는 1380×17244px입니다. WebP의 최대 높이(16383px) 제한 때문에 원본 픽셀을 그대로 1380×6000, 1380×6000, 1380×5244의 세 장으로 분할하여 무손실 변환했습니다.
+assets/prologue-01.webp ~ prologue-03.webp가 위에서 아래 순서대로 표시됩니다. CSS는 최대 640px, 모바일은 화면 폭에 맞추며 이미지 사이 여백은 없습니다. 변환 후 디코딩한 픽셀과 원본의 각 구간이 동일함을 검증했습니다.
