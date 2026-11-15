@@ -20,7 +20,7 @@ const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entr
 const orbitToggle=document.getElementById('orbit-toggle');
 const tableDisplay=document.querySelector('.conclave-display');
 const orbitMotion=matchMedia('(prefers-reduced-motion: reduce)');
-function pauseOrbit(paused){tableDisplay.classList.toggle('orbit-paused',paused);orbitToggle.setAttribute('aria-pressed',String(paused));orbitToggle.textContent=paused?'회전 재생 ▷':'회전 멈추기 Ⅱ';}
-orbitToggle.addEventListener('click',()=>pauseOrbit(orbitToggle.getAttribute('aria-pressed')!=='true'));
+function pauseOrbit(paused){tableDisplay.classList.toggle('orbit-paused',paused);if(paused)tableDisplay.classList.remove('orbit-user-play');orbitToggle.setAttribute('aria-pressed',String(paused));orbitToggle.textContent=paused?'회전 재생 ▷':'회전 멈추기 Ⅱ';}
+orbitToggle.addEventListener('click',()=>{const paused=orbitToggle.getAttribute('aria-pressed')!=='true';pauseOrbit(paused);if(!paused)tableDisplay.classList.add('orbit-user-play');});
 if(orbitMotion.matches)pauseOrbit(true);
 orbitMotion.addEventListener('change',e=>{if(e.matches)pauseOrbit(true)});
